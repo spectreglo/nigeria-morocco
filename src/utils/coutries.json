@@ -1,0 +1,14 @@
+[
+    {
+      "name": "Nigeria",
+      "code": "+234",
+      "imageUrl": "https://flagcdn.com/ng.svg",
+      "emoji": "🇳🇬"
+    },
+    {
+        "name": "Morocco",
+        "code": "+212",
+        "imageUrl": "https://flagcdn.com/ma.svg",
+        "emoji": "🇲🇦"
+      }
+]
