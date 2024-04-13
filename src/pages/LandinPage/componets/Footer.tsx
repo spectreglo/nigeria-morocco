@@ -1,4 +1,4 @@
-import { Input } from 'antd';
+import { Input } from "antd";
 
 export default function Footer() {
   return (
@@ -40,7 +40,7 @@ export default function Footer() {
         </div>
 
         <div className="gap-2 flex flex-col">
-          <h1 className="font-bold mb-2 md:mb-8">Stay Up To dated</h1>
+          <h1 className="font-bold mb-2 md:mb-8">Stay Up To Date</h1>
           <Input placeholder="Your email address" />
         </div>
       </div>
