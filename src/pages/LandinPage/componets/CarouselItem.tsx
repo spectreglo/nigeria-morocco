@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button } from "antd";
 
 export default function CarouselItem({ openModal }: { openModal: () => void }) {
   return (
@@ -10,10 +10,12 @@ export default function CarouselItem({ openModal }: { openModal: () => void }) {
         <h1 className="text-5xl md:text-6xl text-left font-bold text-lightGreen">
           Business Week Casablanca, Morocco
         </h1>
-        <span className="my-6 text-left">May 27-29, 2024</span>
+        <h2 className="mt-6 text-left">1st Edition</h2>
+        <span className="my-6 text-left">May 27th-29th, 2024</span>
         <Button
           onClick={openModal}
-          className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
+          className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black"
+        >
           Participate
         </Button>
       </div>
