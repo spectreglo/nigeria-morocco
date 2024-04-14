@@ -288,7 +288,9 @@ export default function Register() {
                 defaultValue={false}
                 onChange={(e) => {
                   formik.values.governmental = e;
-                  console.log(e);
+                  if (isGov) {
+                    console.log(e);
+                  }
                   setIsGov(e);
                 }}
                 options={[

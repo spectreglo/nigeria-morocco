@@ -32,7 +32,7 @@ export default function Booking() {
   const [id, setId] = useState('');
   const [amount, setAmount] = useState(0);
   const [selectedSectors, setSelectedSectors] = useState<string[] | []>([]);
-  const [isGov, setIsPersonalised] = useState(false);
+  const [isPersonalised, setIsPersonalised] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -114,10 +114,7 @@ export default function Booking() {
     amount, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
     publicKey: 'pk_test_acd82313c5945d37a69e9e06195f153984cc70e0',
   });
-  const Buttons = [
-    { title: 'Paystack', image: 'paystack.png', value: 'PAYSTACK' },
-    { title: 'Use Code', image: 'num.png', value: 'CODE' },
-  ];
+
   useEffect(() => {
     // This effect will run every time `amount` or `ref` changes
     if (amount !== 0 && ref !== '') {
@@ -242,6 +239,9 @@ export default function Booking() {
                 className="mr-2"
                 onChange={(e) => {
                   if (e.target.checked) {
+                    if (isPersonalised) {
+                      console.log('');
+                    }
                     setSelectedSectors((prev) => [...prev, options]);
                   } else {
                     const filtered = selectedSectors.filter(
