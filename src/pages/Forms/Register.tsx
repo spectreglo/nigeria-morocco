@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Input from '../../components/Input';
 import { InboxOutlined } from '@ant-design/icons';
 
-import { Button, message, Modal, Spin, Upload } from 'antd';
+import { Button, message, Modal, Select, Spin, Upload } from 'antd';
 import PaymentSumarryModal from './components/PaymentSumarryModal';
 import { useLocation, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -27,6 +27,10 @@ export interface InitialValuesProps {
   export_morocco: string;
   meeting_sectors: string[];
   image_url: string;
+  governmental: boolean;
+  ministry: string;
+  full_name: string;
+  annual_turnover: string;
 }
 interface UploadProps {
   name: string;
@@ -46,6 +50,7 @@ export default function Register() {
   const { register, registering } = useRegister();
   const navigate = useNavigate();
   const location = useLocation();
+  const [isGov, setIsGov] = useState(false);
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
@@ -79,6 +84,7 @@ export default function Register() {
     import_morocco: Yup.string(),
     export_morocco: Yup.string(),
     image_url: Yup.string().url('Invalid image URL'),
+    full_name: Yup.string().required('Full name is required'),
   });
   const initialValues: InitialValuesProps = {
     company_name: '',
@@ -93,6 +99,10 @@ export default function Register() {
     export_morocco: '',
     meeting_sectors: [],
     image_url: '',
+    governmental: false,
+    ministry: '',
+    full_name: '',
+    annual_turnover: '',
   };
   const formik = useFormik({
     initialValues,
@@ -249,6 +259,63 @@ export default function Register() {
             />
           </div>
 
+          <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
+            <Input
+              error={
+                formik.touched.full_name && formik.errors.full_name
+                  ? formik.errors.full_name
+                  : ''
+              }
+              value={formik.values.full_name}
+              onChange={formik.handleChange}
+              id="full_name"
+              className="w-full md:w-[70%]"
+              required
+              label={'Full Name'}
+              placeholder="Enter Your Full Name"
+              outlined={false}
+            />
+
+            <div className="w-full md:w-[30%] mt-4">
+              <span className="text-[12px]">Occupation</span>
+              <Select
+                status={
+                  formik.touched.governmental && formik.errors.governmental
+                    ? 'error'
+                    : ''
+                }
+                className="w-[100%]"
+                defaultValue={false}
+                onChange={(e) => {
+                  formik.values.governmental = e;
+                  if (isGov) {
+                    console.log(e);
+                  }
+                  setIsGov(e);
+                }}
+                options={[
+                  { value: true, label: 'Govermental' },
+                  { value: false, label: 'Non-Govermental' },
+                ]}
+              />
+            </div>
+          </div>
+          {formik.values.governmental ? (
+            <Input
+              id="ministry"
+              error={
+                formik.touched.ministry && formik.errors.ministry
+                  ? formik.errors.ministry
+                  : ''
+              }
+              value={formik.values.ministry}
+              onChange={formik.handleChange}
+              className="w-full"
+              label={'Ministry'}
+              outlined={false}
+            />
+          ) : null}
+
           <AntTextArea
             error={
               formik.touched.address && formik.errors.address
@@ -262,6 +329,15 @@ export default function Register() {
             label={t('Address')}
             outlined={false}
             placeholder="Type your address"
+          />
+          <Input
+            id="annual_turnover"
+            type="number"
+            value={formik.values.annual_turnover}
+            onChange={formik.handleChange}
+            className="w-full"
+            label={'Annual Turnover (USD)'}
+            outlined={false}
           />
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
             <Input
