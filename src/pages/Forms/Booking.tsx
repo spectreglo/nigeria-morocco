@@ -31,7 +31,7 @@ export interface InitialValuesProps {
 
 export default function Booking() {
   const [ref, setRef] = useState('');
-  const [id, setId] = useState('');
+  const [id] = useState('');
   const [amount, setAmount] = useState(0);
   const [selectedSectors, setSelectedSectors] = useState<string[] | []>([]);
   const [isPersonalised, setIsPersonalised] = useState(false);
@@ -47,7 +47,7 @@ export default function Booking() {
     'Energy (renewable energy)',
     'Information Technology',
   ]);
-  const [email, setEmail] = useState('');
+  const [email] = useState('');
 
   const { book, booking } = useBooking();
   const navigate = useNavigate();
