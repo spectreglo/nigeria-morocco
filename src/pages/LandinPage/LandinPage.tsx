@@ -88,7 +88,7 @@ export default function LandinPage() {
         <div className="grid  place-items-center px-0 grid-cols-2 md:grid-cols-6 gap-5 w-full md:px-32 mt-10">
           <img src="sponsor.png" />
           <img src="Logo.png" />
-          <img src="embassy.png" />
+          <img src="Embassy.png" />
           <img src="ram.png" />
           <img src="sponsor.png" />
           <img src="sponsor.png" />
