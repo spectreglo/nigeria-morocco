@@ -207,7 +207,9 @@ export default function Register() {
       console.log('Dropped files', e.dataTransfer.files);
     },
   };
-
+  useEffect(() => {
+    setIsModalOpen(true);
+  }, []);
   return (
     <div
       // style={{ backgroundImage: 'url(rectangle.png)' }}
@@ -271,13 +273,13 @@ export default function Register() {
               id="full_name"
               className="w-full md:w-[70%]"
               required
-              label={'Full Name'}
+              label={t('full')}
               placeholder="Enter Your Full Name"
               outlined={false}
             />
 
             <div className="w-full md:w-[30%] mt-4">
-              <span className="text-[12px]">Occupation</span>
+              <span className="text-[12px]">{t('Designation')}</span>
               <Select
                 status={
                   formik.touched.governmental && formik.errors.governmental
@@ -294,8 +296,8 @@ export default function Register() {
                   setIsGov(e);
                 }}
                 options={[
-                  { value: true, label: 'Govermental' },
-                  { value: false, label: 'Non-Govermental' },
+                  { value: true, label: t('Govermental') },
+                  { value: false, label: t('Non-Govermental') },
                 ]}
               />
             </div>
@@ -311,7 +313,7 @@ export default function Register() {
               value={formik.values.ministry}
               onChange={formik.handleChange}
               className="w-full"
-              label={'Ministry'}
+              label={t('Ministry')}
               outlined={false}
             />
           ) : null}
@@ -336,7 +338,7 @@ export default function Register() {
             value={formik.values.annual_turnover}
             onChange={formik.handleChange}
             className="w-full"
-            label={'Annual Turnover (USD)'}
+            label={t('annual')}
             outlined={false}
           />
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
