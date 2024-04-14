@@ -53,7 +53,12 @@ export default function Login() {
         }}
         className="flex flex-col p-5 bg-white h-[70%] w-[90%] md:w-[40%] shadow">
         <div className="w-[80%] ml-auto mr-auto h-full flex flex-col items-center">
-          <h1 className="font-bold text-[30px] mt-10 mr-auto">Login</h1>
+          <Button
+            onClick={() => navigate('/')}
+            className="bg-lightGreen text-white mr-auto mt-10">
+            Back To Home
+          </Button>
+          <h1 className="font-bold text-[30px] mt-4  mr-auto">Login</h1>
           <p className="mr-auto">Welcome back</p>
           <div className="w-[100%]">
             <Input
