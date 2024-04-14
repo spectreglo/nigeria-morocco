@@ -88,8 +88,8 @@ export default function LandinPage() {
         <div className="grid  place-items-center px-0 grid-cols-2 md:grid-cols-6 gap-5 w-full md:px-32 mt-10">
           <img src="sponsor.png" />
           <img src="Logo.png" />
-          <img src="sponsor.png" />
-          <img src="sponsor.png" />
+          <img src="embassy.png" />
+          <img src="ram.png" />
           <img src="sponsor.png" />
           <img src="sponsor.png" />
         </div>
@@ -141,16 +141,26 @@ export default function LandinPage() {
             Promoting Commercial Trade/Exchange Between Nigeria and Morocco
           </h1>
           <p className="text-justify text-[13px] text-fontColor">
-            We invite you to participate at the 1st Edition of the
-            Nigeria-Morocco Business Week, scheduled to take place at the
-            Exhibition Parks and Economic Zones in Casablanca, Morocco from May
-            27-29, 2024. The event, which is to be organized by Coalition of
-            Northern States Chambers of Commerce, Industry, and Agriculture
-            (CONSCCIMA) and Spectre Trans-Trade Global is aimed at boosting the
-            Agricultural potentials of Northern Nigeria and the Country at large
-            through export and improved yield in the Kingdom of Morocco is
-            expected to host individual Participants and Exhibitors from
-            Nigeria.
+            <p>
+              We invite you to participate in the 1st Edition of the
+              Nigeria-Morocco Business Week, scheduled for the 27th to 29th May,
+              2024.
+            </p>{" "}
+            <p className="my-3">
+              <b>Venue:</b> OFEC Casablanca, Morocco.
+            </p>{" "}
+            The event is organized by The Coalition of Northern States Chambers
+            of Commerce, Industry, Agriculture and Mines (CONSCCIMA) in
+            conjunction with Spectre Trans-Trade Global of Morocco. <br />
+            The event is aimed at boosting the Exportation of Agricultural
+            products of Nigeria and other Minerals like Steel & Lithium to the
+            Kingdom Of Morocco and beyond, thereby strategically placing Nigeria
+            as an alternative source of raw materials for the Kingdom of
+            Morocco. <br />
+            The event is expected to host individual Participants, Exhibitors
+            from across all sectors, including industrial Experts, Captains of
+            Industry, Government agencies/ Ministries of both Nigeria and
+            Morocco.
           </p>
           <Button className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
             Learn More
