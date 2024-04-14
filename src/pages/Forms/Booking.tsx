@@ -15,7 +15,7 @@ import useBooking from './hooks/useBooking';
 import AntTextArea from '../../components/TextArea';
 
 export interface InitialValuesProps {
-  company_name: string;
+  name: string;
 
   mobile: string;
   email: string;
@@ -24,7 +24,9 @@ export interface InitialValuesProps {
   job_title: string;
   annual_turnover: string;
   personalised: boolean;
-  personal: string;
+  personal_meters: string;
+  sector: string[];
+  square_meters: string;
 }
 
 export default function Booking() {
@@ -76,13 +78,13 @@ export default function Booking() {
   };
 
   const validationSchema = Yup.object().shape({
-    company_name: Yup.string().required('Company name is required'),
+    name: Yup.string().required('Company name is required'),
     mobile: Yup.string().required('Mobile number is required'),
     email: Yup.string().email('Invalid email').required('Email is required'),
     space: Yup.string(),
   });
   const initialValues: InitialValuesProps = {
-    company_name: '',
+    name: '',
     mobile: phoneNumber,
     email: '',
     space: '',
@@ -90,19 +92,25 @@ export default function Booking() {
     job_title: '',
     annual_turnover: '',
     personalised: false,
-    personal: '',
+    personal_meters: '',
+    sector: [],
+    square_meters: '',
   };
   const formik = useFormik({
     initialValues,
     onSubmit: async (values) => {
+      values.sector = selectedSectors;
+      values.square_meters = selectedOption;
+
       const booked = await book(values);
       if (booked.status) {
-        setEmail(values.email);
         formik.resetForm();
+        message.success('Booked successfully!');
+        navigate('/');
         // console.log(booked, 'booked');
-        setRef(booked.data.data.transaction_ref);
-        setAmount(100 * Number(booked.data.data.amount));
-        setId(booked.data.data.id);
+        // setRef(booked.data.data.transaction_ref);
+        // setAmount(100 * Number(booked.data.data.amount));
+        // setId(booked.data.data.id);
       }
     },
     validationSchema,
@@ -142,13 +150,13 @@ export default function Booking() {
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
             <Input
               error={
-                formik.touched.company_name && formik.errors.company_name
-                  ? formik.errors.company_name
+                formik.touched.name && formik.errors.name
+                  ? formik.errors.name
                   : ''
               }
-              value={formik.values.company_name}
+              value={formik.values.name}
               onChange={formik.handleChange}
-              id="company_name"
+              id="name"
               className="w-full md:w-[50%]"
               required
               label={t('Name')}
@@ -281,13 +289,13 @@ export default function Booking() {
           </div>
           {formik.values.personalised ? (
             <AntTextArea
-              id="personal"
+              id="personal_meters"
               error={
-                formik.touched.personal && formik.errors.personal
-                  ? formik.errors.personal
+                formik.touched.personal_meters && formik.errors.personal_meters
+                  ? formik.errors.personal_meters
                   : ''
               }
-              value={formik.values.personal}
+              value={formik.values.personal_meters}
               onChange={formik.handleChange}
               className="w-full"
               label={'Pesronalise Square Meteres'}
