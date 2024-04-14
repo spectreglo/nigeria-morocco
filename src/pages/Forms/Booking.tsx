@@ -175,7 +175,7 @@ export default function Booking() {
               onChange={formik.handleChange}
               className="w-full md:w-[50%]"
               required
-              label={'Full Name'}
+              label={t('full')}
               placeholder="Enter Your Full Name"
               outlined={false}
             />
@@ -217,7 +217,7 @@ export default function Booking() {
               onChange={formik.handleChange}
               id="job_title"
               className="w-full md:w-[50%]"
-              label={'Job Title'}
+              label={t('job')}
               placeholder="Job Title"
               outlined={false}
             />
@@ -232,14 +232,14 @@ export default function Booking() {
               id="annual_turnover"
               onChange={formik.handleChange}
               className="w-full md:w-[50%]"
-              label={'Annual Turnover (USD)'}
+              label={t('annual')}
               placeholder="Enter Your Annual Turnover"
               outlined={false}
             />
           </div>
 
           <span className="font-[500] text-[12px] my-4 mt-[20px] ">
-            Please select your sector: <span className="text-[red]">*</span>
+            {t('your')} <span className="text-[red]">*</span>
           </span>
           {sector.map((options, ind) => (
             <div className="my-3 flex items-center" key={ind.toString()}>
@@ -267,7 +267,7 @@ export default function Booking() {
             <h1 className="italic text-[#7A8599]">Space Booking</h1>
           </div>
           <div className="w-full md:w-[100%] mt-[5px]">
-            <span className="text-[12px]">Space Type</span>
+            <span className="text-[12px]">{t('space')}</span>
             <Select
               status={
                 formik.touched.personalised && formik.errors.personalised
@@ -282,8 +282,8 @@ export default function Booking() {
                 setIsPersonalised(e);
               }}
               options={[
-                { value: true, label: 'Pesonalised' },
-                { value: false, label: 'Non-Personalised' },
+                { value: true, label: t('Pesonalised') },
+                { value: false, label: t('Non-Personalised') },
               ]}
             />
           </div>
@@ -298,13 +298,13 @@ export default function Booking() {
               value={formik.values.personal_meters}
               onChange={formik.handleChange}
               className="w-full"
-              label={'Pesronalise Square Meteres'}
+              label={t('personal')}
               outlined={false}
             />
           ) : null}
           <div className="flex flex-col mt-[20px]">
             <h1>
-              Select Space Size <span className="text-[red] ml-1">*</span>
+              {t('size')} <span className="text-[red] ml-1">*</span>
             </h1>
             <label className="inline-flex items-center">
               <input
