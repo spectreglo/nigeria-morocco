@@ -1,4 +1,4 @@
-import { ChangeEvent, SetStateAction, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import Input from '../../components/Input';
 
 import { Button, Select, message } from 'antd';
@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 
 import { useTranslation } from 'react-i18next';
-import PaymentType from './components/PaymentType';
+
 import { usePaystackPayment } from 'react-paystack';
 import useBooking from './hooks/useBooking';
 import AntTextArea from '../../components/TextArea';
@@ -28,7 +28,6 @@ export interface InitialValuesProps {
 }
 
 export default function Booking() {
-  const [active, setActive] = useState(0);
   const [ref, setRef] = useState('');
   const [id, setId] = useState('');
   const [amount, setAmount] = useState(0);
