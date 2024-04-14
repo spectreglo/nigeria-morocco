@@ -169,16 +169,16 @@ export default function Register() {
   const props: UploadProps = {
     name: 'file',
     multiple: false,
-    action: 'https://api.cloudinary.com/v1_1/v4lnyqau/image/upload',
+    action: 'https://api.cloudinary.com/v1_1/djlbovjlt/image/upload',
     beforeUpload: (file) => {
-      const uploadPreset = 'se5hxkgw'; // Replace with your Cloudinary upload preset name
+      const uploadPreset = 'v4lnyqau'; // Replace with your Cloudinary upload preset name
       setUploading(true);
       const formData = new FormData();
       formData.append('file', file);
       formData.append('upload_preset', uploadPreset);
 
       // Upload the file
-      fetch('https://api.cloudinary.com/v1_1/v4lnyqau/image/upload', {
+      fetch('https://api.cloudinary.com/v1_1/djlbovjlt/image/upload', {
         method: 'POST',
         body: formData,
       })
