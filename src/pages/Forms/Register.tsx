@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
-import Input from '../../components/Input';
-import { InboxOutlined } from '@ant-design/icons';
+import { useEffect, useState } from "react";
+import Input from "../../components/Input";
+import { InboxOutlined } from "@ant-design/icons";
 
-import { Button, message, Modal, Select, Spin, Upload } from 'antd';
-import PaymentSumarryModal from './components/PaymentSumarryModal';
-import { useLocation, useNavigate } from 'react-router-dom';
-import * as Yup from 'yup';
+import { Button, message, Modal, Select, Spin, Upload } from "antd";
+import PaymentSumarryModal from "./components/PaymentSumarryModal";
+import { useLocation, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 
-import { useFormik } from 'formik';
-import useRegister from './hooks/useRegister';
-import { useTranslation } from 'react-i18next';
-import AntTextArea from '../../components/TextArea';
+import { useFormik } from "formik";
+import useRegister from "./hooks/useRegister";
+import { useTranslation } from "react-i18next";
+import AntTextArea from "../../components/TextArea";
 
 const { Dragger } = Upload;
 
@@ -45,8 +45,8 @@ export default function Register() {
   const [uploading, setUploading] = useState(false);
   const [selectedNiche, setNiche] = useState<string[] | []>([]);
   const [selectedMeeting, setMeeting] = useState<string[] | []>([]);
-  const [userId, setUserId] = useState<string>('');
-  const [email, setEmail] = useState('');
+  const [userId, setUserId] = useState<string>("");
+  const [email, setEmail] = useState("");
   const { register, registering } = useRegister();
   const navigate = useNavigate();
   const location = useLocation();
@@ -54,10 +54,10 @@ export default function Register() {
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    if (phoneNumber.startsWith('+234')) {
-      i18n.changeLanguage('en');
+    if (phoneNumber.startsWith("+234")) {
+      i18n.changeLanguage("en");
     } else {
-      i18n.changeLanguage('fr');
+      i18n.changeLanguage("fr");
     }
   }, []);
   const [phoneNumber] = useState<string>(location.state.phoneNumber);
@@ -70,39 +70,39 @@ export default function Register() {
   };
 
   const validationSchema = Yup.object().shape({
-    company_name: Yup.string().required('Company name is required'),
-    creation_date: Yup.date().required('Creation date is required'),
-    address: Yup.string().required('Address is required'),
+    company_name: Yup.string().required("Company name is required"),
+    creation_date: Yup.date().required("Creation date is required"),
+    address: Yup.string().required("Address is required"),
     number_of_employees: Yup.number(),
     website: Yup.string(),
-    mobile: Yup.string().required('Mobile number is required'),
-    email: Yup.string().email('Invalid email').required('Email is required'),
+    mobile: Yup.string().required("Mobile number is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
     company_niche: Yup.array()
       .of(Yup.string())
-      .required('Company niche is required'),
+      .required("Company niche is required"),
     meeting_sectors: Yup.array().of(Yup.string()),
     import_morocco: Yup.string(),
     export_morocco: Yup.string(),
-    image_url: Yup.string().url('Invalid image URL'),
-    full_name: Yup.string().required('Full name is required'),
+    image_url: Yup.string().url("Invalid image URL"),
+    full_name: Yup.string().required("Full name is required"),
   });
   const initialValues: InitialValuesProps = {
-    company_name: '',
-    creation_date: '',
-    address: '',
-    number_of_employees: '',
-    website: '',
+    company_name: "",
+    creation_date: "",
+    address: "",
+    number_of_employees: "",
+    website: "",
     mobile: phoneNumber,
-    email: '',
+    email: "",
     company_niche: [],
-    import_morocco: '',
-    export_morocco: '',
+    import_morocco: "",
+    export_morocco: "",
     meeting_sectors: [],
-    image_url: '',
+    image_url: "",
     governmental: false,
-    ministry: '',
-    full_name: '',
-    annual_turnover: '',
+    ministry: "",
+    full_name: "",
+    annual_turnover: "",
   };
   const formik = useFormik({
     initialValues,
@@ -111,13 +111,13 @@ export default function Register() {
       if (registered.status) {
         setUserId(registered.data);
         formik.resetForm();
-        message.success('Registered successfully!');
-        if (phoneNumber.startsWith('+234')) {
+        message.success("Registered successfully!");
+        if (phoneNumber.startsWith("+234")) {
           setEmail(values.email);
 
           openSummaryModal();
         } else {
-          navigate('/');
+          navigate("/");
         }
       }
     },
@@ -132,19 +132,19 @@ export default function Register() {
     setIsModalOpen(false);
   };
   const [companyNiche] = useState([
-    'Importer/User',
-    'Wholesaler/Distributor',
-    'Intermediary',
-    'Central Purchasing',
-    'Manufacturer',
+    "Importer/User",
+    "Wholesaler/Distributor",
+    "Intermediary",
+    "Central Purchasing",
+    "Manufacturer",
   ]);
 
   const [meetingWith] = useState([
-    'Agriculture & Agro Allied',
-    'Automobile',
-    'Solid Minerals',
-    'Energy (renewable energy)',
-    'Information Technology',
+    "Agriculture & Agro Allied",
+    "Automobile",
+    "Solid Minerals",
+    "Energy (renewable energy)",
+    "Information Technology",
   ]);
   // const [selectedAvailability, setSelectedAvailabilty] = useState([]);
   // const props: UploadProps = {
@@ -167,25 +167,25 @@ export default function Register() {
   //   },
   // };
   const props: UploadProps = {
-    name: 'file',
+    name: "file",
     multiple: false,
-    action: 'https://api.cloudinary.com/v1_1/djlbovjlt/image/upload',
+    action: "https://api.cloudinary.com/v1_1/djlbovjlt/image/upload",
     beforeUpload: (file) => {
-      const uploadPreset = 'v4lnyqau'; // Replace with your Cloudinary upload preset name
+      const uploadPreset = "v4lnyqau"; // Replace with your Cloudinary upload preset name
       setUploading(true);
       const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', uploadPreset);
+      formData.append("file", file);
+      formData.append("upload_preset", uploadPreset);
 
       // Upload the file
-      fetch('https://api.cloudinary.com/v1_1/djlbovjlt/image/upload', {
-        method: 'POST',
+      fetch("https://api.cloudinary.com/v1_1/djlbovjlt/image/upload", {
+        method: "POST",
         body: formData,
       })
         .then((response) => response.json())
         .then((data) => {
           // Handle the upload response
-          console.log('Upload response:', data);
+          console.log("Upload response:", data);
           if (data.error) {
             message.error(`${file.name} upload failed: ${data.error.message}`);
           } else {
@@ -195,7 +195,7 @@ export default function Register() {
           }
         })
         .catch((error) => {
-          console.error('Upload error:', error);
+          console.error("Upload error:", error);
           message.error(`${file.name} upload failed.`);
         });
       setUploading(false);
@@ -204,7 +204,7 @@ export default function Register() {
     },
 
     onDrop(e) {
-      console.log('Dropped files', e.dataTransfer.files);
+      console.log("Dropped files", e.dataTransfer.files);
     },
   };
   useEffect(() => {
@@ -213,32 +213,34 @@ export default function Register() {
   return (
     <div
       // style={{ backgroundImage: 'url(rectangle.png)' }}
-      className="bg-cover bg-center h-[100vh] w-full relative overflow-x-hidden">
+      className="bg-cover bg-center h-[100vh] w-full relative overflow-x-hidden"
+    >
       <div
         // style={{
         //   backgroundImage: 'url(round.png)',
         //   backgroundRepeat: 'no-repeat',
         // }}
-        className="fixed top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden">
-        <h1 className="text-lightGreen font-bold text-4xl">{t('Register')}</h1>
-        <span>{t('Part')}</span>
-        <p className="text-2xl"> {t('Fill')}</p>
+        className="top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden"
+      >
+        <h1 className="text-lightGreen font-bold text-4xl">{t("Register")}</h1>
+        <span>{t("Part")}</span>
+        <p className="text-2xl"> {t("Fill")}</p>
 
-        <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[70%] mt-5 overflow-x-hidden">
-          <span className="text-[18px] text-lightGreen">{t('Personal')}</span>
+        <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[50%] mt-5 overflow-x-hidden">
+          <span className="text-[18px] text-lightGreen">{t("Personal")}</span>
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
             <Input
               error={
                 formik.touched.company_name && formik.errors.company_name
                   ? formik.errors.company_name
-                  : ''
+                  : ""
               }
               value={formik.values.company_name}
               onChange={formik.handleChange}
               id="company_name"
               className="w-full md:w-[70%]"
               required
-              label={t('Name')}
+              label={t("Name")}
               placeholder="Enter the name of the company"
               outlined={false}
             />
@@ -247,14 +249,14 @@ export default function Register() {
               error={
                 formik.touched.creation_date && formik.errors.creation_date
                   ? formik.errors.creation_date
-                  : ''
+                  : ""
               }
               value={formik.values.creation_date}
               id="creation_date"
               onChange={formik.handleChange}
               className="w-full md:w-[30%]"
               required
-              label={t('Creation')}
+              label={t("Creation")}
               placeholder="Enter the name of the company"
               outlined={false}
               type="date"
@@ -266,25 +268,25 @@ export default function Register() {
               error={
                 formik.touched.full_name && formik.errors.full_name
                   ? formik.errors.full_name
-                  : ''
+                  : ""
               }
               value={formik.values.full_name}
               onChange={formik.handleChange}
               id="full_name"
               className="w-full md:w-[70%]"
               required
-              label={t('full')}
+              label={t("full")}
               placeholder="Enter Your Full Name"
               outlined={false}
             />
 
             <div className="w-full md:w-[30%] mt-4">
-              <span className="text-[12px]">{t('Designation')}</span>
+              <span className="text-[12px]">{t("Organization")}</span>
               <Select
                 status={
                   formik.touched.governmental && formik.errors.governmental
-                    ? 'error'
-                    : ''
+                    ? "error"
+                    : ""
                 }
                 className="w-[100%]"
                 defaultValue={false}
@@ -296,8 +298,8 @@ export default function Register() {
                   setIsGov(e);
                 }}
                 options={[
-                  { value: true, label: t('Govermental') },
-                  { value: false, label: t('Non-Govermental') },
+                  { value: true, label: t("Governmental") },
+                  { value: false, label: t("Non-Governmental") },
                 ]}
               />
             </div>
@@ -308,27 +310,37 @@ export default function Register() {
               error={
                 formik.touched.ministry && formik.errors.ministry
                   ? formik.errors.ministry
-                  : ''
+                  : ""
               }
               value={formik.values.ministry}
               onChange={formik.handleChange}
               className="w-full"
-              label={t('Ministry')}
+              label={t("Ministry")}
               outlined={false}
             />
           ) : null}
+
+          <Input
+            id="designation"
+            type="text"
+            value=""
+            onChange={formik.handleChange}
+            className="w-full"
+            label={t("Designation")}
+            outlined={false}
+          />
 
           <AntTextArea
             error={
               formik.touched.address && formik.errors.address
                 ? formik.errors.address
-                : ''
+                : ""
             }
             value={formik.values.address}
             onChange={formik.handleChange}
             required
             id="address"
-            label={t('Address')}
+            label={t("Address")}
             outlined={false}
             placeholder="Type your address"
           />
@@ -338,7 +350,7 @@ export default function Register() {
             value={formik.values.annual_turnover}
             onChange={formik.handleChange}
             className="w-full"
-            label={t('annual')}
+            label={t("annual")}
             outlined={false}
           />
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
@@ -346,12 +358,12 @@ export default function Register() {
               error={
                 formik.touched.website && formik.errors.website
                   ? formik.errors.website
-                  : ''
+                  : ""
               }
               value={formik.values.website}
               onChange={formik.handleChange}
               className="w-full md:w-[70%]"
-              label={t('Website')}
+              label={t("Website")}
               id="website"
               placeholder="www.example.com"
               outlined={false}
@@ -363,12 +375,12 @@ export default function Register() {
                 formik.touched.number_of_employees &&
                 formik.errors.number_of_employees
                   ? formik.errors.number_of_employees
-                  : ''
+                  : ""
               }
               value={formik.values.number_of_employees}
               onChange={formik.handleChange}
               className="w-full md:w-[30%]"
-              label={t('Employees')}
+              label={t("Employees")}
               outlined={false}
               type="number"
             />
@@ -380,7 +392,7 @@ export default function Register() {
               value={phoneNumber}
               disabled
               className="w-full md:w-[30%]"
-              label={t('Mobile')}
+              label={t("Mobile")}
               outlined={false}
             />
 
@@ -389,18 +401,18 @@ export default function Register() {
               error={
                 formik.touched.email && formik.errors.email
                   ? formik.errors.email
-                  : ''
+                  : ""
               }
               value={formik.values.email}
               id="email"
               onChange={formik.handleChange}
               className="w-full md:w-[70%]"
-              label={t('Email')}
+              label={t("Email")}
               outlined={false}
             />
           </div>
           <h1 className="my-[10px] text-[13px] font-[500]">
-            {t('Is')}
+            {t("Is")}
             <span className="text-[red]">*</span>
           </h1>
           {companyNiche.map((options, ind) => (
@@ -427,12 +439,12 @@ export default function Register() {
             error={
               formik.touched.import_morocco && formik.errors.import_morocco
                 ? formik.errors.import_morocco
-                : ''
+                : ""
             }
             value={formik.values.import_morocco}
             id="import_morocco"
             onChange={formik.handleChange}
-            label={t('What')}
+            label={t("What")}
             outlined={false}
             placeholder="Type here"
           />
@@ -441,17 +453,17 @@ export default function Register() {
             error={
               formik.touched.export_morocco && formik.errors.export_morocco
                 ? formik.errors.export_morocco
-                : ''
+                : ""
             }
             value={formik.values.export_morocco}
             id="export_morocco"
             onChange={formik.handleChange}
             className="mb-10"
-            label={t('Export')}
+            label={t("Export")}
             outlined={false}
             placeholder="Type here"
           />
-          <span className="font-[500]">{t('Meeting')}</span>
+          <span className="font-[500]">{t("Meeting")}</span>
           {meetingWith.map((options, ind) => (
             <div className="my-3 flex items-center" key={ind.toString()}>
               <input
@@ -472,7 +484,7 @@ export default function Register() {
             </div>
           ))}
 
-          <span className="mt-5">{t('Passport')}</span>
+          <span className="mt-5">{t("Passport")}</span>
           <div className="h-[200px] md:h-[150px] mt-4">
             <Dragger showUploadList={true} className="h-[150px]" {...props}>
               <p className="ant-upload-drag-icon">
@@ -481,7 +493,7 @@ export default function Register() {
 
               <p className="ant-upload-text">
                 {uploading && <Spin size="large" spinning />}
-                {t('Drag')}
+                {t("Drag")}
               </p>
               <p className="ant-upload-hint">
                 Please Upload or Capture your passport
@@ -502,10 +514,11 @@ export default function Register() {
                 formik.handleSubmit();
               }}
               className="bg-lightGreen h-[38px]"
-              type="primary">
-              {phoneNumber.startsWith('+234')
-                ? 'Submit & proceed to payment'
-                : t('Submit')}
+              type="primary"
+            >
+              {phoneNumber.startsWith("+234")
+                ? "Submit & proceed to payment"
+                : t("Submit")}
             </Button>
           </div>
         </div>
@@ -518,23 +531,111 @@ export default function Register() {
         centered
         title=""
         open={isModalOpen}
-        onOk={handleOk}>
+        onOk={handleOk}
+      >
         <div className="flex flex-col min-h-[400px] bg-white  items-cente p-3">
           <h1 className="text-[16px] text-black">Terms and Conditions</h1>
           <div className="border-[#9D9DB7] border h-[217px] w-full my-5 overflow-y-scroll p-[10px]">
             <p className="text-justify">
-              Lorem ipsum dolor sit amet consectetur. Nibh aliquet vel ut
-              bibendum. Mauris ultrices justo fermentum malesuada ullamcorper.
-              Faucibus sit nulla quam consequat odio pharetra sit scelerisque.
-              Sit mauris risus gravida orci ut lacus posuere. Enim lobortis
-              ultrices aliquet eget. Sem orci odio vitae lobortis viverra
-              suspendisse tortor morbi dui. Adipiscing augue semper mi tristique
-              iaculis et. Rhoncus porta at nec consequat. Tortor in sollicitudin
-              mattis mattis sit risus. Et integer accumsan justo quam enim
-              tincidunt ipsum tellus. Integer ut dolor sit fermentum porta.
-              Egestas sed suscipit donec ornare tempus risus. Scelerisque
-              vulputate porta magna vulputate consequat eget sit bibendum
-              imperdiet. Aliquet nulla habitant magna egestas aliquam.
+              <p>
+                Welcome to Nigeria-Morocco Business Week! By proceeding with the
+                registration process, you agree to the following terms and
+                conditions:{" "}
+              </p>
+              Registration Information: <br />
+              1.1 You must provide accurate and complete information during the
+              registration process. <br />
+              1.2 You are responsible for maintaining the confidentiality of
+              your account credentials and for all activities that occur under
+              your account. <br />
+              <p>Data Collection and Use: </p>
+              2.1 We collect personal information such as your name, email
+              address, and other relevant details for registration and
+              communication purposes. <br />
+              2.2 Your data may be shared with third parties for specific
+              purposes such as marketing, analytics, or service provision. We
+              will not sell or rent your personal information to third parties
+              without your explicit consent.
+              <br />
+              2.3 We may collect non-personal information such as browser type,
+              IP address, and usage patterns to improve our services and user
+              experience.
+              <br />
+              <p>Cookies and Tracking:</p>
+              3.1 We use cookies and similar technologies to enhance your
+              browsing experience and track usage patterns.
+              <br />
+              3.2 By using our website, you consent to the use of cookies and
+              tracking technologies as described in our Privacy Policy.
+              <br />
+              <p>Content Submission:</p>
+              4.1 You are solely responsible for any content you submit or
+              upload to the website.
+              <br />
+              4.2 By submitting content, you grant us a non-exclusive,
+              royalty-free, perpetual, irrevocable, and worldwide license to
+              use, reproduce, modify, adapt, publish, translate, distribute, and
+              display such content.
+              <br />
+              <p>Intellectual Property:</p>
+              5.1 All content and materials on the website, including but not
+              limited to text, graphics, logos, and software, are owned or
+              licensed by us and are protected by intellectual property laws.
+              <br />
+              5.2 You may not use, reproduce, modify, or distribute any content
+              from the website without our prior written consent.
+              <br />
+              <p>Disclaimer of Warranties:</p>
+              6.1 We strive to provide accurate and up-to-date information, but
+              we do not warrant the completeness, reliability, or accuracy of
+              the content on the website.
+              <br />
+              6.2 Your use of the website is at your own risk, and we disclaim
+              all warranties, express or implied, including but not limited to
+              warranties of merchantability, fitness for a particular purpose,
+              and non-infringement.
+              <br />
+              <p>Limitation of Liability:</p>
+              7.1 We shall not be liable for any direct, indirect, incidental,
+              consequential, or punitive damages arising out of your use or
+              inability to use the website.
+              <br />
+              7.2 Our total liability to you for any claims arising from or
+              related to the website shall not exceed the amount paid by you, if
+              any, for accessing the website.
+              <br />
+              <p>Indemnification:</p>
+              8.1 You agree to indemnify and hold us harmless from any claims,
+              losses, liabilities, damages, costs, and expenses arising out of
+              your use of the website or violation of these terms and
+              conditions.
+              <br />
+              Governing Law: 9.1 These terms and conditions shall be governed by
+              and construed in accordance with the laws of Nigeria and Morocco.
+              <br />
+              9.2 Any disputes arising out of or related to these terms and
+              conditions shall be subject to the exclusive jurisdiction of the
+              courts in Nigeria and Morocco.
+              <br />
+              <p>Changes to Terms:</p>
+              10.1 We reserve the right to modify or update these terms and
+              conditions at any time without prior notice.
+              <br />
+              10.2 Your continued use of the website after such changes
+              constitutes your acceptance of the modified terms.
+              <br />
+              <p>
+                Please review these terms and conditions carefully before
+                proceeding with the registration process. If you do not agree
+                with any part of these terms, please do not proceed further. If
+                you have any questions or concerns, please contact us at
+                info@spectre.com.
+              </p>
+              <p>
+                By clicking "I Agree" or similar buttons, you acknowledge that
+                you have read, understood, and agreed to these terms and
+                conditions.
+              </p>
             </p>
           </div>
           <div className="my-3 flex items-center">
@@ -545,13 +646,15 @@ export default function Register() {
           <div className="flex gap-4 items-center justify-end mt-5">
             <Button
               onClick={handleCancel}
-              className="border-lightGreen bg-transparent text-lightGreen h-[38px]">
+              className="border-lightGreen bg-transparent text-lightGreen h-[38px]"
+            >
               Cancel
             </Button>
             <Button
               onClick={handleCancel}
               className="bg-lightGreen h-[38px]"
-              type="primary">
+              type="primary"
+            >
               Confirm
             </Button>
           </div>
