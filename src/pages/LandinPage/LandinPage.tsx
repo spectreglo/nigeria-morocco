@@ -86,12 +86,12 @@ export default function LandinPage() {
           We have been working with some biggest companies
         </p>
         <div className="grid  place-items-center px-0 grid-cols-2 md:grid-cols-6 gap-5 w-full md:px-32 mt-10">
-          <img src="sponsor.png" />
-          <img src="Logo.png" />
+          <span />
+          <span />
           <img src="Embassy.png" />
           <img src="ram.png" />
-          <img src="sponsor.png" />
-          <img src="sponsor.png" />
+          <span />
+          <span />
         </div>
       </div>
 
