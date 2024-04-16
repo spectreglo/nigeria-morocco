@@ -16,6 +16,7 @@ import store from './redux';
 import Profile from './pages/Dashboard/profile/Profile';
 import UserProfile from './pages/Dashboard/profile/UserProfile';
 import Users from './pages/Users/Users';
+import Success from './pages/Forms/Success';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
               <Route path="/Booking" element={<Booking />} />
               <Route path="/Invoice" element={<Invoice />} />
               <Route path="/BookingInvoice" element={<BookingInvoice />} />
+              <Route path="/Success" element={<Success />} />
               <Route path="/Login" element={<Login />} />
               <Route path="/dashboard" element={<PrivateRoutes />}>
                 <Route index element={<DashboardHome />} />

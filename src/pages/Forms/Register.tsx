@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
-import Input from "../../components/Input";
-import { InboxOutlined } from "@ant-design/icons";
+import { useEffect, useState } from 'react';
+import Input from '../../components/Input';
+import { InboxOutlined } from '@ant-design/icons';
 
-import { Button, message, Modal, Select, Spin, Upload } from "antd";
-import PaymentSumarryModal from "./components/PaymentSumarryModal";
-import { useLocation, useNavigate } from "react-router-dom";
-import * as Yup from "yup";
+import { Button, message, Modal, Select, Spin, Upload } from 'antd';
+import PaymentSumarryModal from './components/PaymentSumarryModal';
+import { useLocation, useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 
-import { useFormik } from "formik";
-import useRegister from "./hooks/useRegister";
-import { useTranslation } from "react-i18next";
-import AntTextArea from "../../components/TextArea";
+import { useFormik } from 'formik';
+import useRegister from './hooks/useRegister';
+import { useTranslation } from 'react-i18next';
+import AntTextArea from '../../components/TextArea';
 
 const { Dragger } = Upload;
 
@@ -31,6 +31,7 @@ export interface InitialValuesProps {
   ministry: string;
   full_name: string;
   annual_turnover: string;
+  designation: string;
 }
 interface UploadProps {
   name: string;
@@ -45,8 +46,9 @@ export default function Register() {
   const [uploading, setUploading] = useState(false);
   const [selectedNiche, setNiche] = useState<string[] | []>([]);
   const [selectedMeeting, setMeeting] = useState<string[] | []>([]);
-  const [userId, setUserId] = useState<string>("");
-  const [email, setEmail] = useState("");
+  const [userId, setUserId] = useState<string>('');
+  const [email, setEmail] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
   const { register, registering } = useRegister();
   const navigate = useNavigate();
   const location = useLocation();
@@ -54,10 +56,10 @@ export default function Register() {
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    if (phoneNumber.startsWith("+234")) {
-      i18n.changeLanguage("en");
+    if (phoneNumber.startsWith('+234')) {
+      i18n.changeLanguage('en');
     } else {
-      i18n.changeLanguage("fr");
+      i18n.changeLanguage('fr');
     }
   }, []);
   const [phoneNumber] = useState<string>(location.state.phoneNumber);
@@ -70,39 +72,40 @@ export default function Register() {
   };
 
   const validationSchema = Yup.object().shape({
-    company_name: Yup.string().required("Company name is required"),
-    creation_date: Yup.date().required("Creation date is required"),
-    address: Yup.string().required("Address is required"),
+    company_name: Yup.string().required('Company name is required'),
+    creation_date: Yup.date().required('Creation date is required'),
+    address: Yup.string().required('Address is required'),
     number_of_employees: Yup.number(),
     website: Yup.string(),
-    mobile: Yup.string().required("Mobile number is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    mobile: Yup.string().required('Mobile number is required'),
+    email: Yup.string().email('Invalid email').required('Email is required'),
     company_niche: Yup.array()
       .of(Yup.string())
-      .required("Company niche is required"),
+      .required('Company niche is required'),
     meeting_sectors: Yup.array().of(Yup.string()),
     import_morocco: Yup.string(),
     export_morocco: Yup.string(),
-    image_url: Yup.string().url("Invalid image URL"),
-    full_name: Yup.string().required("Full name is required"),
+    image_url: Yup.string().url('Invalid image URL'),
+    full_name: Yup.string().required('Full name is required'),
   });
   const initialValues: InitialValuesProps = {
-    company_name: "",
-    creation_date: "",
-    address: "",
-    number_of_employees: "",
-    website: "",
+    company_name: '',
+    creation_date: '',
+    address: '',
+    number_of_employees: '',
+    website: '',
     mobile: phoneNumber,
-    email: "",
+    email: '',
     company_niche: [],
-    import_morocco: "",
-    export_morocco: "",
+    import_morocco: '',
+    export_morocco: '',
     meeting_sectors: [],
-    image_url: "",
+    image_url: '',
     governmental: false,
-    ministry: "",
-    full_name: "",
-    annual_turnover: "",
+    ministry: '',
+    full_name: '',
+    annual_turnover: '',
+    designation: '',
   };
   const formik = useFormik({
     initialValues,
@@ -111,13 +114,13 @@ export default function Register() {
       if (registered.status) {
         setUserId(registered.data);
         formik.resetForm();
-        message.success("Registered successfully!");
-        if (phoneNumber.startsWith("+234")) {
+        message.success('Registered successfully!');
+        if (phoneNumber.startsWith('+234')) {
           setEmail(values.email);
 
           openSummaryModal();
         } else {
-          navigate("/");
+          navigate('/Success');
         }
       }
     },
@@ -132,19 +135,19 @@ export default function Register() {
     setIsModalOpen(false);
   };
   const [companyNiche] = useState([
-    "Importer/User",
-    "Wholesaler/Distributor",
-    "Intermediary",
-    "Central Purchasing",
-    "Manufacturer",
+    'Importer/User',
+    'Wholesaler/Distributor',
+    'Intermediary',
+    'Central Purchasing',
+    'Manufacturer',
   ]);
 
   const [meetingWith] = useState([
-    "Agriculture & Agro Allied",
-    "Automobile",
-    "Solid Minerals",
-    "Energy (renewable energy)",
-    "Information Technology",
+    'Agriculture & Agro Allied',
+    'Automobile',
+    'Solid Minerals',
+    'Energy (renewable energy)',
+    'Information Technology',
   ]);
   // const [selectedAvailability, setSelectedAvailabilty] = useState([]);
   // const props: UploadProps = {
@@ -167,25 +170,25 @@ export default function Register() {
   //   },
   // };
   const props: UploadProps = {
-    name: "file",
+    name: 'file',
     multiple: false,
-    action: "https://api.cloudinary.com/v1_1/djlbovjlt/image/upload",
+    action: 'https://api.cloudinary.com/v1_1/djlbovjlt/image/upload',
     beforeUpload: (file) => {
-      const uploadPreset = "v4lnyqau"; // Replace with your Cloudinary upload preset name
+      const uploadPreset = 'v4lnyqau'; // Replace with your Cloudinary upload preset name
       setUploading(true);
       const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", uploadPreset);
+      formData.append('file', file);
+      formData.append('upload_preset', uploadPreset);
 
       // Upload the file
-      fetch("https://api.cloudinary.com/v1_1/djlbovjlt/image/upload", {
-        method: "POST",
+      fetch('https://api.cloudinary.com/v1_1/djlbovjlt/image/upload', {
+        method: 'POST',
         body: formData,
       })
         .then((response) => response.json())
         .then((data) => {
           // Handle the upload response
-          console.log("Upload response:", data);
+          console.log('Upload response:', data);
           if (data.error) {
             message.error(`${file.name} upload failed: ${data.error.message}`);
           } else {
@@ -195,7 +198,7 @@ export default function Register() {
           }
         })
         .catch((error) => {
-          console.error("Upload error:", error);
+          console.error('Upload error:', error);
           message.error(`${file.name} upload failed.`);
         });
       setUploading(false);
@@ -204,7 +207,7 @@ export default function Register() {
     },
 
     onDrop(e) {
-      console.log("Dropped files", e.dataTransfer.files);
+      console.log('Dropped files', e.dataTransfer.files);
     },
   };
   useEffect(() => {
@@ -213,34 +216,32 @@ export default function Register() {
   return (
     <div
       // style={{ backgroundImage: 'url(rectangle.png)' }}
-      className="bg-cover bg-center h-[100vh] w-full relative overflow-x-hidden"
-    >
+      className="bg-cover bg-center h-[100vh] w-full relative overflow-x-hidden">
       <div
         // style={{
         //   backgroundImage: 'url(round.png)',
         //   backgroundRepeat: 'no-repeat',
         // }}
-        className="top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden"
-      >
-        <h1 className="text-lightGreen font-bold text-4xl">{t("Register")}</h1>
-        <span>{t("Part")}</span>
-        <p className="text-2xl"> {t("Fill")}</p>
+        className="top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden">
+        <h1 className="text-lightGreen font-bold text-4xl">{t('Register')}</h1>
+        <span>{t('Part')}</span>
+        <p className="text-2xl"> {t('Fill')}</p>
 
         <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[50%] mt-5 overflow-x-hidden">
-          <span className="text-[18px] text-lightGreen">{t("Personal")}</span>
+          <span className="text-[18px] text-lightGreen">{t('Personal')}</span>
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
             <Input
               error={
                 formik.touched.company_name && formik.errors.company_name
                   ? formik.errors.company_name
-                  : ""
+                  : ''
               }
               value={formik.values.company_name}
               onChange={formik.handleChange}
               id="company_name"
               className="w-full md:w-[70%]"
               required
-              label={t("Name")}
+              label={t('Name')}
               placeholder="Enter the name of the company"
               outlined={false}
             />
@@ -249,14 +250,14 @@ export default function Register() {
               error={
                 formik.touched.creation_date && formik.errors.creation_date
                   ? formik.errors.creation_date
-                  : ""
+                  : ''
               }
               value={formik.values.creation_date}
               id="creation_date"
               onChange={formik.handleChange}
               className="w-full md:w-[30%]"
               required
-              label={t("Creation")}
+              label={t('Creation')}
               placeholder="Enter the name of the company"
               outlined={false}
               type="date"
@@ -268,25 +269,25 @@ export default function Register() {
               error={
                 formik.touched.full_name && formik.errors.full_name
                   ? formik.errors.full_name
-                  : ""
+                  : ''
               }
               value={formik.values.full_name}
               onChange={formik.handleChange}
               id="full_name"
               className="w-full md:w-[70%]"
               required
-              label={t("full")}
+              label={t('full')}
               placeholder="Enter Your Full Name"
               outlined={false}
             />
 
             <div className="w-full md:w-[30%] mt-4">
-              <span className="text-[12px]">{t("Organization")}</span>
+              <span className="text-[12px]">{t('Organization')}</span>
               <Select
                 status={
                   formik.touched.governmental && formik.errors.governmental
-                    ? "error"
-                    : ""
+                    ? 'error'
+                    : ''
                 }
                 className="w-[100%]"
                 defaultValue={false}
@@ -298,8 +299,8 @@ export default function Register() {
                   setIsGov(e);
                 }}
                 options={[
-                  { value: true, label: t("Governmental") },
-                  { value: false, label: t("Non-Governmental") },
+                  { value: true, label: t('Governmental') },
+                  { value: false, label: t('Non-Governmental') },
                 ]}
               />
             </div>
@@ -310,12 +311,12 @@ export default function Register() {
               error={
                 formik.touched.ministry && formik.errors.ministry
                   ? formik.errors.ministry
-                  : ""
+                  : ''
               }
               value={formik.values.ministry}
               onChange={formik.handleChange}
               className="w-full"
-              label={t("Ministry")}
+              label={t('Ministry')}
               outlined={false}
             />
           ) : null}
@@ -323,10 +324,10 @@ export default function Register() {
           <Input
             id="designation"
             type="text"
-            value=""
+            value={formik.values.designation}
             onChange={formik.handleChange}
             className="w-full"
-            label={t("Designation")}
+            label={t('Designation')}
             outlined={false}
           />
 
@@ -334,13 +335,13 @@ export default function Register() {
             error={
               formik.touched.address && formik.errors.address
                 ? formik.errors.address
-                : ""
+                : ''
             }
             value={formik.values.address}
             onChange={formik.handleChange}
             required
             id="address"
-            label={t("Address")}
+            label={t('Address')}
             outlined={false}
             placeholder="Type your address"
           />
@@ -350,7 +351,7 @@ export default function Register() {
             value={formik.values.annual_turnover}
             onChange={formik.handleChange}
             className="w-full"
-            label={t("annual")}
+            label={t('annual')}
             outlined={false}
           />
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
@@ -358,12 +359,12 @@ export default function Register() {
               error={
                 formik.touched.website && formik.errors.website
                   ? formik.errors.website
-                  : ""
+                  : ''
               }
               value={formik.values.website}
               onChange={formik.handleChange}
               className="w-full md:w-[70%]"
-              label={t("Website")}
+              label={t('Website')}
               id="website"
               placeholder="www.example.com"
               outlined={false}
@@ -375,12 +376,12 @@ export default function Register() {
                 formik.touched.number_of_employees &&
                 formik.errors.number_of_employees
                   ? formik.errors.number_of_employees
-                  : ""
+                  : ''
               }
               value={formik.values.number_of_employees}
               onChange={formik.handleChange}
               className="w-full md:w-[30%]"
-              label={t("Employees")}
+              label={t('Employees')}
               outlined={false}
               type="number"
             />
@@ -392,7 +393,7 @@ export default function Register() {
               value={phoneNumber}
               disabled
               className="w-full md:w-[30%]"
-              label={t("Mobile")}
+              label={t('Mobile')}
               outlined={false}
             />
 
@@ -401,18 +402,18 @@ export default function Register() {
               error={
                 formik.touched.email && formik.errors.email
                   ? formik.errors.email
-                  : ""
+                  : ''
               }
               value={formik.values.email}
               id="email"
               onChange={formik.handleChange}
               className="w-full md:w-[70%]"
-              label={t("Email")}
+              label={t('Email')}
               outlined={false}
             />
           </div>
           <h1 className="my-[10px] text-[13px] font-[500]">
-            {t("Is")}
+            {t('Is')}
             <span className="text-[red]">*</span>
           </h1>
           {companyNiche.map((options, ind) => (
@@ -439,12 +440,12 @@ export default function Register() {
             error={
               formik.touched.import_morocco && formik.errors.import_morocco
                 ? formik.errors.import_morocco
-                : ""
+                : ''
             }
             value={formik.values.import_morocco}
             id="import_morocco"
             onChange={formik.handleChange}
-            label={t("What")}
+            label={t('What')}
             outlined={false}
             placeholder="Type here"
           />
@@ -453,17 +454,17 @@ export default function Register() {
             error={
               formik.touched.export_morocco && formik.errors.export_morocco
                 ? formik.errors.export_morocco
-                : ""
+                : ''
             }
             value={formik.values.export_morocco}
             id="export_morocco"
             onChange={formik.handleChange}
             className="mb-10"
-            label={t("Export")}
+            label={t('Export')}
             outlined={false}
             placeholder="Type here"
           />
-          <span className="font-[500]">{t("Meeting")}</span>
+          <span className="font-[500]">{t('Meeting')}</span>
           {meetingWith.map((options, ind) => (
             <div className="my-3 flex items-center" key={ind.toString()}>
               <input
@@ -484,7 +485,7 @@ export default function Register() {
             </div>
           ))}
 
-          <span className="mt-5">{t("Passport")}</span>
+          <span className="mt-5">{t('Passport')}</span>
           <div className="h-[200px] md:h-[150px] mt-4">
             <Dragger showUploadList={true} className="h-[150px]" {...props}>
               <p className="ant-upload-drag-icon">
@@ -493,7 +494,7 @@ export default function Register() {
 
               <p className="ant-upload-text">
                 {uploading && <Spin size="large" spinning />}
-                {t("Drag")}
+                {t('Drag')}
               </p>
               <p className="ant-upload-hint">
                 Please Upload or Capture your passport
@@ -514,11 +515,10 @@ export default function Register() {
                 formik.handleSubmit();
               }}
               className="bg-lightGreen h-[38px]"
-              type="primary"
-            >
-              {phoneNumber.startsWith("+234")
-                ? "Submit & proceed to payment"
-                : t("Submit")}
+              type="primary">
+              {phoneNumber.startsWith('+234')
+                ? 'Submit & proceed to payment'
+                : t('Submit')}
             </Button>
           </div>
         </div>
@@ -531,8 +531,7 @@ export default function Register() {
         centered
         title=""
         open={isModalOpen}
-        onOk={handleOk}
-      >
+        onOk={handleOk}>
         <div className="flex flex-col min-h-[400px] bg-white  items-cente p-3">
           <h1 className="text-[16px] text-black">Terms and Conditions</h1>
           <div className="border-[#9D9DB7] border h-[217px] w-full my-5 overflow-y-scroll p-[10px]">
@@ -540,7 +539,7 @@ export default function Register() {
               <p>
                 Welcome to Nigeria-Morocco Business Week! By proceeding with the
                 registration process, you agree to the following terms and
-                conditions:{" "}
+                conditions:{' '}
               </p>
               Registration Information: <br />
               1.1 You must provide accurate and complete information during the
@@ -639,22 +638,26 @@ export default function Register() {
             </p>
           </div>
           <div className="my-3 flex items-center">
-            <input className="mr-2" type="checkbox" />
+            <input
+              onChange={(e) => setIsChecked(e.currentTarget.checked)}
+              checked={isChecked}
+              className="mr-2"
+              type="checkbox"
+            />
             <span className="text-[12px]">I accept term and condition</span>
           </div>
 
           <div className="flex gap-4 items-center justify-end mt-5">
             <Button
-              onClick={handleCancel}
-              className="border-lightGreen bg-transparent text-lightGreen h-[38px]"
-            >
+              onClick={() => navigate('/')}
+              className="border-lightGreen bg-transparent text-lightGreen h-[38px]">
               Cancel
             </Button>
             <Button
+              disabled={!isChecked}
               onClick={handleCancel}
               className="bg-lightGreen h-[38px]"
-              type="primary"
-            >
+              type="primary">
               Confirm
             </Button>
           </div>
