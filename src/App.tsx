@@ -17,6 +17,7 @@ import Profile from './pages/Dashboard/profile/Profile';
 import UserProfile from './pages/Dashboard/profile/UserProfile';
 import Users from './pages/Users/Users';
 import Success from './pages/Forms/Success';
+import Bookings from './pages/Bookings/Bookings';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
                 <Route path="user" element={<UserProfile />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="users" element={<Users />} />
+                <Route path="bookings" element={<Bookings />} />
               </Route>
             </Routes>
           </ConfigProvider>
