@@ -4,6 +4,7 @@ import ProfileIcon from './compopnents/ProfileIcon';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
 import UsersIcon from './compopnents/UsersIcon';
+import SpaaceIcon from './compopnents/SpaaceIcon';
 
 export default function DashboardLayout() {
   const location = useLocation();
@@ -61,6 +62,28 @@ export default function DashboardLayout() {
                   : 'text-[#808080]'
               } text-[14px]  ml-3`}>
               Profile
+            </h1>
+          </div>
+        </Link>
+        <Link to="/dashboard/bookings">
+          <div
+            className={`w-full h-[40px] ${
+              location.pathname == '/dashboard/bookings'
+                ? 'bg-lightGreen'
+                : 'bg-transparent'
+            } flex items-center px-3 rounded-md justify-center cursor-pointer transition-all`}>
+            <SpaaceIcon
+              color={
+                location.pathname == '/dashboard/bookings' ? 'white' : '#808080'
+              }
+            />
+            <h1
+              className={`w-[80%]  ${
+                location.pathname == '/dashboard/bookings'
+                  ? 'text-white'
+                  : 'text-[#808080]'
+              } text-[14px]  ml-3`}>
+              Bookings
             </h1>
           </div>
         </Link>

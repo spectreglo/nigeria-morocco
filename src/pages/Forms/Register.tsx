@@ -773,7 +773,7 @@ export default function Register() {
               className="mr-2"
               type="checkbox"
             />
-            <span className="text-[12px]">I accept term and condition</span>
+            <span className="text-[12px]">{t('accept')}</span>
           </div>
 
           <div className="flex gap-4 items-center justify-end mt-5">
