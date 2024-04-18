@@ -48,7 +48,7 @@ export default function Register() {
   const [selectedNiche, setNiche] = useState<string[] | []>([]);
   const [selectedMeeting, setMeeting] = useState<string[] | []>([]);
   const [userId, setUserId] = useState<string>('');
-  const [email, setEmail] = useState('');
+  const [email] = useState('');
   const [isChecked, setIsChecked] = useState(false);
   const { register, registering } = useRegister();
   const navigate = useNavigate();
@@ -64,9 +64,9 @@ export default function Register() {
     }
   }, []);
   const [phoneNumber] = useState<string>(location.state.phoneNumber);
-  const openSummaryModal = () => {
-    setOpenSummary(true);
-  };
+  // const openSummaryModal = () => {
+  //   setOpenSummary(true);
+  // };
 
   const closeSummary = () => {
     setOpenSummary(false);
@@ -115,9 +115,10 @@ export default function Register() {
         formik.resetForm();
         message.success('Registered successfully!');
         if (phoneNumber.startsWith('+234')) {
-          setEmail(values.email);
+          navigate('/Success');
+          // setEmail(values.email);
 
-          openSummaryModal();
+          // openSummaryModal();
         } else {
           navigate('/Success');
         }
