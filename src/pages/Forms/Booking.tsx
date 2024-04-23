@@ -30,15 +30,20 @@ export interface InitialValuesProps {
 }
 
 export default function Booking() {
+  const location = useLocation();
   const [ref, setRef] = useState('');
   const [id] = useState('');
   const [amount, setAmount] = useState(0);
   const [selectedSectors, setSelectedSectors] = useState<string[] | []>([]);
   const [isPersonalised, setIsPersonalised] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
+  const [phoneNumber] = useState<string>(location.state.phoneNumber);
+  const [rate, setRate] = useState(phoneNumber.startsWith('+234') ? 550 : 1650);
+  const [selectedMeters, setSelectedMeters] = useState(0);
 
   const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);
+    setSelectedMeters(Number(event.target.value));
   };
   const [sector] = useState([
     'Agriculture & Agro Allied',
@@ -51,7 +56,7 @@ export default function Booking() {
 
   const { book, booking } = useBooking();
   const navigate = useNavigate();
-  const location = useLocation();
+
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
@@ -61,7 +66,6 @@ export default function Booking() {
       i18n.changeLanguage('fr');
     }
   }, []);
-  const [phoneNumber] = useState<string>(location.state.phoneNumber);
 
   const onSuccess = () => {
     setAmount(0);
@@ -99,14 +103,22 @@ export default function Booking() {
   const formik = useFormik({
     initialValues,
     onSubmit: async (values) => {
+      if (selectedMeters == 0) {
+        message.warning('Pleas fill all required fields');
+        return;
+      }
       values.sector = selectedSectors;
-      values.square_meters = selectedOption;
+      values.square_meters = selectedOption + 'Sqm';
 
       const booked = await book(values);
       if (booked.status) {
         formik.resetForm();
         message.success('Booked successfully!');
-        navigate('/');
+        navigate('/Success', {
+          state: {
+            total: rate * selectedMeters,
+          },
+        });
         // console.log(booked, 'booked');
         // setRef(booked.data.data.transaction_ref);
         // setAmount(100 * Number(booked.data.data.amount));
@@ -278,8 +290,15 @@ export default function Booking() {
               defaultValue={false}
               onChange={(e) => {
                 formik.values.personalised = e;
-                console.log(e);
+
                 setIsPersonalised(e);
+                if (!phoneNumber.startsWith('+234')) {
+                  if (e == true) {
+                    setRate(2700);
+                  } else {
+                    setRate(1650);
+                  }
+                }
               }}
               options={[
                 { value: true, label: t('Pesonalised') },
@@ -310,8 +329,8 @@ export default function Booking() {
               <input
                 type="radio"
                 className="form-radio text-lightGreen"
-                value="6Sqm"
-                checked={selectedOption === '6Sqm'}
+                value={6}
+                checked={selectedOption == '6'}
                 onChange={handleOptionChange}
               />
               <span className="ml-2">6 Sqm</span>
@@ -320,8 +339,8 @@ export default function Booking() {
               <input
                 type="radio"
                 className="form-radio text-lightGreen"
-                value="9Sqm"
-                checked={selectedOption === '9Sqm'}
+                value={9}
+                checked={selectedOption == '9'}
                 onChange={handleOptionChange}
               />
               <span className="ml-2">9 Sqm</span>
@@ -330,8 +349,8 @@ export default function Booking() {
               <input
                 type="radio"
                 className="form-radio text-lightGreen"
-                value="12Sqm"
-                checked={selectedOption === '12Sqm'}
+                value={12}
+                checked={selectedOption == '12'}
                 onChange={handleOptionChange}
               />
               <span className="ml-2">12 Sqm</span>
@@ -341,8 +360,8 @@ export default function Booking() {
               <input
                 type="radio"
                 className="form-radio text-lightGreen"
-                value="18Sqm"
-                checked={selectedOption === '18Sqm'}
+                value={18}
+                checked={selectedOption == '18'}
                 onChange={handleOptionChange}
               />
               <span className="ml-2">18 Sqm</span>
@@ -351,8 +370,8 @@ export default function Booking() {
               <input
                 type="radio"
                 className="form-radio text-lightGreen"
-                value="40Sqm"
-                checked={selectedOption === '40Sqm'}
+                value={40}
+                checked={selectedOption == '40'}
                 onChange={handleOptionChange}
               />
               <span className="ml-2">40 Sqm</span>
@@ -362,12 +381,18 @@ export default function Booking() {
               <input
                 type="radio"
                 className="form-radio text-lightGreen"
-                value="50Sqm"
-                checked={selectedOption === '50Sqm'}
+                value={50}
+                checked={selectedOption == '50'}
                 onChange={handleOptionChange}
               />
               <span className="ml-2">50 Sqm</span>
             </label>
+          </div>
+          <div className="flex flex-col">
+            <h1 className="ml-auto font-bold text-black">TOTAL AMOUNT ($)</h1>
+            <p className="ml-auto font-bold">
+              $ {(rate * selectedMeters).toLocaleString()}
+            </p>
           </div>
           <div className="flex gap-4 items-center justify-end mt-10 mb-5">
             <Button className="border-lightGreen bg-transparent text-lightGreen h-[38px]">
