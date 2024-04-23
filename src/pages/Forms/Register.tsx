@@ -115,7 +115,11 @@ export default function Register() {
         formik.resetForm();
         message.success('Registered successfully!');
         if (phoneNumber.startsWith('+234')) {
-          navigate('/Success');
+          navigate('/Success', {
+            state: {
+              total: 1000,
+            },
+          });
           // setEmail(values.email);
 
           // openSummaryModal();
