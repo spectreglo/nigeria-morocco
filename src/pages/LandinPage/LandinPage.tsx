@@ -1,18 +1,18 @@
-import CarouselItem from './componets/CarouselItem';
-import { Carousel } from 'react-responsive-carousel';
-import ProgramItems from './componets/ProgramItems';
-import { Button, Modal, message } from 'antd';
-import Footer from './componets/Footer';
-import { useState } from 'react';
-import PhoneInput from './componets/PhoneInput';
-import { Link, useNavigate } from 'react-router-dom';
+import CarouselItem from "./componets/CarouselItem";
+import { Carousel } from "react-responsive-carousel";
+import ProgramItems from "./componets/ProgramItems";
+import { Button, Modal, message } from "antd";
+import Footer from "./componets/Footer";
+import { useState } from "react";
+import PhoneInput from "./componets/PhoneInput";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function LandinPage() {
-  const ITEMS = ['SLIDE', 'SLIDE2', 'SLIDE3'];
+  const ITEMS = ["SLIDE", "SLIDE2", "SLIDE3"];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
-  const [value, setValue] = useState('+234');
-  const [phone, setPhone] = useState('');
+  const [value, setValue] = useState("+234");
+  const [phone, setPhone] = useState("");
   const navigate = useNavigate();
 
   const showModal = () => {
@@ -48,18 +48,21 @@ export default function LandinPage() {
                 setBookingModalOpen(true);
               }}
               className="text-[12px]"
-              href="/">
+              href="/"
+            >
               Book A Space
             </a>
             <Button
               onClick={showModal}
-              className="bg-lightGreen w-[115px] h-[40px]   text-white">
+              className="bg-lightGreen w-[115px] h-[40px]   text-white"
+            >
               Participate
             </Button>
             <Link to="/dashboard">
               <Button
                 onClick={showModal}
-                className="bg-silver w-[115px] h-[40px]   text-black">
+                className="bg-silver w-[115px] h-[40px]   text-black"
+              >
                 Admin
               </Button>
             </Link>
@@ -73,7 +76,8 @@ export default function LandinPage() {
           autoPlay
           showArrows={false}
           infiniteLoop
-          className="flex flex-col w-full min-h-[50vh] md:min-h-[80vh] justify-start text-start">
+          className="flex flex-col w-full min-h-[50vh] md:min-h-[80vh] justify-start text-start"
+        >
           {ITEMS.map((item) => (
             <CarouselItem openModal={showModal} key={item} />
           ))}
@@ -110,24 +114,24 @@ export default function LandinPage() {
         </p>
         <div className="grid  place-items-center px-0 grid-cols-1 md:grid-cols-3 gap-5 w-full md:px-5 lg:px-32 mt-10">
           <ProgramItems
-            icon="com.png"
+            icon="tract.svg"
             title="Agriculture & Agro-allied Products"
             content=""
           />
-          <ProgramItems title="Automobile" content="" icon="Icon.png" />
+          <ProgramItems title="Automobile" content="" icon="car.svg" />
           <ProgramItems
-            icon="energy.png"
+            icon="renergy.svg"
             title="Electricity & Renewable Energy"
             content=""
           />
           <ProgramItems
-            icon="com.png"
+            icon="rock.svg"
             title="Solid Minerals/Steel"
             content=""
           />
-          <ProgramItems icon="com.png" title="Digital Economy" content="" />
+          <ProgramItems icon="economy.svg" title="Digital Economy" content="" />
           <ProgramItems
-            icon="com.png"
+            icon="bank.svg"
             title="Banking & E-Government"
             content=""
           />
@@ -148,10 +152,10 @@ export default function LandinPage() {
               We invite you to participate in the 1st Edition of the
               Nigeria-Morocco Business Week, scheduled for the 27th to 29th May,
               2024.
-            </p>{' '}
+            </p>{" "}
             <p className="my-3">
               <b>Venue:</b> OFEC Casablanca, Morocco.
-            </p>{' '}
+            </p>{" "}
             The event is organized by The Coalition of Northern States Chambers
             of Commerce, Industry, Agriculture and Mines (CONSCCIMA) in
             conjunction with Spectre Trans-Trade Global of Morocco. <br />
@@ -175,7 +179,7 @@ export default function LandinPage() {
       <div className="flex bg-silver  min-h-[308px] justify-center flex-col md:flex-row md:justify-between  items-center w-full py-5 px-5  md:px-20 gap-5 md:gap-10 lg:px-40">
         <div className="gap-4">
           <h1 className="text-4xl font-bold">
-            Want an{' '}
+            Want an{" "}
             <span className="text-lightGreen text-4xl font-bold">
               Exhibition space?
             </span>
@@ -188,7 +192,8 @@ export default function LandinPage() {
         <div className="grid grid-cols-2 gap-20">
           <Button
             onClick={() => setBookingModalOpen(true)}
-            className="bg-lightGreen w-[100%] mt-4 md:w-[200px] h-12 text-white hover:bg-black">
+            className="bg-lightGreen w-[100%] mt-4 md:w-[200px] h-12 text-white hover:bg-black"
+          >
             Book A Space
           </Button>
         </div>
@@ -201,7 +206,8 @@ export default function LandinPage() {
         title=""
         open={isModalOpen}
         onOk={handleOk}
-        onCancel={handleCancel}>
+        onCancel={handleCancel}
+      >
         <div className="flex flex-col min-h-[400px] bg-white justify-center items-center">
           <img src="phone.png" className="mt-[auto]" />
           <h1 className="font-bold mt-5">Enter Your Phone Number</h1>
@@ -217,15 +223,16 @@ export default function LandinPage() {
             <Button
               onClick={() => {
                 if (phone && value) {
-                  navigate('Register', {
+                  navigate("Register", {
                     state: { phoneNumber: value + phone },
                   });
                 } else {
-                  message.warning('Phone number is required');
+                  message.warning("Phone number is required");
                 }
               }}
               className="bg-lightGreen h-[40px]"
-              type="primary">
+              type="primary"
+            >
               Confirm
             </Button>
           </div>
@@ -238,7 +245,8 @@ export default function LandinPage() {
         title=""
         open={bookingModalOpen}
         onOk={() => setBookingModalOpen(false)}
-        onCancel={() => setBookingModalOpen(false)}>
+        onCancel={() => setBookingModalOpen(false)}
+      >
         <div className="flex flex-col min-h-[400px] bg-white justify-center items-center">
           <img src="phone.png" className="mt-[auto]" />
           <h1 className="font-bold mt-5">Enter Your Phone Number</h1>
@@ -254,15 +262,16 @@ export default function LandinPage() {
             <Button
               onClick={() => {
                 if (phone && value) {
-                  navigate('Booking', {
+                  navigate("Booking", {
                     state: { phoneNumber: value + phone },
                   });
                 } else {
-                  message.warning('Phone number is required');
+                  message.warning("Phone number is required");
                 }
               }}
               className="bg-lightGreen h-[40px]"
-              type="primary">
+              type="primary"
+            >
               Confirm
             </Button>
           </div>
