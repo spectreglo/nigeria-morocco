@@ -39,17 +39,21 @@ export default function Success() {
             <h1 className="text-[30px]">Morrocan Account 🇲🇦</h1>
             <div className="flex items-center gap-2">
               <h1 className="font-bold">ACCOUNT NAME:</h1>
-              <h1>CONSCCIMA</h1>
+              <h1>SPECTRE TRANS-TRADE GLOBAL</h1>
             </div>
 
             <div className="flex items-center gap-2">
-              <h1 className="font-bold">ACCOUNT NUMBER:</h1>
-              <h1>0002225410</h1>
+              <h1 className="font-bold">RIB:</h1>
+              <h1>007 810 0001593000003349 42</h1>
             </div>
 
             <div className="flex items-center gap-2">
-              <h1 className="font-bold">BANK NAME/BRANCH:</h1>
-              <h1>UNITY BANK PLC</h1>
+              <h1 className="font-bold">BANK NAME:</h1>
+              <h1>ATTIJARIWAFA BANK</h1>
+            </div>
+            <div className="flex items-center gap-2">
+              <h1 className="font-bold">SWIFT CODE:</h1>
+              <h1>BCMAMAMC</h1>
             </div>
           </div>
         </div>
