@@ -89,9 +89,7 @@ export default function LandinPage() {
       {/* OUR PARTNERS */}
       <div className="flex flex-col items-center p-10">
         <h1 className="text-2xl text-fontColor font-[600]">Our Partners</h1>
-        <p className="my-5 text-center text-fontColor">
-          We have been working with some biggest companies
-        </p>
+
         <div className="grid  place-items-center px-0 grid-cols-2 md:grid-cols-6 gap-5 w-full md:px-32 mt-10">
           <span />
           <span />
