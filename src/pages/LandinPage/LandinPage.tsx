@@ -141,12 +141,7 @@ export default function LandinPage() {
           infiniteLoop
           className="flex flex-col w-full min-h-[50vh] md:min-h-[80vh] justify-start text-start">
           {ITEMS.map((item, ind) => (
-            <CarouselItem
-              openModal={showModal}
-              key={ind}
-              item={item}
-              ind={ind}
-            />
+            <CarouselItem key={ind} item={item} ind={ind} />
           ))}
         </Carousel>
       </div>

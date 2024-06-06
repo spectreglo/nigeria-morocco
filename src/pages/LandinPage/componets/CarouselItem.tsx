@@ -6,16 +6,11 @@ interface ItemType {
 }
 
 interface CarouselItemProps {
-  openModal: () => void;
   item: ItemType;
   ind: number;
 }
 
-export default function CarouselItem({
-  openModal,
-  item,
-  ind,
-}: CarouselItemProps) {
+export default function CarouselItem({ item, ind }: CarouselItemProps) {
   return (
     <div
       style={{
