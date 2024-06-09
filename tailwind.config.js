@@ -12,6 +12,7 @@ export default {
       colors: {
         primary: "#1D6731",
         lightGreen: "#4CAF4F",
+        darkGreen: "#004f2b",
         silver: "#F5F7FA",
         lightBlack: "#263238",
         fontColor: "#4D4D4D",
