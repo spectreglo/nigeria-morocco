@@ -1,5 +1,3 @@
-import { Input } from "antd";
-
 export default function Footer() {
   return (
     <div className="min-h-[344px] bg-lightBlack text-white py-10 flex flex-col-reverse md:flex-row md:justify-between  px-5 md:px-20 lg:px-40 gap-10">
@@ -10,15 +8,11 @@ export default function Footer() {
 
         <div className="flex items-center mt-[auto]">
           <div className="bg-[rgba(255,255,255,0.2)] w-[32px] h-[32px] rounded-full flex items-center mr-2 justify-center">
-            <img src="insta.svg" />
+            <i className="fa-brands fa-youtube"></i>
           </div>
 
           <div className="bg-[rgba(255,255,255,0.2)] w-[32px] h-[32px] rounded-full flex items-center mr-2 justify-center">
-            <img src="insta.svg" />
-          </div>
-
-          <div className="bg-[rgba(255,255,255,0.2)] w-[32px] h-[32px] rounded-full flex items-center mr-2 justify-center">
-            <img src="insta.svg" />
+            <i className="fa-brands fa-x-twitter"></i>
           </div>
         </div>
       </div>
@@ -33,15 +27,43 @@ export default function Footer() {
         </div>
 
         <div className="gap-2 flex flex-col">
-          <h1 className="font-bold mb-2 md:mb-8">Support</h1>
-          <span className="text-[13px]">Register Now</span>
-          <span className="text-[13px]">Terms of service</span>
-          <span className="text-[13px]">Contact Us</span>
+          <h1 className="font-bold mb-2 md:mb-8">Follow Us</h1>
+          <span className="text-[13px]">
+            <i className="fa-brands fa-facebook text-[24px] mr-2" />
+            Facebook
+          </span>
+          <span className="text-[13px]">
+            <i className="fa-brands fa-instagram text-[24px] mr-2" />
+            Instagram
+          </span>
+          <span className="text-[13px]">
+            <i className="fa-brands fa-linkedin text-[24px] mr-2" />
+            LinkedIn
+          </span>
+          {/* <span className="text-[13px]">
+            <i className="fa-brands fa-youtube text-[24px] mr-2" />
+            YouTube
+          </span> */}
         </div>
 
-        <div className="gap-2 flex flex-col">
-          <h1 className="font-bold mb-2 md:mb-8">Stay Up To Date</h1>
-          <Input placeholder="Your email address" />
+        <div className="gap-2 flex flex-col w-[120%]">
+          <h1 className="font-bold mb-2 md:mb-8">Infos</h1>
+          <span className="text-[13px]">
+            <i className="fa-solid fa-location-dot mr-2" />
+            OFEC Casablanca, Morocco
+          </span>
+          <span className="text-[13px]">
+            <i className="fa-solid fa-calendar mr-2" />
+            27-29 May, 2024
+          </span>
+          <span className="text-[13px]">
+            <i className="fa-solid fa-clock mr-2" />
+            From 08h00 to 19h00
+          </span>
+          <span className="text-[13px]">
+            <i className="fa-solid fa-envelope mr-2" />
+            info@nigeria-moroccobusinessweek.com
+          </span>
         </div>
       </div>
     </div>
