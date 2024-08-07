@@ -1,10 +1,10 @@
-import { Link, Outlet, useLocation } from 'react-router-dom';
-import DashbordIcon from './compopnents/DashbordIcon';
-import ProfileIcon from './compopnents/ProfileIcon';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux';
-import UsersIcon from './compopnents/UsersIcon';
-import SpaaceIcon from './compopnents/SpaaceIcon';
+import { Link, Outlet, useLocation } from "react-router-dom";
+import DashbordIcon from "./compopnents/DashbordIcon";
+import ProfileIcon from "./compopnents/ProfileIcon";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux";
+import UsersIcon from "./compopnents/UsersIcon";
+import SpaaceIcon from "./compopnents/SpaaceIcon";
 
 export default function DashboardLayout() {
   const location = useLocation();
@@ -18,26 +18,28 @@ export default function DashboardLayout() {
         <Link to="/dashboard">
           <div
             className={`w-full h-[40px] ${
-              location.pathname == '/dashboard' ||
-              location.pathname == '/dashboard/user'
-                ? 'bg-lightGreen'
-                : 'bg-transparent'
-            } flex items-center px-3 rounded-md justify-center cursor-pointer transition-all`}>
+              location.pathname == "/dashboard" ||
+              location.pathname == "/dashboard/user"
+                ? "bg-lightGreen"
+                : "bg-transparent"
+            } flex items-center px-3 rounded-md justify-center cursor-pointer transition-all`}
+          >
             <DashbordIcon
               color={
-                location.pathname == '/dashboard' ||
-                location.pathname == '/dashboard/user'
-                  ? 'white'
-                  : '#808080'
+                location.pathname == "/dashboard" ||
+                location.pathname == "/dashboard/user"
+                  ? "white"
+                  : "#808080"
               }
             />
             <h1
               className={`w-[80%]  ${
-                location.pathname == '/dashboard' ||
-                location.pathname == '/dashboard/user'
-                  ? 'text-white'
-                  : 'text-[#808080]'
-              } text-[14px]  ml-3`}>
+                location.pathname == "/dashboard" ||
+                location.pathname == "/dashboard/user"
+                  ? "text-white"
+                  : "text-[#808080]"
+              } text-[14px]  ml-3`}
+            >
               Dashboard
             </h1>
           </div>
@@ -46,21 +48,23 @@ export default function DashboardLayout() {
         <Link to="/dashboard/profile">
           <div
             className={`w-full h-[40px] ${
-              location.pathname == '/dashboard/profile'
-                ? 'bg-lightGreen'
-                : 'bg-transparent'
-            } flex items-center px-3 rounded-md justify-center cursor-pointer transition-all`}>
+              location.pathname == "/dashboard/profile"
+                ? "bg-lightGreen"
+                : "bg-transparent"
+            } flex items-center px-3 rounded-md justify-center cursor-pointer transition-all`}
+          >
             <ProfileIcon
               color={
-                location.pathname == '/dashboard/profile' ? 'white' : '#808080'
+                location.pathname == "/dashboard/profile" ? "white" : "#808080"
               }
             />
             <h1
               className={`w-[80%]  ${
-                location.pathname == '/dashboard/profile'
-                  ? 'text-white'
-                  : 'text-[#808080]'
-              } text-[14px]  ml-3`}>
+                location.pathname == "/dashboard/profile"
+                  ? "text-white"
+                  : "text-[#808080]"
+              } text-[14px]  ml-3`}
+            >
               Profile
             </h1>
           </div>
@@ -68,45 +72,49 @@ export default function DashboardLayout() {
         <Link to="/dashboard/bookings">
           <div
             className={`w-full h-[40px] ${
-              location.pathname == '/dashboard/bookings'
-                ? 'bg-lightGreen'
-                : 'bg-transparent'
-            } flex items-center px-3 rounded-md justify-center cursor-pointer transition-all`}>
+              location.pathname == "/dashboard/bookings"
+                ? "bg-lightGreen"
+                : "bg-transparent"
+            } flex items-center px-3 rounded-md justify-center cursor-pointer transition-all`}
+          >
             <SpaaceIcon
               color={
-                location.pathname == '/dashboard/bookings' ? 'white' : '#808080'
+                location.pathname == "/dashboard/bookings" ? "white" : "#808080"
               }
             />
             <h1
               className={`w-[80%]  ${
-                location.pathname == '/dashboard/bookings'
-                  ? 'text-white'
-                  : 'text-[#808080]'
-              } text-[14px]  ml-3`}>
+                location.pathname == "/dashboard/bookings"
+                  ? "text-white"
+                  : "text-[#808080]"
+              } text-[14px]  ml-3`}
+            >
               Bookings
             </h1>
           </div>
         </Link>
 
-        {user.user.role == 'super_admin' && (
+        {user.user.role == "super_admin" && (
           <Link to="/dashboard/users">
             <div
               className={`w-full h-[40px] ${
-                location.pathname == '/dashboard/users'
-                  ? 'bg-lightGreen'
-                  : 'bg-transparent'
-              } flex items-center px-3 rounded-md justify-center cursor-pointer transition-all`}>
+                location.pathname == "/dashboard/users"
+                  ? "bg-lightGreen"
+                  : "bg-transparent"
+              } flex items-center px-3 rounded-md justify-center cursor-pointer transition-all`}
+            >
               <UsersIcon
                 color={
-                  location.pathname == '/dashboard/users' ? 'white' : '#808080'
+                  location.pathname == "/dashboard/users" ? "white" : "#808080"
                 }
               />
               <h1
                 className={`w-[80%]  ${
-                  location.pathname == '/dashboard/users'
-                    ? 'text-white'
-                    : 'text-[#808080]'
-                } text-[14px]  ml-3`}>
+                  location.pathname == "/dashboard/users"
+                    ? "text-white"
+                    : "text-[#808080]"
+                } text-[14px]  ml-3`}
+              >
                 Users
               </h1>
             </div>
@@ -120,7 +128,7 @@ export default function DashboardLayout() {
             <img src="/start.png" className="w-[40px] h-[40px] rounded-full" />
             <div className=" ml-5">
               <h1 className="text-[14px] text-[#4C4C4C]">
-                {' '}
+                {" "}
                 {user.user.firstName} {user.user.lastName}
               </h1>
               <p className="text-[14px]">{user.user.role}</p>
