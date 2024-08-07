@@ -50,11 +50,11 @@ export default function Footer() {
           <h1 className="font-bold mb-2 md:mb-8">Infos</h1>
           <span className="text-[13px]">
             <i className="fa-solid fa-location-dot mr-2" />
-            OFEC Casablanca, Morocco
+            El-Jadida Casablanca, Morocco
           </span>
           <span className="text-[13px]">
             <i className="fa-solid fa-calendar mr-2" />
-            27-29 May, 2024
+            23-25 October, 2024
           </span>
           <span className="text-[13px]">
             <i className="fa-solid fa-clock mr-2" />

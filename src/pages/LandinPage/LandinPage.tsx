@@ -40,7 +40,7 @@ export default function LandinPage() {
             Business Week Casablanca, Morocco
           </h1>
           <h2 className="mt-6 text-left">1st Edition</h2>
-          <span className="my-6 text-left">May 27th-29th, 2024</span>
+          <span className="my-6 text-left">October 23rd-25th, 2024</span>
           <Button
             onClick={showModal}
             className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black"
