@@ -46,7 +46,7 @@ export default function Register() {
   const [openSummary, setOpenSummary] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [selectedNiche, setNiche] = useState<string[] | []>([]);
-  const [selectedMeeting, setMeeting] = useState<string[] | []>([]);
+  const [selectedMeeting, setMeeting] = useState<string[]>([]);
   const [userId, setUserId] = useState<string>('');
   const [email] = useState('');
   const [isChecked, setIsChecked] = useState(false);
@@ -300,39 +300,21 @@ export default function Register() {
     'Electricity & Renewable Energy',
     'Information Technology',
   ]);
-  // const [selectedAvailability, setSelectedAvailabilty] = useState([]);
-  // const props: UploadProps = {
-  //   name: 'file',
-  //   multiple: false,
-  //   action: 'https://api.cloudinary.com/v1_1/nutscoders/image/upload',
-  //   onChange(info) {
-  //     const { status } = info.file;
-  //     if (status !== 'uploading') {
-  //       console.log(info.file, info.fileList);
-  //     }
-  //     if (status === 'done') {
-  //       message.success(`${info.file.name} file uploaded successfully.`);
-  //     } else if (status === 'error') {
-  //       message.error(`${info.file.name} file upload failed.`);
-  //     }
-  //   },
-  //   onDrop(e) {
-  //     console.log('Dropped files', e.dataTransfer.files);
-  //   },
-  // };
+
   const props: UploadProps = {
     name: 'file',
     multiple: false,
     action: 'https://api.cloudinary.com/v1_1/djlbovjlt/image/upload',
     beforeUpload: (file) => {
       const uploadPreset = 'v4lnyqau'; // Replace with your Cloudinary upload preset name
-      setUploading(true);
+      setUploading(true); // Set uploading state to true
+
       const formData = new FormData();
       formData.append('file', file);
       formData.append('upload_preset', uploadPreset);
 
       // Upload the file
-      fetch('https://api.cloudinary.com/v1_1/djlbovjlt/image/upload', {
+      return fetch('https://api.cloudinary.com/v1_1/djlbovjlt/image/upload', {
         method: 'POST',
         body: formData,
       })
@@ -344,16 +326,19 @@ export default function Register() {
             message.error(`${file.name} upload failed: ${data.error.message}`);
           } else {
             message.success(`${file.name} uploaded successfully.`);
-
             formik.values.image_url = data.url;
           }
         })
         .catch((error) => {
           console.error('Upload error:', error);
           message.error(`${file.name} upload failed.`);
+        })
+        .finally(() => {
+          setUploading(false); // Set uploading state to false after the upload process is done
         });
-      setUploading(false);
+
       // Return false to prevent default upload behavior
+      // Returning the fetch Promise allows async handling
       return false;
     },
 
@@ -641,23 +626,19 @@ export default function Register() {
             placeholder="Type here"
           />
           <span className="font-[500]">{t('Meeting')}</span>
-          {meetingWith.map((options, ind) => (
+
+          {meetingWith.map((option: string, ind) => (
             <div className="my-3 flex items-center" key={ind.toString()}>
               <input
                 className="mr-2"
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setMeeting((prev) => [...prev, options]);
-                  } else {
-                    const filtered = selectedMeeting.filter(
-                      (selected) => selected !== options
-                    );
-                    setMeeting(filtered);
-                  }
+                onChange={() => {
+                  setMeeting([option]); // Set the selected option as the only item in the state
                 }}
-                type="checkbox"
+                type="radio"
+                name="meetingOptions"
+                checked={selectedMeeting.includes(option)}
               />
-              <span className="text-[12px]">{options}</span>
+              <span className="text-[12px]">{option}</span>
             </div>
           ))}
 
@@ -683,6 +664,7 @@ export default function Register() {
               Reset
             </Button>
             <Button
+              disabled={uploading}
               loading={registering}
               onClick={() => {
                 formik.values.company_niche = selectedNiche;
