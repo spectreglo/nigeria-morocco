@@ -22,7 +22,7 @@ export default function UserProfile() {
           <div className="w-[30%] border-r border-silver flex flex-col items-center">
             <img
               className="h-[150px] w-[150px] rounded-full my-8"
-              src="../default.png"
+              src={data?.image_url ? data.image_url : '../default.png'}
             />
             <h1 className="text-[26px] text-black font-bold capitalize">
               {data?.company_name}{' '}

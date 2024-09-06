@@ -12,7 +12,7 @@ interface CompanyData {
   creation_date: string;
   email: string;
   export_morocco: string;
-  image_url: string[];
+  image_url: string;
   import_morocco: string;
   meeting_sectors: string[];
   mobile: string;
