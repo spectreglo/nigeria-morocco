@@ -124,7 +124,11 @@ export default function Register() {
 
           // openSummaryModal();
         } else {
-          navigate('/Success');
+          navigate('/Success', {
+            state: {
+              total: 1000,
+            },
+          });
         }
       }
     },
