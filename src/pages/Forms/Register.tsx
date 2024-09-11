@@ -205,9 +205,10 @@ export default function Register() {
       label: 'FEDERAL MINISTRY OF PETROLEUM RESOURCES',
       value: 'FEDERAL MINISTRY OF PETROLEUM RESOURCES',
     },
+
     {
-      label: 'FEDERAL MINISTRY OF POWER & STEEL',
-      value: 'FEDERAL MINISTRY OF POWER & STEEL',
+      label: 'FEDERAL MINISTRY OF POWER',
+      value: 'FEDERAL MINISTRY OF POWER',
     },
     {
       label: 'FEDERAL MINISTRY OF SCIENCE AND TECHNOLOGY',
@@ -233,7 +234,10 @@ export default function Register() {
       label: 'FEDERAL MINISTRY OF WOMEN AFFAIRS AND SOCIAL DEVELOPMENT',
       value: 'FEDERAL MINISTRY OF WOMEN AFFAIRS AND SOCIAL DEVELOPMENT',
     },
-    { label: 'FEDERAL MINISTRY OF WORKS', value: 'FEDERAL MINISTRY OF WORKS' },
+    {
+      label: 'FEDERAL MINISTRY OF WORKS',
+      value: 'FEDERAL MINISTRY OF WORKS',
+    },
     {
       label: 'FEDERAL MINISTRY OF YOUTH & SPORT',
       value: 'FEDERAL MINISTRY OF YOUTH & SPORT',
@@ -279,6 +283,71 @@ export default function Register() {
     {
       label: 'MINISTRY OF YOUTH, CULTURE AND COMMUNICATION (MOROCCO)',
       value: 'MINISTRY OF YOUTH, CULTURE AND COMMUNICATION (MOROCCO)',
+    },
+    // Added organizations
+    {
+      label: 'Nigerian Investment Promotion Council',
+      value: 'Nigerian Investment Promotion Council',
+    },
+    {
+      label: 'SMEDAN',
+      value: 'SMEDAN',
+    },
+    {
+      label: 'Ahmadu Bello University',
+      value: 'Ahmadu Bello University',
+    },
+    {
+      label: 'Federal University Kashere',
+      value: 'Federal University Kashere',
+    },
+    {
+      label: 'Gombe State Government',
+      value: 'Gombe State Government',
+    },
+    {
+      label: 'Bauchi State Government',
+      value: 'Bauchi State Government',
+    },
+    {
+      label: 'Niger State Government',
+      value: 'Niger State Government',
+    },
+    {
+      label: 'Kaduna State Government',
+      value: 'Kaduna State Government',
+    },
+    {
+      label: 'Kano State Government',
+      value: 'Kano State Government',
+    },
+    {
+      label: 'NEXIM',
+      value: 'NEXIM',
+    },
+    {
+      label: 'NADDC',
+      value: 'NADDC',
+    },
+    {
+      label: 'NASENI',
+      value: 'NASENI',
+    },
+    {
+      label: 'NITDA',
+      value: 'NITDA',
+    },
+    {
+      label: 'NSIA',
+      value: 'NSIA',
+    },
+    {
+      label: 'National Agricultural Development Funds',
+      value: 'National Agricultural Development Funds',
+    },
+    {
+      label: 'Ministry of Steel Development',
+      value: 'Ministry of Steel Development',
     },
   ];
 
