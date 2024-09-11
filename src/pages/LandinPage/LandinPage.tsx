@@ -5,7 +5,7 @@ import { Button, Modal, message, Divider } from 'antd';
 import Footer from './componets/Footer';
 import { useState } from 'react';
 import PhoneInput from './componets/PhoneInput';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MenuIcon from './componets/MenuIcon';
 
 import { Drawer } from 'antd';
