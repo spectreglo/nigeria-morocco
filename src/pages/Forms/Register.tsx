@@ -138,6 +138,18 @@ export default function Register() {
 
   const NigerianMinisteries = [
     {
+      label: 'AHMADU BELLO UNIVERSITY',
+      value: 'AHMADU BELLO UNIVERSITY',
+    },
+    {
+      label: 'BAUCHI STATE GOVERNMENT',
+      value: 'BAUCHI STATE GOVERNMENT',
+    },
+    {
+      label: 'FEDERAL MINISTRY FOR FEDERAL CAPITAL TERRITORY (M.F.C.T.)',
+      value: 'FEDERAL MINISTRY FOR FEDERAL CAPITAL TERRITORY (M.F.C.T.)',
+    },
+    {
       label: 'FEDERAL MINISTRY OF AGRICULTURE AND NATURAL RESOURCES',
       value: 'FEDERAL MINISTRY OF AGRICULTURE AND NATURAL RESOURCES',
     },
@@ -166,16 +178,8 @@ export default function Register() {
       value: 'FEDERAL MINISTRY OF ENVIRONMENT',
     },
     {
-      label: 'FEDERAL MINISTRY FOR FEDERAL CAPITAL TERRITORY (M.F.C.T.)',
-      value: 'FEDERAL MINISTRY FOR FEDERAL CAPITAL TERRITORY (M.F.C.T.)',
-    },
-    {
       label: 'FEDERAL MINISTRY OF FINANCE & ECONOMIC DEVELOPMENT',
       value: 'FEDERAL MINISTRY OF FINANCE & ECONOMIC DEVELOPMENT',
-    },
-    {
-      label: 'MINISTRY OF FOREIGN AFFAIRS',
-      value: 'MINISTRY OF FOREIGN AFFAIRS',
     },
     {
       label: 'FEDERAL MINISTRY OF HEALTH AND SOCIAL SERVICES',
@@ -205,7 +209,6 @@ export default function Register() {
       label: 'FEDERAL MINISTRY OF PETROLEUM RESOURCES',
       value: 'FEDERAL MINISTRY OF PETROLEUM RESOURCES',
     },
-
     {
       label: 'FEDERAL MINISTRY OF POWER',
       value: 'FEDERAL MINISTRY OF POWER',
@@ -243,16 +246,28 @@ export default function Register() {
       value: 'FEDERAL MINISTRY OF YOUTH & SPORT',
     },
     {
-      label: 'MINISTRY OF ECONOMY AND FINANCE (MOROCCO)',
-      value: 'MINISTRY OF ECONOMY AND FINANCE (MOROCCO)',
+      label: 'FEDERAL UNIVERSITY KASHERE',
+      value: 'FEDERAL UNIVERSITY KASHERE',
     },
     {
-      label: 'MINISTRY OF INTERIOR (MOROCCO)',
-      value: 'MINISTRY OF INTERIOR (MOROCCO)',
+      label: 'GOMBE STATE GOVERNMENT',
+      value: 'GOMBE STATE GOVERNMENT',
+    },
+    {
+      label: 'KADUNA STATE GOVERNMENT',
+      value: 'KADUNA STATE GOVERNMENT',
+    },
+    {
+      label: 'KANO STATE GOVERNMENT',
+      value: 'KANO STATE GOVERNMENT',
     },
     {
       label: 'MINISTRY OF CULTURE AND COMMUNICATION (MOROCCO)',
       value: 'MINISTRY OF CULTURE AND COMMUNICATION (MOROCCO)',
+    },
+    {
+      label: 'MINISTRY OF ECONOMY AND FINANCE (MOROCCO)',
+      value: 'MINISTRY OF ECONOMY AND FINANCE (MOROCCO)',
     },
     {
       label: 'MINISTRY OF ENERGY, MINES AND ENVIROMENT (MOROCCO)',
@@ -263,16 +278,28 @@ export default function Register() {
       value: 'MINISTRY OF EQUIPMENT, TRANSPORT AND LOGISTICS (MOROCCO)',
     },
     {
+      label: 'MINISTRY OF FOREIGN AFFAIRS',
+      value: 'MINISTRY OF FOREIGN AFFAIRS',
+    },
+    {
       label:
         'MINISTRY OF FOREIGN AFFAIRS, AFRICAN COOPERATION AND MOROCCAN EXPATRIATES (MOROCCO)',
       value:
         'MINISTRY OF FOREIGN AFFAIRS, AFRICAN COOPERATION AND MOROCCAN EXPATRIATES (MOROCCO)',
     },
     {
+      label: 'MINISTRY OF INTERIOR (MOROCCO)',
+      value: 'MINISTRY OF INTERIOR (MOROCCO)',
+    },
+    {
       label:
         'MINISTRY OF NATIONAL TERITORY PLANNING, LAND PLANNING AND CITY POLICY (MOROCCO)',
       value:
         'MINISTRY OF NATIONAL TERITORY PLANNING, LAND PLANNING AND CITY POLICY (MOROCCO)',
+    },
+    {
+      label: 'MINISTRY OF STEEL DEVELOPMENT',
+      value: 'MINISTRY OF STEEL DEVELOPMENT',
     },
     {
       label:
@@ -284,47 +311,6 @@ export default function Register() {
       label: 'MINISTRY OF YOUTH, CULTURE AND COMMUNICATION (MOROCCO)',
       value: 'MINISTRY OF YOUTH, CULTURE AND COMMUNICATION (MOROCCO)',
     },
-    // Added organizations
-    {
-      label: 'Nigerian Investment Promotion Council',
-      value: 'Nigerian Investment Promotion Council',
-    },
-    {
-      label: 'SMEDAN',
-      value: 'SMEDAN',
-    },
-    {
-      label: 'Ahmadu Bello University',
-      value: 'Ahmadu Bello University',
-    },
-    {
-      label: 'Federal University Kashere',
-      value: 'Federal University Kashere',
-    },
-    {
-      label: 'Gombe State Government',
-      value: 'Gombe State Government',
-    },
-    {
-      label: 'Bauchi State Government',
-      value: 'Bauchi State Government',
-    },
-    {
-      label: 'Niger State Government',
-      value: 'Niger State Government',
-    },
-    {
-      label: 'Kaduna State Government',
-      value: 'Kaduna State Government',
-    },
-    {
-      label: 'Kano State Government',
-      value: 'Kano State Government',
-    },
-    {
-      label: 'NEXIM',
-      value: 'NEXIM',
-    },
     {
       label: 'NADDC',
       value: 'NADDC',
@@ -332,6 +318,22 @@ export default function Register() {
     {
       label: 'NASENI',
       value: 'NASENI',
+    },
+    {
+      label: 'NEXIM',
+      value: 'NEXIM',
+    },
+    {
+      label: 'NIGER STATE GOVERNMENT',
+      value: 'NIGER STATE GOVERNMENT',
+    },
+    {
+      label: 'NIGERIAN INVESTMENT PROMOTION COUNCIL',
+      value: 'NIGERIAN INVESTMENT PROMOTION COUNCIL',
+    },
+    {
+      label: 'NATIONAL AGRICULTURAL DEVELOPMENT FUNDS',
+      value: 'NATIONAL AGRICULTURAL DEVELOPMENT FUNDS',
     },
     {
       label: 'NITDA',
@@ -342,12 +344,8 @@ export default function Register() {
       value: 'NSIA',
     },
     {
-      label: 'National Agricultural Development Funds',
-      value: 'National Agricultural Development Funds',
-    },
-    {
-      label: 'Ministry of Steel Development',
-      value: 'Ministry of Steel Development',
+      label: 'SMEDAN',
+      value: 'SMEDAN',
     },
   ];
 
