@@ -12,12 +12,13 @@ export default function Success() {
         <h1 className="my-[20px]">Succesfull!</h1>
 
         <p className=" text-fontColor text-center">
-          You Can Now Proceed To Pay the total amount below Using the following
-          Details
+          You Can Now Proceed To Pay your fee Using the following Details
         </p>
-        <h1 className="font-bold">Total ${Number(total).toLocaleString()}</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 my-5">
-          <div className="flex flex-col">
+        {total && (
+          <h1 className="font-bold">Total ${Number(total).toLocaleString()}</h1>
+        )}
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-10 my-5">
+          {/* <div className="flex flex-col">
             <h1 className="text-[30px]">Nigerian Account 🇳🇬</h1>
             <div className="flex items-center gap-2">
               <h1 className="font-bold">ACCOUNT NAME:</h1>
@@ -33,10 +34,10 @@ export default function Success() {
               <h1 className="font-bold">BANK NAME/BRANCH:</h1>
               <h1>UNITY BANK PLC</h1>
             </div>
-          </div>
+          </div> */}
 
           <div className="flex flex-col">
-            <h1 className="text-[30px]">Morrocan Account 🇲🇦</h1>
+            <h1 className="text-[30px]">Morroccan Account 🇲🇦</h1>
             <div className="flex items-center gap-2">
               <h1 className="font-bold">ACCOUNT NAME:</h1>
               <h1>SPECTRE TRANS-TRADE GLOBAL</h1>

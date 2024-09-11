@@ -138,13 +138,6 @@ export default function LandinPage() {
               className="bg-lightGreen w-[115px] h-[40px]   text-white">
               Participate
             </Button>
-            <Link to="/dashboard">
-              <Button
-                onClick={showModal}
-                className="bg-silver w-[115px] h-[40px]   text-black">
-                Admin
-              </Button>
-            </Link>
           </div>
 
           <div onClick={showDrawer} className="flex flex-col md:hidden">
@@ -383,13 +376,6 @@ export default function LandinPage() {
             className="bg-lightGreen w-full h-[40px]   text-white">
             Participate
           </Button>
-          <Link style={{ width: '100%' }} to="/dashboard">
-            <Button
-              onClick={showModal}
-              className="bg-silver w-full h-[40px]   text-black">
-              Admin
-            </Button>
-          </Link>
         </div>
       </Drawer>
     </div>
