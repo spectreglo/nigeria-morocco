@@ -1,7 +1,7 @@
 import CarouselItem from './componets/CarouselItem';
 import { Carousel } from 'react-responsive-carousel';
 import ProgramItems from './componets/ProgramItems';
-import { Button, Modal, message } from 'antd';
+import { Button, Modal, message, Divider } from 'antd';
 import Footer from './componets/Footer';
 import { useState } from 'react';
 import PhoneInput from './componets/PhoneInput';
@@ -245,6 +245,47 @@ export default function LandinPage() {
           </p>
           <Button className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
             Learn More
+          </Button>
+        </div>
+      </div>
+
+      <div className="w-full px-5 md:px-20">
+        <Divider
+          style={{
+            borderColor: '#e9e9e9',
+          }}
+        />
+      </div>
+      {/* NEWS */}
+
+      <div className="flex flex-col md:flex-row justify-between my-10 items-center w-full px-5  md:px-20  gap-10 lg:px-40">
+        <img
+          src="https://spectretranstradeglobal.com/wp-content/uploads/2024/09/Consultative-meeting-1-1080x675.jpeg"
+          alt="Meeting"
+          className="w-full md:w-1/2"
+        />
+
+        <div className="flex flex-col gap-5 w-full md:w-1/2">
+          <h1 className="text-2xl  font-bold text-fontColor">
+            Consultative meeting with top officials of Chamber of Commerce,
+            Industry and Services
+          </h1>
+          <p className="text-justify text-[13px] text-fontColor">
+            As part of preparations towards hosting of Nigeria-Morocco Business
+            Week (Investment Summit) scheduled to hold from October 23rd -25th
+            in Casablanca-Morocco, Mal Dalhatu Abubakar, FCICN, President
+            CONSCCIMA, the Managing Director Spectre Trans-Trade Global Mr.
+            Mohammed Rhali and Managing Director RIDEC SARL Mr. Mohammed Jabri
+            Yesterday 5th September 2024, held a consultative meeting with top
+            officials of Chamber of Commerce, Industry and Services
+            Casablanca-Settat, Kingdom of Morocco.
+          </p>
+          <Button className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
+            <a
+              target="_blank"
+              href="https://spectretranstradeglobal.com/consultative-meeting-with-top-officials-of-chamber-of-commerce-industry-and-services">
+              Learn More
+            </a>
           </Button>
         </div>
       </div>
