@@ -4,13 +4,14 @@ import { InboxOutlined } from '@ant-design/icons';
 
 import { Button, message, Modal, Select, Spin, Upload } from 'antd';
 import PaymentSumarryModal from './components/PaymentSumarryModal';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { useFormik } from 'formik';
 import useRegister from './hooks/useRegister';
 import { useTranslation } from 'react-i18next';
 import AntTextArea from '../../components/TextArea';
+import BackIcon from '../../components/BackIcon';
 
 const { Dragger } = Upload;
 
@@ -115,20 +116,12 @@ export default function Register() {
         formik.resetForm();
         message.success('Registered successfully!');
         if (phoneNumber.startsWith('+234')) {
-          navigate('/Success', {
-            state: {
-              total: 1000,
-            },
-          });
+          navigate('/Success');
           // setEmail(values.email);
 
           // openSummaryModal();
         } else {
-          navigate('/Success', {
-            state: {
-              total: 1000,
-            },
-          });
+          navigate('/Success');
         }
       }
     },
@@ -363,6 +356,12 @@ export default function Register() {
         //   backgroundRepeat: 'no-repeat',
         // }}
         className="top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden">
+        <div className="mr-auto">
+          <Link to="/">
+            <BackIcon />
+          </Link>
+        </div>
+
         <h1 className="text-lightGreen font-bold text-4xl">{t('Register')}</h1>
         <span>{t('Part')}</span>
         <p className="text-2xl"> {t('Fill')}</p>
