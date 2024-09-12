@@ -317,6 +317,9 @@ export default function Booking() {
 
                   setIsPersonalised(e);
                   if (!phoneNumber.startsWith('+234')) {
+                    if (isPersonalised) {
+                      console.log('');
+                    }
                     if (e == true) {
                       setRate(2700);
                     } else {
