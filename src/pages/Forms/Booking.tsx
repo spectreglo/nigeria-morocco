@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 import { usePaystackPayment } from 'react-paystack';
 import useBooking from './hooks/useBooking';
-import AntTextArea from '../../components/TextArea';
+
 import BackIcon from '../../components/BackIcon';
 
 export interface InitialValuesProps {
