@@ -3,7 +3,7 @@ import Input from '../../components/Input';
 
 import { Button, Select, message } from 'antd';
 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { useFormik } from 'formik';
@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { usePaystackPayment } from 'react-paystack';
 import useBooking from './hooks/useBooking';
 import AntTextArea from '../../components/TextArea';
+import BackIcon from '../../components/BackIcon';
 
 export interface InitialValuesProps {
   name: string;
@@ -34,7 +35,7 @@ export default function Booking() {
   const [ref, setRef] = useState('');
   const [id] = useState('');
   const [amount, setAmount] = useState(0);
-  const [selectedSectors, setSelectedSectors] = useState<string[] | []>([]);
+  const [selectedSectors, setSelectedSectors] = useState<string[]>([]);
   const [isPersonalised, setIsPersonalised] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
   const [phoneNumber] = useState<string>(location.state.phoneNumber);
@@ -152,12 +153,17 @@ export default function Booking() {
         //   backgroundImage: 'url(round.png)',
         //   backgroundRepeat: 'no-repeat',
         // }}
-        className="fixed top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden">
+        className="top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden">
+        <div className="mr-auto">
+          <Link to="/">
+            <BackIcon />
+          </Link>
+        </div>
         <h1 className="text-lightGreen font-bold text-4xl">{t('Book')}</h1>
         <span>{t('Part')}</span>
         <p className="text-2xl"> {t('Fill')}</p>
 
-        <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[70%] mt-5 overflow-x-hidden">
+        <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[50%] mt-5 overflow-x-hidden">
           <span className="text-[18px] text-lightGreen">{t('Personal')}</span>
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
             <Input
@@ -253,7 +259,7 @@ export default function Booking() {
           <span className="font-[500] text-[12px] my-4 mt-[20px] ">
             {t('your')} <span className="text-[red]">*</span>
           </span>
-          {sector.map((options, ind) => (
+          {/* {sector.map((options, ind) => (
             <div className="my-3 flex items-center" key={ind.toString()}>
               <input
                 className="mr-2"
@@ -274,39 +280,58 @@ export default function Booking() {
               />
               <span className="text-[12px]">{options}</span>
             </div>
+          ))} */}
+
+          {sector.map((option: string, ind) => (
+            <div className="my-3 flex items-center" key={ind.toString()}>
+              <input
+                className="mr-2"
+                onChange={() => {
+                  setSelectedSectors([option]); // Set the selected option as the only item in the state
+                }}
+                type="radio"
+                name="meetingOptions"
+                checked={selectedSectors.includes(option)}
+              />
+              <span className="text-[12px]">{option}</span>
+            </div>
           ))}
           <div className="h-[75px] bg-[#F2F2F2] w-full flex items-center">
-            <h1 className="italic text-[#7A8599]">Space Booking</h1>
+            <h1 className="text-lightGreen font-bold text-2xl">
+              Space Booking
+            </h1>
           </div>
-          <div className="w-full md:w-[100%] mt-[5px]">
-            <span className="text-[12px]">{t('space')}</span>
-            <Select
-              status={
-                formik.touched.personalised && formik.errors.personalised
-                  ? 'error'
-                  : ''
-              }
-              className="w-[100%]"
-              defaultValue={false}
-              onChange={(e) => {
-                formik.values.personalised = e;
-
-                setIsPersonalised(e);
-                if (!phoneNumber.startsWith('+234')) {
-                  if (e == true) {
-                    setRate(2700);
-                  } else {
-                    setRate(1650);
-                  }
+          {!phoneNumber.startsWith('+234') && (
+            <div className="w-full md:w-[100%] mt-[5px]">
+              <span className="text-[12px]">{t('space')}</span>
+              <Select
+                status={
+                  formik.touched.personalised && formik.errors.personalised
+                    ? 'error'
+                    : ''
                 }
-              }}
-              options={[
-                { value: true, label: t('Pesonalised') },
-                { value: false, label: t('Non-Personalised') },
-              ]}
-            />
-          </div>
-          {formik.values.personalised ? (
+                className="w-[100%]"
+                defaultValue={false}
+                onChange={(e) => {
+                  formik.values.personalised = e;
+
+                  setIsPersonalised(e);
+                  if (!phoneNumber.startsWith('+234')) {
+                    if (e == true) {
+                      setRate(2700);
+                    } else {
+                      setRate(1650);
+                    }
+                  }
+                }}
+                options={[
+                  { value: true, label: t('Pesonalised') },
+                  { value: false, label: t('Non-Personalised') },
+                ]}
+              />
+            </div>
+          )}
+          {/* {formik.values.personalised ? (
             <AntTextArea
               id="personal_meters"
               error={
@@ -320,7 +345,7 @@ export default function Booking() {
               label={t('personal')}
               outlined={false}
             />
-          ) : null}
+          ) : null} */}
           <div className="flex flex-col mt-[20px]">
             <h1>
               {t('size')} <span className="text-[red] ml-1">*</span>
