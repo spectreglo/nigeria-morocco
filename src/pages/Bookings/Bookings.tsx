@@ -1,4 +1,4 @@
-import { Button, Skeleton } from 'antd';
+import { Skeleton } from 'antd';
 
 import useGetAllBookings from './hooks/useGetAllBookings';
 
