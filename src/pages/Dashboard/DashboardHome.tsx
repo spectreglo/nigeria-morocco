@@ -146,7 +146,7 @@ export default function DashboardHome() {
       </div>
 
       <div className="mt-4 max-w-[80vw] overflow-x-scroll">
-        <table className="w-full divide-y divide-gray-200 rounded ">
+        <table className="w-full divide-y divide-gray-200 rounded text-[13px]">
           <thead className="bg-silver">
             <tr>
               <th

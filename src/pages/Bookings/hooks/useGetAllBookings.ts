@@ -15,7 +15,7 @@ interface Booking {
   annual_turnover?: string;
   sector?: string[];
   personalised?: boolean;
-  square_meters?: string;
+  square_meters: string;
   personal_meters?: string;
   _id: string;
 }

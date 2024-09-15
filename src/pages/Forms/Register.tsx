@@ -41,6 +41,7 @@ interface UploadProps {
   action: string;
   beforeUpload: (file: File) => boolean | void | Promise<boolean | void>;
   onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
+  accept: string;
 }
 export default function Register() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -366,6 +367,7 @@ export default function Register() {
   const props: UploadProps = {
     name: 'file',
     multiple: false,
+    accept: 'image/png, image/jpeg',
     action: 'https://api.cloudinary.com/v1_1/djlbovjlt/image/upload',
     beforeUpload: (file) => {
       const uploadPreset = 'v4lnyqau'; // Replace with your Cloudinary upload preset name
