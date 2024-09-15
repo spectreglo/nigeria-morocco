@@ -1,23 +1,40 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useGetDetails from '../hooks/useGetDetails';
 import { Skeleton } from 'antd';
 
 import moment from 'moment';
 import AntTextArea from '../../../components/TextArea';
+import DeleteIcon from '../compopnents/DeleteIcon';
+import useDeleteRecord from '../hooks/useDeleteRecord';
 
 export default function UserProfile() {
   const location = useLocation();
   const { loading, data } = useGetDetails(location.state.id);
+  const { deleteRecord, deleting } = useDeleteRecord();
+  const navigate = useNavigate();
+  const handleDelete = async () => {
+    const confirmed = confirm('Are you sure you want to delete this record?');
+    if (confirmed) {
+      const deleted = await deleteRecord(location.state.id);
+      if (deleted) {
+        navigate('/dashboard');
+      }
+    }
+  };
   return (
     <div className="flex flex-1 bg-transparent flex-col">
-      <div className="h-[140px] w-full bg-[#F5F7FA] flex items-center px-4">
+      <div className="h-[140px] w-full bg-[#F5F7FA] flex items-center px-4 justify-between">
         <h1 onClick={() => console.log(data)} className="text-[30px]">
           User Details
         </h1>
-      </div>
-      {loading && <Skeleton className="w-1/2" loading active />}
 
-      {!loading && (
+        <span onClick={handleDelete} className="cursor-pointer">
+          <DeleteIcon />
+        </span>
+      </div>
+      {(loading || deleting) && <Skeleton className="w-1/2" loading active />}
+
+      {!loading && !deleting && (
         <div className="flex  flex-1">
           <div className="w-[30%] border-r border-silver flex flex-col items-center">
             <img
