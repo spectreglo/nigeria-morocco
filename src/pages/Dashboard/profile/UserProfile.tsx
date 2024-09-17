@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useGetDetails from '../hooks/useGetDetails';
 import { Skeleton } from 'antd';
 
-import moment from 'moment';
 import AntTextArea from '../../../components/TextArea';
 import DeleteIcon from '../compopnents/DeleteIcon';
 import useDeleteRecord from '../hooks/useDeleteRecord';
