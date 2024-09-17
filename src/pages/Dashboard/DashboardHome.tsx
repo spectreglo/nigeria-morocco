@@ -1,4 +1,4 @@
-import { Button, Modal, Skeleton, message } from 'antd';
+import { Button, Dropdown, MenuProps, Modal, Skeleton, message } from 'antd';
 import DashboardCard from './compopnents/DashboardCard';
 import Input from '../../components/Input';
 import useGetAllRegistration from './hooks/useGetAllRegistration';
@@ -9,10 +9,11 @@ import useGenerateToken from './hooks/useGenerateToken';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
+import { truncateText } from '../../utils';
 
 export default function DashboardHome() {
   const user = useSelector((user: RootState) => user.user);
-  const { data, loading } = useGetAllRegistration();
+
   const { tokens, lloadingTokens, setRefresh } = useGetAllTokens(
     user.user.role
   );
@@ -27,7 +28,8 @@ export default function DashboardHome() {
   const [tokenModal, setTokenModal] = useState(false);
 
   const [email, setEmail] = useState('');
-
+  const [filter, setFilter] = useState('');
+  const { data, loading } = useGetAllRegistration(filter);
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -61,6 +63,20 @@ export default function DashboardHome() {
       setMorocco(moroccans.length.toString());
     }
   }, [data]);
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: (
+        <Button onClick={() => setFilter('mobile=+234')}>Nigeria 🇳🇬</Button>
+      ),
+    },
+    {
+      key: '2',
+      label: (
+        <Button onClick={() => setFilter('mobile=+212')}>Morocco 🇲🇦</Button>
+      ),
+    },
+  ];
   return (
     <div className="flex flex-col flex-1 bg-white overflow-y-scroll overflow-x-hidden">
       <h1 className="text-[24px] text-fontColor">
@@ -141,7 +157,9 @@ export default function DashboardHome() {
             label=""
             outlined={true}
           />
-          <Button>Filter</Button>
+          <Dropdown trigger={['click']} menu={{ items }} placement="bottom">
+            <Button>Filter</Button>
+          </Dropdown>
         </div>
       </div>
 
@@ -211,8 +229,10 @@ export default function DashboardHome() {
               data.map((record, ind) => (
                 <tr key={ind.toString()}>
                   <td className="px-6 py-4 whitespace-nowrap">{ind + 1}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {record.company_name}
+                  <td className="px-6 py-4 whitespace-nowrap max-w-[20%]">
+                    {record.governmental
+                      ? truncateText(record.ministry)
+                      : truncateText(record.company_name)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {record.payment?.status}
