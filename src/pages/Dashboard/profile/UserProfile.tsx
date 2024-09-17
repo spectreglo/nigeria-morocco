@@ -54,15 +54,15 @@ export default function UserProfile() {
             </div>
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div>
-                <h1 className="font-bold text-[20px] text-black">
-                  {data?.company_niche.map((ni) => `${ni} `)}
+                <h1 className="font-bold text-[13px] text-black">
+                  {data?.governmental ? data?.ministry : data?.company_name}
                 </h1>
-                <span>Company Niche</span>
+                <span>Organization/Company</span>
               </div>
 
               <div>
                 <h1 className="font-bold text-[20px] text-black">
-                  {moment(data?.creation_date).format('YYYY-MM-DD')}
+                  {data?.creation_date}
                 </h1>
                 <span>Date Of Creation</span>
               </div>

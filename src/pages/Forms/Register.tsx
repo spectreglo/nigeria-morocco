@@ -2,7 +2,15 @@ import { useEffect, useState } from 'react';
 import Input from '../../components/Input';
 import { InboxOutlined } from '@ant-design/icons';
 
-import { Button, message, Modal, Select, Spin, Upload } from 'antd';
+import {
+  Button,
+  message,
+  Modal,
+  notification,
+  Select,
+  Spin,
+  Upload,
+} from 'antd';
 import PaymentSumarryModal from './components/PaymentSumarryModal';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -30,10 +38,14 @@ export interface InitialValuesProps {
   image_url: string;
   governmental: boolean;
   ministry: string;
-  full_name: string;
+  first_name: string;
   annual_turnover: string;
   designation: string;
   cin: string;
+  passport_number: string;
+  passport_expiry: string;
+  cin_expiry: string;
+  last_name: string;
 }
 interface UploadProps {
   name: string;
@@ -86,8 +98,10 @@ export default function Register() {
     import_morocco: Yup.string(),
     export_morocco: Yup.string(),
     image_url: Yup.string().url('Invalid image URL'),
-    full_name: Yup.string().required('Full name is required'),
+    first_name: Yup.string().required('First name is required'),
+    last_name: Yup.string().required('Last name is required'),
   });
+
   const initialValues: InitialValuesProps = {
     company_name: '',
     creation_date: '',
@@ -103,26 +117,67 @@ export default function Register() {
     image_url: '',
     governmental: false,
     ministry: '',
-    full_name: '',
     annual_turnover: '',
     designation: '',
     cin: '',
+    passport_number: '',
+    passport_expiry: '',
+    cin_expiry: '',
+    last_name: '',
+    first_name: '',
   };
   const formik = useFormik({
     initialValues,
     onSubmit: async (values) => {
+      if (values.governmental) {
+        if (!values.ministry) {
+          notification.error({ message: 'Please add an organisation' });
+          return;
+        }
+      }
+
+      if (!values.image_url) {
+        notification.error({ message: 'Please upload your passport' });
+        return;
+      }
+
+      if (phoneNumber.startsWith('+234')) {
+        if (!values.passport_expiry || !values.passport_number) {
+          notification.error({
+            message: 'Please complete your international passport record',
+          });
+          return;
+        }
+      }
+
+      if (phoneNumber.startsWith('+212')) {
+        if (!values.cin || !values.cin_expiry) {
+          notification.error({
+            message: 'Please complete your international passport record',
+          });
+          return;
+        }
+      }
       const registered = await register(values);
       if (registered.status) {
         setUserId(registered.data);
         formik.resetForm();
         message.success('Registered successfully!');
         if (phoneNumber.startsWith('+234')) {
-          navigate('/Success');
+          navigate('/Success', {
+            state: {
+              total: 0,
+            },
+          });
           // setEmail(values.email);
 
           // openSummaryModal();
         } else {
-          navigate('/Success');
+          navigate('/Success', {
+            state: {
+              total: 0,
+            },
+          });
         }
       }
     },
@@ -187,8 +242,8 @@ export default function Register() {
       value: 'FEDERAL MINISTRY OF HEALTH AND SOCIAL SERVICES',
     },
     {
-      label: 'FEDERAL MINISTRY OF INDUSTRIES',
-      value: 'FEDERAL MINISTRY OF INDUSTRIES',
+      label: 'FEDERAL MINISTRY OF INDUSTRIES, TRADE AND INVESTMENT',
+      value: 'FEDERAL MINISTRY OF INDUSTRIES, TRADE AND INVESTMENT',
     },
     {
       label: 'FEDERAL MINISTRY OF INFORMATION & COMMUNICATIONS',
@@ -343,6 +398,10 @@ export default function Register() {
       value: 'NSIA',
     },
     {
+      label: 'RURAL ELECTRIFICATION AGENCY (REA)',
+      value: 'RURAL ELECTRIFICATION AGENCY (REA)',
+    },
+    {
       label: 'SMEDAN',
       value: 'SMEDAN',
     },
@@ -362,6 +421,9 @@ export default function Register() {
     'Solid Minerals/Steel',
     'Electricity & Renewable Energy',
     'Information Technology',
+    'Education',
+    'Finance & Fintech',
+    'Aviation',
   ]);
 
   const props: UploadProps = {
@@ -436,45 +498,88 @@ export default function Register() {
         <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[50%] mt-5 overflow-x-hidden">
           <span className="text-[18px] text-lightGreen">{t('Personal')}</span>
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
-            <div className="w-full md:w-[50%] mt-4">
-              <span className="text-[12px]">{t('Organization')}</span>
-              <Select
-                status={
-                  formik.touched.governmental && formik.errors.governmental
-                    ? 'error'
-                    : ''
-                }
-                className="w-[100%]"
-                defaultValue={false}
-                onChange={(e) => {
-                  formik.values.governmental = e;
-                  if (isGov) {
-                    console.log(e);
-                  }
-                  setIsGov((prev) => !prev);
-                }}
-                options={[
-                  { value: true, label: t('Governmental') },
-                  { value: false, label: t('Private Company') },
-                ]}
-              />
-            </div>
             <Input
               error={
-                formik.touched.full_name && formik.errors.full_name
-                  ? formik.errors.full_name
+                formik.touched.first_name && formik.errors.first_name
+                  ? formik.errors.first_name
                   : ''
               }
-              value={formik.values.full_name}
+              value={formik.values.first_name}
               onChange={formik.handleChange}
-              id="full_name"
+              id="first_name"
               className="w-full md:w-[50%]"
               required
               label={t('full')}
-              placeholder="Enter Your Full Name"
+              placeholder="Enter Your First Name"
+              outlined={false}
+            />
+
+            <Input
+              error={
+                formik.touched.last_name && formik.errors.last_name
+                  ? formik.errors.last_name
+                  : ''
+              }
+              value={formik.values.last_name}
+              onChange={formik.handleChange}
+              id="last_name"
+              className="w-full md:w-[50%]"
+              required
+              label={t('last')}
+              placeholder="Enter Your Last Name"
               outlined={false}
             />
           </div>
+          <div className="w-full mt-4">
+            <span className="text-[12px]">{t('Organization')}</span>
+            <Select
+              status={
+                formik.touched.governmental && formik.errors.governmental
+                  ? 'error'
+                  : ''
+              }
+              className="w-[100%]"
+              defaultValue={false}
+              onChange={(e) => {
+                formik.values.governmental = e;
+                if (isGov) {
+                  console.log(e);
+                }
+                setIsGov((prev) => !prev);
+              }}
+              options={[
+                { value: true, label: t('Governmental') },
+                { value: false, label: t('Private Company') },
+              ]}
+            />
+          </div>
+          {phoneNumber.startsWith('+234') && (
+            <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
+              <Input
+                value={formik.values.passport_number}
+                onChange={formik.handleChange}
+                id="passport_number"
+                className="w-full md:w-[70%]"
+                required
+                label="Passport number"
+                placeholder="Enter your passport number"
+                outlined={false}
+              />
+
+              <Input
+                value={formik.values.passport_expiry}
+                id="passport_expiry"
+                onChange={formik.handleChange}
+                className="w-full md:w-[30%]"
+                required
+                label="Passport expiration date"
+                placeholder="Enter the expiration date"
+                outlined={false}
+                type="date"
+              />
+            </div>
+          )}
+
           {formik.values.governmental ? (
             <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
               <div className="w-full md:w-[50%] mt-4">
@@ -605,18 +710,35 @@ export default function Register() {
             </>
           )}
           {!phoneNumber.startsWith('+234') && (
-            <Input
-              id="cin"
-              error={
-                formik.touched.cin && formik.errors.cin ? formik.errors.cin : ''
-              }
-              value={formik.values.cin}
-              onChange={formik.handleChange}
-              className="w-full"
-              label={'CIN Number'}
-              outlined={false}
-              type="number"
-            />
+            <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
+              <Input
+                id="cin"
+                error={
+                  formik.touched.cin && formik.errors.cin
+                    ? formik.errors.cin
+                    : ''
+                }
+                value={formik.values.cin}
+                onChange={formik.handleChange}
+                className="w-full md:w-[70%]"
+                required
+                label={'CIN Number'}
+                outlined={false}
+                type="number"
+              />
+
+              <Input
+                value={formik.values.cin_expiry}
+                id="cin_expiry"
+                onChange={formik.handleChange}
+                className="w-full md:w-[30%]"
+                required
+                label={t('expiry')}
+                placeholder="Enter the expiration date"
+                outlined={false}
+                type="date"
+              />
+            </div>
           )}
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
             <Input
@@ -643,29 +765,33 @@ export default function Register() {
               outlined={false}
             />
           </div>
-          <h1 className="my-[10px] text-[13px] font-[500]">
-            {t('Is')}
-            <span className="text-[red]">*</span>
-          </h1>
-          {companyNiche.map((options, ind) => (
-            <div className="mt-3 flex items-center" key={ind.toString()}>
-              <input
-                className="mr-2"
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setNiche((prev) => [...prev, options]);
-                  } else {
-                    const filtered = selectedNiche.filter(
-                      (selected) => selected !== options
-                    );
-                    setNiche(filtered);
-                  }
-                }}
-                type="checkbox"
-              />
-              <span className="text-[12px]">{options}</span>
-            </div>
-          ))}
+          {!formik.values.governmental && (
+            <>
+              <h1 className="my-[10px] text-[13px] font-[500]">
+                {t('Is')}
+                <span className="text-[red]">*</span>
+              </h1>
+              {companyNiche.map((options, ind) => (
+                <div className="mt-3 flex items-center" key={ind.toString()}>
+                  <input
+                    className="mr-2"
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setNiche((prev) => [...prev, options]);
+                      } else {
+                        const filtered = selectedNiche.filter(
+                          (selected) => selected !== options
+                        );
+                        setNiche(filtered);
+                      }
+                    }}
+                    type="checkbox"
+                  />
+                  <span className="text-[12px]">{options}</span>
+                </div>
+              ))}
+            </>
+          )}
 
           <AntTextArea
             error={

@@ -1,10 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Button } from 'antd';
+
 export default function Success() {
   const navigate = useNavigate();
   const location = useLocation();
   const total = location.state.total;
+
   return (
     <div className="w-full h-[90vh] flex flex-col items-center justify-center">
       <div className="w-full flex flex-col justify-center items-center">
@@ -14,7 +16,7 @@ export default function Success() {
         <p className=" text-fontColor text-center">
           You Can Now Proceed To Pay your fee Using the following Details
         </p>
-        {total && (
+        {total > 0 && (
           <h1 className="font-bold">Total ${Number(total).toLocaleString()}</h1>
         )}
         <div className="grid grid-cols-1 md:grid-cols-1 gap-10 my-5">

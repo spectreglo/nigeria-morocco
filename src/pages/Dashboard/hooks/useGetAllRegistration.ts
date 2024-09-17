@@ -11,7 +11,7 @@ interface ValuesWithPayment extends InitialValuesProps {
 interface Response extends AxiosResponse {
   data: { data: ValuesWithPayment[]; success: boolean };
 }
-const useGetAllRegistration = () => {
+const useGetAllRegistration = (filter: string) => {
   const { loading, startLoading, stopLoading } = useLoading();
   const [data, setData] = useState<ValuesWithPayment[] | []>([]);
   const [refresh, setRefresh] = useState(0);
@@ -33,7 +33,7 @@ const useGetAllRegistration = () => {
 
   useEffect(() => {
     getRecord();
-  }, [refresh]);
+  }, [refresh, filter]);
   return {
     loading,
     getRecord,
