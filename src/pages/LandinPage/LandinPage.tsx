@@ -107,7 +107,7 @@ export default function LandinPage() {
       ),
     },
   ];
-  const isSmallSize = window.innerWidth < 700;
+  const isSmallSize = window.innerWidth < 100;
   const conditionalItem = isSmallSize ? ITEMS.slice(0, 1) : ITEMS;
   return (
     <div className="relative min-h-screen bg-white">
@@ -170,13 +170,15 @@ export default function LandinPage() {
         <h1 className="text-2xl text-fontColor font-[600]">Our Partners</h1>
 
         <div className="grid  place-items-center px-0 grid-cols-2 md:grid-cols-6 gap-5 w-full md:px-32 mt-10">
-          <span />
+          <img src="nec.jpeg" alt="NEC" />
           <img src="coc.png" alt="coc" />
           <img src="Embassy.png" alt="embassy" />
           <img src="ram.png" alt="air maroc" />
           <img src="fmiti.png" alt="fmiti" />
-          <span />
-          <span />
+          <img src="highland.png" alt="highland" />
+          <img src="jed.webp" alt="JED" />
+          <img src="niger.png" alt="niger" />
+          <img src="farmcreed.jpg" alt="farm creed" />
         </div>
       </div>
 
