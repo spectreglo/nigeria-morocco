@@ -170,7 +170,7 @@ export default function LandinPage() {
         <h1 className="text-2xl text-fontColor font-[600]">Our Partners</h1>
 
         <div className="grid  place-items-center px-0 grid-cols-2 md:grid-cols-6 gap-5 w-full md:px-32 mt-10">
-          <img src="nec.png" alt="nec" />
+          {/* <img src="nec.png" alt="nec" /> */}
           <img src="cciscs.jpg" alt="coc" />
           <img src="Embassy.png" alt="embassy" />
           <img src="ram.png" alt="air maroc" />
