@@ -171,12 +171,12 @@ export default function LandinPage() {
 
         <div className="grid  place-items-center px-0 grid-cols-2 md:grid-cols-6 gap-5 w-full md:px-32 mt-10">
           <img src="nec.png" alt="nec" />
-          <img src="cciscs.webp" alt="coc" />
+          <img src="cciscs.jpg" alt="coc" />
           <img src="Embassy.png" alt="embassy" />
           <img src="ram.png" alt="air maroc" />
           <img src="fmiti.png" alt="fmiti" />
           <img src="HIESL.png" alt="highland" />
-          <img src="jed.webp" alt="JED" />
+          <img src="jed.jpg" alt="JED" />
           <img src="niger.png" alt="niger" />
           <img src="farmcreed.jpg" alt="farm creed" />
           <img src="mines.png" alt="steel" />
