@@ -10,7 +10,6 @@ import {
   Select,
   Spin,
   Upload,
-  Checkbox,
 } from "antd";
 import PaymentSumarryModal from "./components/PaymentSumarryModal";
 import { Link, useLocation, useNavigate } from "react-router-dom";
