@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import Input from '../../components/Input';
-import { InboxOutlined } from '@ant-design/icons';
+import { useEffect, useState } from "react";
+import Input from "../../components/Input";
+import { InboxOutlined } from "@ant-design/icons";
 
 import {
   Button,
@@ -10,16 +10,16 @@ import {
   Select,
   Spin,
   Upload,
-} from 'antd';
-import PaymentSumarryModal from './components/PaymentSumarryModal';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import * as Yup from 'yup';
+} from "antd";
+import PaymentSumarryModal from "./components/PaymentSumarryModal";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 
-import { useFormik } from 'formik';
-import useRegister from './hooks/useRegister';
-import { useTranslation } from 'react-i18next';
-import AntTextArea from '../../components/TextArea';
-import BackIcon from '../../components/BackIcon';
+import { useFormik } from "formik";
+import useRegister from "./hooks/useRegister";
+import { useTranslation } from "react-i18next";
+import AntTextArea from "../../components/TextArea";
+import BackIcon from "../../components/BackIcon";
 
 const { Dragger } = Upload;
 
@@ -61,8 +61,8 @@ export default function Register() {
   const [uploading, setUploading] = useState(false);
   const [selectedNiche, setNiche] = useState<string[] | []>([]);
   const [selectedMeeting, setMeeting] = useState<string[]>([]);
-  const [userId, setUserId] = useState<string>('');
-  const [email] = useState('');
+  const [userId, setUserId] = useState<string>("");
+  const [email] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const { register, registering } = useRegister();
   const navigate = useNavigate();
@@ -71,10 +71,10 @@ export default function Register() {
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    if (phoneNumber.startsWith('+234')) {
-      i18n.changeLanguage('en');
+    if (phoneNumber.startsWith("+234")) {
+      i18n.changeLanguage("en");
     } else {
-      i18n.changeLanguage('fr');
+      i18n.changeLanguage("fr");
     }
   }, []);
   const [phoneNumber] = useState<string>(location.state.phoneNumber);
@@ -89,71 +89,71 @@ export default function Register() {
   const validationSchema = Yup.object().shape({
     number_of_employees: Yup.number(),
     website: Yup.string(),
-    mobile: Yup.string().required('Mobile number is required'),
-    email: Yup.string().email('Invalid email').required('Email is required'),
+    mobile: Yup.string().required("Mobile number is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
     company_niche: Yup.array()
       .of(Yup.string())
-      .required('Company niche is required'),
+      .required("Company niche is required"),
     meeting_sectors: Yup.array().of(Yup.string()),
     import_morocco: Yup.string(),
     export_morocco: Yup.string(),
-    image_url: Yup.string().url('Invalid image URL'),
-    first_name: Yup.string().required('First name is required'),
-    last_name: Yup.string().required('Last name is required'),
+    image_url: Yup.string().url("Invalid image URL"),
+    first_name: Yup.string().required("First name is required"),
+    last_name: Yup.string().required("Last name is required"),
   });
 
   const initialValues: InitialValuesProps = {
-    company_name: '',
-    creation_date: '',
-    address: '',
-    number_of_employees: '',
-    website: '',
+    company_name: "",
+    creation_date: "",
+    address: "",
+    number_of_employees: "",
+    website: "",
     mobile: phoneNumber,
-    email: '',
+    email: "",
     company_niche: [],
-    import_morocco: '',
-    export_morocco: '',
+    import_morocco: "",
+    export_morocco: "",
     meeting_sectors: [],
-    image_url: '',
+    image_url: "",
     governmental: false,
-    ministry: '',
-    annual_turnover: '',
-    designation: '',
-    cin: '',
-    passport_number: '',
-    passport_expiry: '',
-    cin_expiry: '',
-    last_name: '',
-    first_name: '',
+    ministry: "",
+    annual_turnover: "",
+    designation: "",
+    cin: "",
+    passport_number: "",
+    passport_expiry: "",
+    cin_expiry: "",
+    last_name: "",
+    first_name: "",
   };
   const formik = useFormik({
     initialValues,
     onSubmit: async (values) => {
       if (values.governmental) {
         if (!values.ministry) {
-          notification.error({ message: 'Please add an organisation' });
+          notification.error({ message: "Please add an organisation" });
           return;
         }
       }
 
       if (!values.image_url) {
-        notification.error({ message: 'Please upload your passport' });
+        notification.error({ message: "Please upload your passport" });
         return;
       }
 
-      if (phoneNumber.startsWith('+234')) {
+      if (phoneNumber.startsWith("+234")) {
         if (!values.passport_expiry || !values.passport_number) {
           notification.error({
-            message: 'Please complete your international passport record',
+            message: "Please complete your international passport record",
           });
           return;
         }
       }
 
-      if (phoneNumber.startsWith('+212')) {
+      if (phoneNumber.startsWith("+212")) {
         if (!values.cin || !values.cin_expiry) {
           notification.error({
-            message: 'Please complete your international passport record',
+            message: "Please complete your international passport record",
           });
           return;
         }
@@ -162,9 +162,9 @@ export default function Register() {
       if (registered.status) {
         setUserId(registered.data);
         formik.resetForm();
-        message.success('Registered successfully!');
-        if (phoneNumber.startsWith('+234')) {
-          navigate('/Success', {
+        message.success("Registered successfully!");
+        if (phoneNumber.startsWith("+234")) {
+          navigate("/Success", {
             state: {
               total: 0,
             },
@@ -173,7 +173,7 @@ export default function Register() {
 
           // openSummaryModal();
         } else {
-          navigate('/Success', {
+          navigate("/Success", {
             state: {
               total: 0,
             },
@@ -194,260 +194,260 @@ export default function Register() {
 
   const NigerianMinisteries = [
     {
-      label: 'AHMADU BELLO UNIVERSITY',
-      value: 'AHMADU BELLO UNIVERSITY',
+      label: "AHMADU BELLO UNIVERSITY",
+      value: "AHMADU BELLO UNIVERSITY",
     },
     {
-      label: 'BAUCHI STATE GOVERNMENT',
-      value: 'BAUCHI STATE GOVERNMENT',
+      label: "BAUCHI STATE GOVERNMENT",
+      value: "BAUCHI STATE GOVERNMENT",
     },
     {
-      label: 'FEDERAL MINISTRY FOR FEDERAL CAPITAL TERRITORY (M.F.C.T.)',
-      value: 'FEDERAL MINISTRY FOR FEDERAL CAPITAL TERRITORY (M.F.C.T.)',
+      label: "FEDERAL MINISTRY FOR FEDERAL CAPITAL TERRITORY (M.F.C.T.)",
+      value: "FEDERAL MINISTRY FOR FEDERAL CAPITAL TERRITORY (M.F.C.T.)",
     },
     {
-      label: 'FEDERAL MINISTRY OF AGRICULTURE AND NATURAL RESOURCES',
-      value: 'FEDERAL MINISTRY OF AGRICULTURE AND NATURAL RESOURCES',
+      label: "FEDERAL MINISTRY OF AGRICULTURE AND NATURAL RESOURCES",
+      value: "FEDERAL MINISTRY OF AGRICULTURE AND NATURAL RESOURCES",
     },
     {
-      label: 'FEDERAL MINISTRY OF AVIATION',
-      value: 'FEDERAL MINISTRY OF AVIATION',
+      label: "FEDERAL MINISTRY OF AVIATION",
+      value: "FEDERAL MINISTRY OF AVIATION",
     },
     {
-      label: 'FEDERAL MINISTRY OF COMMERCE & TOURISM',
-      value: 'FEDERAL MINISTRY OF COMMERCE & TOURISM',
+      label: "FEDERAL MINISTRY OF COMMERCE & TOURISM",
+      value: "FEDERAL MINISTRY OF COMMERCE & TOURISM",
     },
     {
-      label: 'FEDERAL MINISTRY OF CULTURE TOURISM AND NATIONAL ORIENTATION',
-      value: 'FEDERAL MINISTRY OF CULTURE TOURISM AND NATIONAL ORIENTATION',
+      label: "FEDERAL MINISTRY OF CULTURE TOURISM AND NATIONAL ORIENTATION",
+      value: "FEDERAL MINISTRY OF CULTURE TOURISM AND NATIONAL ORIENTATION",
     },
     {
-      label: 'FEDERAL MINISTRY OF DEFENCE',
-      value: 'FEDERAL MINISTRY OF DEFENCE',
+      label: "FEDERAL MINISTRY OF DEFENCE",
+      value: "FEDERAL MINISTRY OF DEFENCE",
     },
     {
-      label: 'FEDERAL MINISTRY OF EDUCATION & YOUTH DEVELOPMENT',
-      value: 'FEDERAL MINISTRY OF EDUCATION & YOUTH DEVELOPMENT',
+      label: "FEDERAL MINISTRY OF EDUCATION & YOUTH DEVELOPMENT",
+      value: "FEDERAL MINISTRY OF EDUCATION & YOUTH DEVELOPMENT",
     },
     {
-      label: 'FEDERAL MINISTRY OF ENVIRONMENT',
-      value: 'FEDERAL MINISTRY OF ENVIRONMENT',
+      label: "FEDERAL MINISTRY OF ENVIRONMENT",
+      value: "FEDERAL MINISTRY OF ENVIRONMENT",
     },
     {
-      label: 'FEDERAL MINISTRY OF FINANCE & ECONOMIC DEVELOPMENT',
-      value: 'FEDERAL MINISTRY OF FINANCE & ECONOMIC DEVELOPMENT',
+      label: "FEDERAL MINISTRY OF FINANCE & ECONOMIC DEVELOPMENT",
+      value: "FEDERAL MINISTRY OF FINANCE & ECONOMIC DEVELOPMENT",
     },
     {
-      label: 'FEDERAL MINISTRY OF HEALTH AND SOCIAL SERVICES',
-      value: 'FEDERAL MINISTRY OF HEALTH AND SOCIAL SERVICES',
+      label: "FEDERAL MINISTRY OF HEALTH AND SOCIAL SERVICES",
+      value: "FEDERAL MINISTRY OF HEALTH AND SOCIAL SERVICES",
     },
     {
-      label: 'FEDERAL MINISTRY OF INDUSTRIES, TRADE AND INVESTMENT',
-      value: 'FEDERAL MINISTRY OF INDUSTRIES, TRADE AND INVESTMENT',
+      label: "FEDERAL MINISTRY OF INDUSTRIES, TRADE AND INVESTMENT",
+      value: "FEDERAL MINISTRY OF INDUSTRIES, TRADE AND INVESTMENT",
     },
     {
-      label: 'FEDERAL MINISTRY OF INFORMATION & COMMUNICATIONS',
-      value: 'FEDERAL MINISTRY OF INFORMATION & COMMUNICATIONS',
+      label: "FEDERAL MINISTRY OF INFORMATION & COMMUNICATIONS",
+      value: "FEDERAL MINISTRY OF INFORMATION & COMMUNICATIONS",
     },
     {
-      label: 'FEDERAL MINISTRY OF INTERNAL AFFAIRS',
-      value: 'FEDERAL MINISTRY OF INTERNAL AFFAIRS',
+      label: "FEDERAL MINISTRY OF INTERNAL AFFAIRS",
+      value: "FEDERAL MINISTRY OF INTERNAL AFFAIRS",
     },
     {
-      label: 'FEDERAL MINISTRY OF JUSTICE',
-      value: 'FEDERAL MINISTRY OF JUSTICE',
+      label: "FEDERAL MINISTRY OF JUSTICE",
+      value: "FEDERAL MINISTRY OF JUSTICE",
     },
     {
-      label: 'FEDERAL MINISTRY OF LABOUR AND PRODUCTIVITY',
-      value: 'FEDERAL MINISTRY OF LABOUR AND PRODUCTIVITY',
+      label: "FEDERAL MINISTRY OF LABOUR AND PRODUCTIVITY",
+      value: "FEDERAL MINISTRY OF LABOUR AND PRODUCTIVITY",
     },
     {
-      label: 'FEDERAL MINISTRY OF PETROLEUM RESOURCES',
-      value: 'FEDERAL MINISTRY OF PETROLEUM RESOURCES',
+      label: "FEDERAL MINISTRY OF PETROLEUM RESOURCES",
+      value: "FEDERAL MINISTRY OF PETROLEUM RESOURCES",
     },
     {
-      label: 'FEDERAL MINISTRY OF POWER',
-      value: 'FEDERAL MINISTRY OF POWER',
+      label: "FEDERAL MINISTRY OF POWER",
+      value: "FEDERAL MINISTRY OF POWER",
     },
     {
-      label: 'FEDERAL MINISTRY OF SCIENCE AND TECHNOLOGY',
-      value: 'FEDERAL MINISTRY OF SCIENCE AND TECHNOLOGY',
+      label: "FEDERAL MINISTRY OF SCIENCE AND TECHNOLOGY",
+      value: "FEDERAL MINISTRY OF SCIENCE AND TECHNOLOGY",
     },
     {
-      label: 'FEDERAL MINISTRY OF SOLID MINERALS DEVELOPMENT',
-      value: 'FEDERAL MINISTRY OF SOLID MINERALS DEVELOPMENT',
+      label: "FEDERAL MINISTRY OF SOLID MINERALS DEVELOPMENT",
+      value: "FEDERAL MINISTRY OF SOLID MINERALS DEVELOPMENT",
     },
     {
-      label: 'FEDERAL MINISTRY OF SPECIAL DUTIES',
-      value: 'FEDERAL MINISTRY OF SPECIAL DUTIES',
+      label: "FEDERAL MINISTRY OF SPECIAL DUTIES",
+      value: "FEDERAL MINISTRY OF SPECIAL DUTIES",
     },
     {
-      label: 'FEDERAL MINISTRY OF TRANSPORT',
-      value: 'FEDERAL MINISTRY OF TRANSPORT',
+      label: "FEDERAL MINISTRY OF TRANSPORT",
+      value: "FEDERAL MINISTRY OF TRANSPORT",
     },
     {
-      label: 'FEDERAL MINISTRY OF WATER RESOURCES & RURAL DEVELOPMENT',
-      value: 'FEDERAL MINISTRY OF WATER RESOURCES & RURAL DEVELOPMENT',
+      label: "FEDERAL MINISTRY OF WATER RESOURCES & RURAL DEVELOPMENT",
+      value: "FEDERAL MINISTRY OF WATER RESOURCES & RURAL DEVELOPMENT",
     },
     {
-      label: 'FEDERAL MINISTRY OF WOMEN AFFAIRS AND SOCIAL DEVELOPMENT',
-      value: 'FEDERAL MINISTRY OF WOMEN AFFAIRS AND SOCIAL DEVELOPMENT',
+      label: "FEDERAL MINISTRY OF WOMEN AFFAIRS AND SOCIAL DEVELOPMENT",
+      value: "FEDERAL MINISTRY OF WOMEN AFFAIRS AND SOCIAL DEVELOPMENT",
     },
     {
-      label: 'FEDERAL MINISTRY OF WORKS',
-      value: 'FEDERAL MINISTRY OF WORKS',
+      label: "FEDERAL MINISTRY OF WORKS",
+      value: "FEDERAL MINISTRY OF WORKS",
     },
     {
-      label: 'FEDERAL MINISTRY OF YOUTH & SPORT',
-      value: 'FEDERAL MINISTRY OF YOUTH & SPORT',
+      label: "FEDERAL MINISTRY OF YOUTH & SPORT",
+      value: "FEDERAL MINISTRY OF YOUTH & SPORT",
     },
     {
-      label: 'FEDERAL UNIVERSITY KASHERE',
-      value: 'FEDERAL UNIVERSITY KASHERE',
+      label: "FEDERAL UNIVERSITY KASHERE",
+      value: "FEDERAL UNIVERSITY KASHERE",
     },
     {
-      label: 'GOMBE STATE GOVERNMENT',
-      value: 'GOMBE STATE GOVERNMENT',
+      label: "GOMBE STATE GOVERNMENT",
+      value: "GOMBE STATE GOVERNMENT",
     },
     {
-      label: 'KADUNA STATE GOVERNMENT',
-      value: 'KADUNA STATE GOVERNMENT',
+      label: "KADUNA STATE GOVERNMENT",
+      value: "KADUNA STATE GOVERNMENT",
     },
     {
-      label: 'KANO STATE GOVERNMENT',
-      value: 'KANO STATE GOVERNMENT',
+      label: "KANO STATE GOVERNMENT",
+      value: "KANO STATE GOVERNMENT",
     },
     {
-      label: 'MINISTRY OF CULTURE AND COMMUNICATION',
-      value: 'MINISTRY OF CULTURE AND COMMUNICATION',
+      label: "MINISTRY OF CULTURE AND COMMUNICATION",
+      value: "MINISTRY OF CULTURE AND COMMUNICATION",
     },
     {
-      label: 'MINISTRY OF ECONOMY AND FINANCE',
-      value: 'MINISTRY OF ECONOMY AND FINANCE',
+      label: "MINISTRY OF ECONOMY AND FINANCE",
+      value: "MINISTRY OF ECONOMY AND FINANCE",
     },
     {
-      label: 'MINISTRY OF ENERGY, MINES AND ENVIROMENT',
-      value: 'MINISTRY OF ENERGY, MINES AND ENVIROMENT',
+      label: "MINISTRY OF ENERGY, MINES AND ENVIROMENT",
+      value: "MINISTRY OF ENERGY, MINES AND ENVIROMENT",
     },
     {
-      label: 'MINISTRY OF EQUIPMENT, TRANSPORT AND LOGISTICS',
-      value: 'MINISTRY OF EQUIPMENT, TRANSPORT AND LOGISTICS',
+      label: "MINISTRY OF EQUIPMENT, TRANSPORT AND LOGISTICS",
+      value: "MINISTRY OF EQUIPMENT, TRANSPORT AND LOGISTICS",
     },
     {
-      label: 'MINISTRY OF FOREIGN AFFAIRS',
-      value: 'MINISTRY OF FOREIGN AFFAIRS',
-    },
-    {
-      label:
-        'MINISTRY OF FOREIGN AFFAIRS, AFRICAN COOPERATION AND MOROCCAN EXPATRIATES',
-      value:
-        'MINISTRY OF FOREIGN AFFAIRS, AFRICAN COOPERATION AND MOROCCAN EXPATRIATES',
-    },
-    {
-      label: 'MINISTRY OF INTERIOR',
-      value: 'MINISTRY OF INTERIOR',
+      label: "MINISTRY OF FOREIGN AFFAIRS",
+      value: "MINISTRY OF FOREIGN AFFAIRS",
     },
     {
       label:
-        'MINISTRY OF NATIONAL TERITORY PLANNING, LAND PLANNING AND CITY POLICY',
+        "MINISTRY OF FOREIGN AFFAIRS, AFRICAN COOPERATION AND MOROCCAN EXPATRIATES",
       value:
-        'MINISTRY OF NATIONAL TERITORY PLANNING, LAND PLANNING AND CITY POLICY',
+        "MINISTRY OF FOREIGN AFFAIRS, AFRICAN COOPERATION AND MOROCCAN EXPATRIATES",
     },
     {
-      label: 'MINISTRY OF STEEL DEVELOPMENT',
-      value: 'MINISTRY OF STEEL DEVELOPMENT',
+      label: "MINISTRY OF INTERIOR",
+      value: "MINISTRY OF INTERIOR",
     },
     {
-      label: 'MINISTRY OF TOURISM, AIR TRANSPORT, CRAFT AND SOCIAL ECONOMY',
-      value: 'MINISTRY OF TOURISM, AIR TRANSPORT, CRAFT AND SOCIAL ECONOMY',
+      label:
+        "MINISTRY OF NATIONAL TERITORY PLANNING, LAND PLANNING AND CITY POLICY",
+      value:
+        "MINISTRY OF NATIONAL TERITORY PLANNING, LAND PLANNING AND CITY POLICY",
     },
     {
-      label: 'MINISTRY OF YOUTH, CULTURE AND COMMUNICATION',
-      value: 'MINISTRY OF YOUTH, CULTURE AND COMMUNICATION',
+      label: "MINISTRY OF STEEL DEVELOPMENT",
+      value: "MINISTRY OF STEEL DEVELOPMENT",
     },
     {
-      label: 'NADDC',
-      value: 'NADDC',
+      label: "MINISTRY OF TOURISM, AIR TRANSPORT, CRAFT AND SOCIAL ECONOMY",
+      value: "MINISTRY OF TOURISM, AIR TRANSPORT, CRAFT AND SOCIAL ECONOMY",
     },
     {
-      label: 'NASENI',
-      value: 'NASENI',
+      label: "MINISTRY OF YOUTH, CULTURE AND COMMUNICATION",
+      value: "MINISTRY OF YOUTH, CULTURE AND COMMUNICATION",
     },
     {
-      label: 'NEXIM',
-      value: 'NEXIM',
+      label: "NADDC",
+      value: "NADDC",
     },
     {
-      label: 'NIGER STATE GOVERNMENT',
-      value: 'NIGER STATE GOVERNMENT',
+      label: "NASENI",
+      value: "NASENI",
     },
     {
-      label: 'NIGERIAN INVESTMENT PROMOTION COUNCIL',
-      value: 'NIGERIAN INVESTMENT PROMOTION COUNCIL',
+      label: "NEXIM",
+      value: "NEXIM",
     },
     {
-      label: 'NATIONAL AGRICULTURAL DEVELOPMENT FUNDS',
-      value: 'NATIONAL AGRICULTURAL DEVELOPMENT FUNDS',
+      label: "NIGER STATE GOVERNMENT",
+      value: "NIGER STATE GOVERNMENT",
     },
     {
-      label: 'NITDA',
-      value: 'NITDA',
+      label: "NIGERIAN INVESTMENT PROMOTION COUNCIL",
+      value: "NIGERIAN INVESTMENT PROMOTION COUNCIL",
     },
     {
-      label: 'NSIA',
-      value: 'NSIA',
+      label: "NATIONAL AGRICULTURAL DEVELOPMENT FUNDS",
+      value: "NATIONAL AGRICULTURAL DEVELOPMENT FUNDS",
     },
     {
-      label: 'RURAL ELECTRIFICATION AGENCY (REA)',
-      value: 'RURAL ELECTRIFICATION AGENCY (REA)',
+      label: "NITDA",
+      value: "NITDA",
     },
     {
-      label: 'SMEDAN',
-      value: 'SMEDAN',
+      label: "NSIA",
+      value: "NSIA",
+    },
+    {
+      label: "RURAL ELECTRIFICATION AGENCY (REA)",
+      value: "RURAL ELECTRIFICATION AGENCY (REA)",
+    },
+    {
+      label: "SMEDAN",
+      value: "SMEDAN",
     },
   ];
 
   const [companyNiche] = useState([
-    'Importer/User',
-    'Wholesaler/Distributor',
-    'Intermediary',
-    'Central Purchasing',
-    'Manufacturer',
+    "Importer/User",
+    "Wholesaler/Distributor",
+    "Intermediary",
+    "Central Purchasing",
+    "Manufacturer",
   ]);
 
   const [meetingWith] = useState([
-    'Agriculture & Agro Allied',
-    'Automobile',
-    'Solid Minerals/Steel',
-    'Electricity & Renewable Energy',
-    'Information Technology',
-    'Education',
-    'Finance & Fintech',
-    'Aviation',
+    "Agriculture & Agro Allied",
+    "Automobile",
+    "Solid Minerals/Steel",
+    "Electricity & Renewable Energy",
+    "Information Technology",
+    "Education",
+    "Finance & Fintech",
+    "Aviation",
   ]);
 
   const props: UploadProps = {
-    name: 'file',
+    name: "file",
     multiple: false,
-    accept: 'image/png, image/jpeg',
-    action: 'https://api.cloudinary.com/v1_1/djlbovjlt/image/upload',
+    accept: "image/png, image/jpeg",
+    action: "https://api.cloudinary.com/v1_1/djlbovjlt/image/upload",
     beforeUpload: (file) => {
-      const uploadPreset = 'v4lnyqau'; // Replace with your Cloudinary upload preset name
+      const uploadPreset = "v4lnyqau"; // Replace with your Cloudinary upload preset name
       setUploading(true); // Set uploading state to true
 
       const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', uploadPreset);
+      formData.append("file", file);
+      formData.append("upload_preset", uploadPreset);
 
       // Upload the file
-      return fetch('https://api.cloudinary.com/v1_1/djlbovjlt/image/upload', {
-        method: 'POST',
+      return fetch("https://api.cloudinary.com/v1_1/djlbovjlt/image/upload", {
+        method: "POST",
         body: formData,
       })
         .then((response) => response.json())
         .then((data) => {
           // Handle the upload response
-          console.log('Upload response:', data);
+          console.log("Upload response:", data);
           if (data.error) {
             message.error(`${file.name} upload failed: ${data.error.message}`);
           } else {
@@ -456,7 +456,7 @@ export default function Register() {
           }
         })
         .catch((error) => {
-          console.error('Upload error:', error);
+          console.error("Upload error:", error);
           message.error(`${file.name} upload failed.`);
         })
         .finally(() => {
@@ -469,7 +469,7 @@ export default function Register() {
     },
 
     onDrop(e) {
-      console.log('Dropped files', e.dataTransfer.files);
+      console.log("Dropped files", e.dataTransfer.files);
     },
   };
   useEffect(() => {
@@ -478,38 +478,40 @@ export default function Register() {
   return (
     <div
       // style={{ backgroundImage: 'url(rectangle.png)' }}
-      className="bg-cover bg-center h-[100vh] w-full relative overflow-x-hidden">
+      className="bg-cover bg-center h-[100vh] w-full relative overflow-x-hidden"
+    >
       <div
         // style={{
         //   backgroundImage: 'url(round.png)',
         //   backgroundRepeat: 'no-repeat',
         // }}
-        className="top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden">
+        className="top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden"
+      >
         <div className="mr-auto">
           <Link to="/">
             <BackIcon />
           </Link>
         </div>
 
-        <h1 className="text-lightGreen font-bold text-4xl">{t('Register')}</h1>
-        <span>{t('Part')}</span>
-        <p className="text-2xl"> {t('Fill')}</p>
+        <h1 className="text-lightGreen font-bold text-4xl">{t("Register")}</h1>
+        <span>{t("Part")}</span>
+        <p className="text-2xl"> {t("Fill")}</p>
 
         <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[50%] mt-5 overflow-x-hidden">
-          <span className="text-[18px] text-lightGreen">{t('Personal')}</span>
+          <span className="text-[18px] text-lightGreen">{t("Personal")}</span>
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
             <Input
               error={
                 formik.touched.first_name && formik.errors.first_name
                   ? formik.errors.first_name
-                  : ''
+                  : ""
               }
               value={formik.values.first_name}
               onChange={formik.handleChange}
               id="first_name"
               className="w-full md:w-[50%]"
               required
-              label={t('full')}
+              label={t("full")}
               placeholder="Enter Your First Name"
               outlined={false}
             />
@@ -518,25 +520,25 @@ export default function Register() {
               error={
                 formik.touched.last_name && formik.errors.last_name
                   ? formik.errors.last_name
-                  : ''
+                  : ""
               }
               value={formik.values.last_name}
               onChange={formik.handleChange}
               id="last_name"
               className="w-full md:w-[50%]"
               required
-              label={t('last')}
+              label={t("last")}
               placeholder="Enter Your Last Name"
               outlined={false}
             />
           </div>
           <div className="w-full mt-4">
-            <span className="text-[12px]">{t('Organization')}</span>
+            <span className="text-[12px]">{t("Organization")}</span>
             <Select
               status={
                 formik.touched.governmental && formik.errors.governmental
-                  ? 'error'
-                  : ''
+                  ? "error"
+                  : ""
               }
               className="w-[100%]"
               defaultValue={false}
@@ -548,12 +550,12 @@ export default function Register() {
                 setIsGov((prev) => !prev);
               }}
               options={[
-                { value: true, label: t('Governmental') },
-                { value: false, label: t('Private Company') },
+                { value: true, label: t("Governmental") },
+                { value: false, label: t("Private Company") },
               ]}
             />
           </div>
-          {phoneNumber.startsWith('+234') && (
+          {phoneNumber.startsWith("+234") && (
             <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
               <Input
                 value={formik.values.passport_number}
@@ -583,16 +585,16 @@ export default function Register() {
           {formik.values.governmental ? (
             <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
               <div className="w-full md:w-[50%] mt-4">
-                <span className="text-[12px]">{t('Ministry')}</span>
+                <span className="text-[12px]">{t("Ministry")}</span>
                 <br />
                 <Select
                   status={
                     formik.touched.governmental && formik.errors.governmental
-                      ? 'error'
-                      : ''
+                      ? "error"
+                      : ""
                   }
                   className="w-[100%] md:w-[100%]"
-                  defaultValue={''}
+                  defaultValue={""}
                   onChange={(e) => {
                     formik.values.ministry = e;
                     if (isGov) {
@@ -610,7 +612,7 @@ export default function Register() {
                   value={formik.values.designation}
                   onChange={formik.handleChange}
                   className="w-full"
-                  label={t('Designation')}
+                  label={t("Designation")}
                   outlined={false}
                 />
               </div>
@@ -622,14 +624,14 @@ export default function Register() {
                   error={
                     formik.touched.company_name && formik.errors.company_name
                       ? formik.errors.company_name
-                      : ''
+                      : ""
                   }
                   value={formik.values.company_name}
                   onChange={formik.handleChange}
                   id="company_name"
                   className="w-full md:w-[70%]"
                   required
-                  label={t('Name')}
+                  label={t("Name")}
                   placeholder="Enter the name of the company"
                   outlined={false}
                 />
@@ -638,14 +640,14 @@ export default function Register() {
                   error={
                     formik.touched.creation_date && formik.errors.creation_date
                       ? formik.errors.creation_date
-                      : ''
+                      : ""
                   }
                   value={formik.values.creation_date}
                   id="creation_date"
                   onChange={formik.handleChange}
                   className="w-full md:w-[30%]"
                   required
-                  label={t('Creation')}
+                  label={t("Creation")}
                   placeholder="Enter the name of the company"
                   outlined={false}
                   type="date"
@@ -656,13 +658,13 @@ export default function Register() {
                 error={
                   formik.touched.address && formik.errors.address
                     ? formik.errors.address
-                    : ''
+                    : ""
                 }
                 value={formik.values.address}
                 onChange={formik.handleChange}
                 required
                 id="address"
-                label={t('Address')}
+                label={t("Address")}
                 outlined={false}
                 placeholder="Type your address"
               />
@@ -672,8 +674,8 @@ export default function Register() {
                 value={formik.values.annual_turnover}
                 onChange={formik.handleChange}
                 className="w-full"
-                label={`${t('annual')} ${
-                  phoneNumber.startsWith('+234') ? '(NGN)' : '(MAD)'
+                label={`${t("annual")} ${
+                  phoneNumber.startsWith("+234") ? "(USD)" : "(MAD)"
                 }`}
                 outlined={false}
               />
@@ -682,12 +684,12 @@ export default function Register() {
                   error={
                     formik.touched.website && formik.errors.website
                       ? formik.errors.website
-                      : ''
+                      : ""
                   }
                   value={formik.values.website}
                   onChange={formik.handleChange}
                   className="w-full md:w-[50%]"
-                  label={t('Website')}
+                  label={t("Website")}
                   id="website"
                   placeholder="www.example.com"
                   outlined={false}
@@ -699,32 +701,32 @@ export default function Register() {
                     formik.touched.number_of_employees &&
                     formik.errors.number_of_employees
                       ? formik.errors.number_of_employees
-                      : ''
+                      : ""
                   }
                   value={formik.values.number_of_employees}
                   onChange={formik.handleChange}
                   className="w-full md:w-[50%]"
-                  label={t('Employees')}
+                  label={t("Employees")}
                   outlined={false}
                   type="number"
                 />
               </div>
             </>
           )}
-          {!phoneNumber.startsWith('+234') && (
+          {!phoneNumber.startsWith("+234") && (
             <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
               <Input
                 id="cin"
                 error={
                   formik.touched.cin && formik.errors.cin
                     ? formik.errors.cin
-                    : ''
+                    : ""
                 }
                 value={formik.values.cin}
                 onChange={formik.handleChange}
                 className="w-full md:w-[70%]"
                 required
-                label={'CIN Number'}
+                label={"CIN Number"}
                 outlined={false}
                 type="number"
               />
@@ -735,7 +737,7 @@ export default function Register() {
                 onChange={formik.handleChange}
                 className="w-full md:w-[30%]"
                 required
-                label={t('expiry')}
+                label={t("expiry")}
                 placeholder="Enter the expiration date"
                 outlined={false}
                 type="date"
@@ -748,7 +750,7 @@ export default function Register() {
               value={phoneNumber}
               disabled
               className="w-full md:w-[50%]"
-              label={t('Mobile')}
+              label={t("Mobile")}
               outlined={false}
             />
 
@@ -757,20 +759,20 @@ export default function Register() {
               error={
                 formik.touched.email && formik.errors.email
                   ? formik.errors.email
-                  : ''
+                  : ""
               }
               value={formik.values.email}
               id="email"
               onChange={formik.handleChange}
               className="w-full md:w-[50%]"
-              label={t('Email')}
+              label={t("Email")}
               outlined={false}
             />
           </div>
           {!formik.values.governmental && (
             <>
               <h1 className="my-[10px] text-[13px] font-[500]">
-                {t('Is')}
+                {t("Is")}
                 <span className="text-[red]">*</span>
               </h1>
               {companyNiche.map((options, ind) => (
@@ -799,12 +801,12 @@ export default function Register() {
             error={
               formik.touched.import_morocco && formik.errors.import_morocco
                 ? formik.errors.import_morocco
-                : ''
+                : ""
             }
             value={formik.values.import_morocco}
             id="import_morocco"
             onChange={formik.handleChange}
-            label={t('What')}
+            label={t("What")}
             outlined={false}
             placeholder="Type here"
           />
@@ -813,17 +815,17 @@ export default function Register() {
             error={
               formik.touched.export_morocco && formik.errors.export_morocco
                 ? formik.errors.export_morocco
-                : ''
+                : ""
             }
             value={formik.values.export_morocco}
             id="export_morocco"
             onChange={formik.handleChange}
             className="mb-10"
-            label={t('Export')}
+            label={t("Export")}
             outlined={false}
             placeholder="Type here"
           />
-          <span className="font-[500]">{t('Meeting')}</span>
+          <span className="font-[500]">{t("Meeting")}</span>
 
           {meetingWith.map((option: string, ind) => (
             <div className="my-3 flex items-center" key={ind.toString()}>
@@ -840,7 +842,7 @@ export default function Register() {
             </div>
           ))}
 
-          <span className="mt-5">{t('Passport')}</span>
+          <span className="mt-5">{t("Passport")}</span>
           <div className="h-[200px] md:h-[150px] mt-4">
             <Dragger showUploadList={true} className="h-[150px]" {...props}>
               <p className="ant-upload-drag-icon">
@@ -849,10 +851,10 @@ export default function Register() {
 
               <p className="ant-upload-text">
                 {uploading && <Spin size="large" spinning />}
-                {t('Drag')}
+                {t("Drag")}
               </p>
               <p className="ant-upload-hint">
-                Please Upload or Capture your passport
+                Please Upload or Capture your passport photograph
               </p>
             </Dragger>
           </div>
@@ -871,10 +873,11 @@ export default function Register() {
                 formik.handleSubmit();
               }}
               className="bg-lightGreen h-[38px]"
-              type="primary">
-              {phoneNumber.startsWith('+234')
-                ? 'Submit & proceed to payment'
-                : t('Submit')}
+              type="primary"
+            >
+              {phoneNumber.startsWith("+234")
+                ? "Submit & proceed to payment"
+                : t("Submit")}
             </Button>
           </div>
         </div>
@@ -887,7 +890,8 @@ export default function Register() {
         centered
         title=""
         open={isModalOpen}
-        onOk={handleOk}>
+        onOk={handleOk}
+      >
         <div className="flex flex-col min-h-[400px] bg-white  items-cente p-3">
           <h1 className="text-[16px] text-black">Terms and Conditions</h1>
           <div className="border-[#9D9DB7] border h-[217px] w-full my-5 overflow-y-scroll p-[10px]">
@@ -895,7 +899,7 @@ export default function Register() {
               <p>
                 Welcome to Nigeria-Morocco Business Week! By proceeding with the
                 registration process, you agree to the following terms and
-                conditions:{' '}
+                conditions:{" "}
               </p>
               Registration Information: <br />
               1.1 You must provide accurate and complete information during the
@@ -1006,20 +1010,22 @@ export default function Register() {
               className="mr-2"
               type="checkbox"
             />
-            <span className="text-[12px]">{t('accept')}</span>
+            <span className="text-[12px]">{t("accept")}</span>
           </div>
 
           <div className="flex gap-4 items-center justify-end mt-5">
             <Button
-              onClick={() => navigate('/')}
-              className="border-lightGreen bg-transparent text-lightGreen h-[38px]">
+              onClick={() => navigate("/")}
+              className="border-lightGreen bg-transparent text-lightGreen h-[38px]"
+            >
               Cancel
             </Button>
             <Button
               disabled={!isChecked}
               onClick={handleCancel}
               className="bg-lightGreen h-[38px]"
-              type="primary">
+              type="primary"
+            >
               Confirm
             </Button>
           </div>
