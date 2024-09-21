@@ -254,11 +254,11 @@ export default function LandinPage() {
               We invite you to participate in the 1st Edition of the
               Nigeria-Morocco Business Week, scheduled for the 23rd to 25th
               October, 2024.
-            </p>{' '}
+            </p>
             <p className="my-3">
               <b>Venue:</b> Parc d’ Expositions Mohammed VI El- Jadida
               Casablanca Morocco.
-            </p>{' '}
+            </p>
             The event is organized by The Coalition of Northern States Chambers
             of Commerce, Industry, Agriculture and Mines (CONSCCIMA) in
             conjunction with Spectre Trans-Trade Global of Morocco. <br />
