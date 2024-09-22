@@ -424,6 +424,7 @@ export default function Register() {
     "Education",
     "Finance & Fintech",
     "Aviation",
+    "Culture & Tourism",
   ]);
 
   const props: UploadProps = {
@@ -675,7 +676,7 @@ export default function Register() {
                 onChange={formik.handleChange}
                 className="w-full"
                 label={`${t("annual")} ${
-                  phoneNumber.startsWith("+234") ? "(USD)" : "(MAD)"
+                  phoneNumber.startsWith("+234") ? "(USD)" : "(USD)"
                 }`}
                 outlined={false}
               />

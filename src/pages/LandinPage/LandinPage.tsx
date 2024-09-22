@@ -1,14 +1,14 @@
-import CarouselItem from './componets/CarouselItem';
-import { Carousel } from 'react-responsive-carousel';
-import ProgramItems from './componets/ProgramItems';
-import { Button, Modal, message, Divider } from 'antd';
-import Footer from './componets/Footer';
-import { useState } from 'react';
-import PhoneInput from './componets/PhoneInput';
-import { useNavigate } from 'react-router-dom';
-import MenuIcon from './componets/MenuIcon';
+import CarouselItem from "./componets/CarouselItem";
+import { Carousel } from "react-responsive-carousel";
+import ProgramItems from "./componets/ProgramItems";
+import { Button, Modal, message, Divider } from "antd";
+import Footer from "./componets/Footer";
+import { useState } from "react";
+import PhoneInput from "./componets/PhoneInput";
+import { useNavigate } from "react-router-dom";
+import MenuIcon from "./componets/MenuIcon";
 
-import { Drawer } from 'antd';
+import { Drawer } from "antd";
 
 interface ItemType {
   left: React.ReactNode;
@@ -17,8 +17,8 @@ interface ItemType {
 export default function LandinPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
-  const [value, setValue] = useState('+234');
-  const [phone, setPhone] = useState('');
+  const [value, setValue] = useState("+234");
+  const [phone, setPhone] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -57,7 +57,8 @@ export default function LandinPage() {
           <span className="my-6 text-left">October 23rd-25th, 2024</span>
           <Button
             onClick={showModal}
-            className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
+            className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black"
+          >
             Participate
           </Button>
         </div>
@@ -130,12 +131,14 @@ export default function LandinPage() {
               //   setBookingModalOpen(true);
               // }}
               className="text-[12px]"
-              href="#space">
+              href="#space"
+            >
               Space Booking
             </a>
             <Button
               onClick={showModal}
-              className="bg-lightGreen w-[115px] h-[40px]   text-white">
+              className="bg-lightGreen w-[115px] h-[40px]   text-white"
+            >
               Participate
             </Button>
           </div>
@@ -152,7 +155,8 @@ export default function LandinPage() {
           autoPlay
           showArrows={false}
           infiniteLoop
-          className="flex flex-col w-full min-h-[50vh] md:min-h-[80vh] justify-start text-start">
+          className="flex flex-col w-full min-h-[50vh] md:min-h-[80vh] justify-start text-start"
+        >
           {conditionalItem.map((item, ind) => (
             <CarouselItem key={ind} item={item} ind={ind} />
           ))}
@@ -175,7 +179,7 @@ export default function LandinPage() {
           <img src="jed.jpg" alt="JED" />
           <img src="niger.png" alt="niger" />
           <img src="farmcreed.jpg" alt="farm creed" />
-          <img src="mines.png" alt="steel" />
+          <img src="MSD.jpg" alt="steel" />
         </div>
       </div>
 
@@ -218,10 +222,11 @@ export default function LandinPage() {
       {/* Space Booking */}
       <div
         id="space"
-        className="flex bg-silver  min-h-[308px] justify-center flex-col md:flex-row md:justify-between  items-center w-full py-5 px-5  md:px-20 gap-5 md:gap-10 lg:px-40">
+        className="flex bg-silver  min-h-[308px] justify-center flex-col md:flex-row md:justify-between  items-center w-full py-5 px-5  md:px-20 gap-5 md:gap-10 lg:px-40"
+      >
         <div className="gap-4">
           <h1 className="text-4xl font-bold">
-            Want an{' '}
+            Want an{" "}
             <span className="text-lightGreen text-4xl font-bold">
               Exhibition space?
             </span>
@@ -234,7 +239,8 @@ export default function LandinPage() {
         <div className="grid grid-cols-2 gap-20">
           <Button
             onClick={() => setBookingModalOpen(true)}
-            className="bg-lightGreen w-[100%] mt-4 md:w-[200px] h-12 text-white hover:bg-black">
+            className="bg-lightGreen w-[100%] mt-4 md:w-[200px] h-12 text-white hover:bg-black"
+          >
             Book A Space
           </Button>
         </div>
@@ -254,11 +260,11 @@ export default function LandinPage() {
               We invite you to participate in the 1st Edition of the
               Nigeria-Morocco Business Week, scheduled for the 23rd to 25th
               October, 2024.
-            </p>{' '}
+            </p>{" "}
             <p className="my-3">
               <b>Venue:</b> Parc d’ Expositions Mohammed VI El- Jadida
               Casablanca Morocco.
-            </p>{' '}
+            </p>{" "}
             The event is organized by The Coalition of Northern States Chambers
             of Commerce, Industry, Agriculture and Mines (CONSCCIMA) in
             conjunction with Spectre Trans-Trade Global of Morocco. <br />
@@ -281,7 +287,7 @@ export default function LandinPage() {
       <div className="w-full px-5 md:px-20">
         <Divider
           style={{
-            borderColor: '#e9e9e9',
+            borderColor: "#e9e9e9",
           }}
         />
       </div>
@@ -312,7 +318,8 @@ export default function LandinPage() {
           <Button className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
             <a
               target="_blank"
-              href="https://spectretranstradeglobal.com/consultative-meeting-with-top-officials-of-chamber-of-commerce-industry-and-services">
+              href="https://spectretranstradeglobal.com/consultative-meeting-with-top-officials-of-chamber-of-commerce-industry-and-services"
+            >
               Learn More
             </a>
           </Button>
@@ -327,7 +334,8 @@ export default function LandinPage() {
         title=""
         open={isModalOpen}
         onOk={handleOk}
-        onCancel={handleCancel}>
+        onCancel={handleCancel}
+      >
         <div className="flex flex-col min-h-[400px] bg-white justify-center items-center">
           <img src="phone.png" className="mt-[auto]" />
           <h1 className="font-bold mt-5">Enter Your Phone Number</h1>
@@ -345,15 +353,16 @@ export default function LandinPage() {
             <Button
               onClick={() => {
                 if (phone && value) {
-                  navigate('Register', {
+                  navigate("Register", {
                     state: { phoneNumber: value + phone },
                   });
                 } else {
-                  message.warning('Phone number is required');
+                  message.warning("Phone number is required");
                 }
               }}
               className="bg-lightGreen h-[40px]"
-              type="primary">
+              type="primary"
+            >
               Confirm
             </Button>
           </div>
@@ -366,7 +375,8 @@ export default function LandinPage() {
         title=""
         open={bookingModalOpen}
         onOk={() => setBookingModalOpen(false)}
-        onCancel={() => setBookingModalOpen(false)}>
+        onCancel={() => setBookingModalOpen(false)}
+      >
         <div className="flex flex-col min-h-[400px] bg-white justify-center items-center">
           <img src="phone.png" className="mt-[auto]" />
           <h1 className="font-bold mt-5">Enter Your Phone Number</h1>
@@ -382,15 +392,16 @@ export default function LandinPage() {
             <Button
               onClick={() => {
                 if (phone && value) {
-                  navigate('Booking', {
+                  navigate("Booking", {
                     state: { phoneNumber: value + phone },
                   });
                 } else {
-                  message.warning('Phone number is required');
+                  message.warning("Phone number is required");
                 }
               }}
               className="bg-lightGreen h-[40px]"
-              type="primary">
+              type="primary"
+            >
               Confirm
             </Button>
           </div>
@@ -401,25 +412,29 @@ export default function LandinPage() {
           <a
             onClick={onClose}
             className="text-[14px]  w-full text-center"
-            href="/">
+            href="/"
+          >
             Home
           </a>
           <a
             onClick={onClose}
             className="text-[14px] w-full text-center"
-            href="#partners">
+            href="#partners"
+          >
             Our Sponsors
           </a>
 
           <a
             onClick={onClose}
             className="text-[14px]  w-full text-center"
-            href="#space">
+            href="#space"
+          >
             Space Booking
           </a>
           <Button
             onClick={showModal}
-            className="bg-lightGreen w-full h-[40px]   text-white">
+            className="bg-lightGreen w-full h-[40px]   text-white"
+          >
             Participate
           </Button>
         </div>
