@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import MenuIcon from "./componets/MenuIcon";
 
 import { Drawer } from "antd";
+import { useTranslation } from "react-i18next";
 
 interface ItemType {
   left: React.ReactNode;
@@ -21,6 +22,7 @@ export default function LandinPage() {
   const [phone, setPhone] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
 
   const showDrawer = () => {
     setOpen(true);
@@ -51,15 +53,15 @@ export default function LandinPage() {
             🇳🇬 NIGERIA-MOROCCO 🇲🇦
           </h1>
           <h1 className="text-5xl md:text-6xl text-left font-bold text-lightGreen">
-            Business Week Casablanca, Morocco
+            {t("businessweek")}
           </h1>
-          <h2 className="mt-6 text-left">1st Edition</h2>
-          <span className="my-6 text-left">October 23rd-25th, 2024</span>
+          <h2 className="mt-6 text-left">{t("edition")}</h2>
+          <span className="my-6 text-left">{t("oct")}</span>
           <Button
             onClick={showModal}
             className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black"
           >
-            Participate
+            {t("Participate")}
           </Button>
         </div>
       ),
@@ -73,18 +75,13 @@ export default function LandinPage() {
       left: (
         <div className="flex w-100% flex-col md:w-4/6">
           <h1 className="text-5xl md:text-6xl text-left font-bold text-white">
-            Noor Solar Power Plant
+            {t("slide2Head")}
           </h1>
-          <h1 className="text-5xl md:text-6xl text-left font-bold  text-white">
+          {/* <h1 className="text-5xl md:text-6xl text-left font-bold  text-white">
             Morocco
-          </h1>
+          </h1> */}
 
-          <span className="my-6 text-left text-white">
-            The Noor solar plant is a flagship project launched under the
-            ambitious energy policy of the Moroccan Kingdom. It is located in
-            the municipality of Ghessate, in the Southern province of
-            Ouarzazate.
-          </span>
+          <span className="my-6 text-left text-white">{t("slide2Body")}</span>
         </div>
       ),
     },
@@ -92,17 +89,13 @@ export default function LandinPage() {
       left: (
         <div className="flex w-100% flex-col md:w-4/6">
           <h1 className="text-5xl md:text-6xl text-left font-bold text-white">
-            Agriculture in
+            {t("slide3Head")}
           </h1>
-          <h1 className="text-5xl md:text-6xl text-left font-bold  text-white">
+          {/* <h1 className="text-5xl md:text-6xl text-left font-bold  text-white">
             Morocco
-          </h1>
+          </h1> */}
 
-          <span className="my-6 text-left text-white">
-            Moroccan agriculture operates through a mixed and integrated
-            crop/livestock system, representing the main source of income for
-            the majority of rural households.
-          </span>
+          <span className="my-6 text-left text-white">{t("slide3Body")}</span>
         </div>
       ),
     },
@@ -119,10 +112,10 @@ export default function LandinPage() {
           </h1>
           <div className="hidden md:flex items-center space-x-10">
             <a className="text-[12px]" href="/">
-              Home
+              {t("Home")}
             </a>
             <a className="text-[12px]" href="#partners">
-              Our Sponsors
+              {t("Sponsors")}
             </a>
 
             <a
@@ -133,13 +126,13 @@ export default function LandinPage() {
               className="text-[12px]"
               href="#space"
             >
-              Space Booking
+              {t("bookButtton")}
             </a>
             <Button
               onClick={showModal}
               className="bg-lightGreen w-[115px] h-[40px]   text-white"
             >
-              Participate
+              {t("Participate")}
             </Button>
           </div>
 
@@ -167,7 +160,7 @@ export default function LandinPage() {
 
       {/* OUR PARTNERS */}
       <div id="partners" className="flex flex-col items-center p-10">
-        <h1 className="text-2xl text-fontColor font-[600]">Our Partners</h1>
+        <h1 className="text-2xl text-fontColor font-[600]">{t("Partners")}</h1>
 
         <div className="grid  place-items-center px-0 grid-cols-2 md:grid-cols-6 gap-5 w-full md:px-32 mt-10">
           {/* <img src="nec.png" alt="nec" /> */}
@@ -187,35 +180,20 @@ export default function LandinPage() {
 
       <div className="flex flex-col items-center p-10">
         <h1 className="text-2xl text-fontColor font-[600]">
-          Multi-sectoral Programme
+          {t("sectorHeading")}
         </h1>
-        <p className="my-5 text-center text-fontColor">
-          The programme is designed to be multi-sectoral with particular focus
-          in some areas
-        </p>
+        <p className="my-5 text-center text-fontColor">{t("sectorBody")}</p>
         <div className="grid  place-items-center px-0 grid-cols-1 md:grid-cols-3 gap-5 w-full md:px-5 lg:px-32 mt-10">
           <ProgramItems
             icon="tract.svg"
-            title="Agriculture & Agro-allied Products"
+            title={t("agricProducts")}
             content=""
           />
-          <ProgramItems title="Automobile" content="" icon="car.svg" />
-          <ProgramItems
-            icon="renergy.svg"
-            title="Electricity & Renewable Energy"
-            content=""
-          />
-          <ProgramItems
-            icon="rock.svg"
-            title="Solid Minerals/Steel"
-            content=""
-          />
-          <ProgramItems icon="economy.svg" title="Digital Economy" content="" />
-          <ProgramItems
-            icon="bank.svg"
-            title="Banking & E-Government"
-            content=""
-          />
+          <ProgramItems title={t("automobile")} content="" icon="car.svg" />
+          <ProgramItems icon="renergy.svg" title={t("renewable")} content="" />
+          <ProgramItems icon="rock.svg" title={t("minerals")} content="" />
+          <ProgramItems icon="economy.svg" title={t("economy")} content="" />
+          <ProgramItems icon="bank.svg" title={t("banking")} content="" />
         </div>
       </div>
 
@@ -226,14 +204,12 @@ export default function LandinPage() {
       >
         <div className="gap-4">
           <h1 className="text-4xl font-bold">
-            Want an{" "}
+            {t("exhibitionHead")}{" "}
             <span className="text-lightGreen text-4xl font-bold">
-              Exhibition space?
+              {t("exhibitionSpace")}?
             </span>
           </h1>
-          <p className="text-left text-fontColor mt-2">
-            We reached here with our hard work and dedication
-          </p>
+          <p className="text-left text-fontColor mt-2">{t("exhibitionBody")}</p>
         </div>
 
         <div className="grid grid-cols-2 gap-20">
@@ -241,7 +217,7 @@ export default function LandinPage() {
             onClick={() => setBookingModalOpen(true)}
             className="bg-lightGreen w-[100%] mt-4 md:w-[200px] h-12 text-white hover:bg-black"
           >
-            Book A Space
+            {t("bookButtton")}
           </Button>
         </div>
       </div>
@@ -253,33 +229,20 @@ export default function LandinPage() {
 
         <div className="flex flex-col gap-5 w-full md:w-1/2">
           <h1 className="text-2xl  font-bold text-fontColor">
-            Promoting Commercial Trade/Exchange Between Nigeria and Morocco
+            {t("newsHeader1")}
           </h1>
           <p className="text-justify text-[13px] text-fontColor">
-            <p>
-              We invite you to participate in the 1st Edition of the
-              Nigeria-Morocco Business Week, scheduled for the 23rd to 25th
-              October, 2024.
-            </p>{" "}
+            <p>{t("newsBody1")}</p>{" "}
             <p className="my-3">
-              <b>Venue:</b> Parc d’ Expositions Mohammed VI El- Jadida
+              <b>{t("venue")}:</b> Parc d’ Expositions Mohammed VI El- Jadida
               Casablanca Morocco.
             </p>{" "}
-            The event is organized by The Coalition of Northern States Chambers
-            of Commerce, Industry, Agriculture and Mines (CONSCCIMA) in
-            conjunction with Spectre Trans-Trade Global of Morocco. <br />
-            The event is aimed at boosting the Exportation of Agricultural
-            products of Nigeria and other Minerals like Steel & Lithium to the
-            Kingdom Of Morocco and beyond, thereby strategically placing Nigeria
-            as an alternative source of raw materials for the Kingdom of
-            Morocco. <br />
-            The event is expected to host individual Participants, Exhibitors
-            from across all sectors, including industrial Experts, Captains of
-            Industry, Government agencies/ Ministries of both Nigeria and
-            Morocco.
+            {t("news1Body2")}
+            <br />
+            {t("news1Body3")}
           </p>
           <Button className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
-            Learn More
+            {t("learn")}
           </Button>
         </div>
       </div>
@@ -302,25 +265,17 @@ export default function LandinPage() {
 
         <div className="flex flex-col gap-5 w-full md:w-1/2">
           <h1 className="text-2xl  font-bold text-fontColor">
-            Consultative meeting with top officials of Chamber of Commerce,
-            Industry and Services
+            {t("newsHeader2")}
           </h1>
           <p className="text-justify text-[13px] text-fontColor">
-            As part of preparations towards hosting of Nigeria-Morocco Business
-            Week (Investment Summit) scheduled to hold from October 23rd -25th
-            in Casablanca-Morocco, Mal Dalhatu Abubakar, FCICN, President
-            CONSCCIMA, the Managing Director Spectre Trans-Trade Global Mr.
-            Mohammed Rhali and Managing Director RIDEC SARL Mr. Mohammed Jabri
-            Yesterday 5th September 2024, held a consultative meeting with top
-            officials of Chamber of Commerce, Industry and Services
-            Casablanca-Settat, Kingdom of Morocco.
+            {t("newsBody2")}
           </p>
           <Button className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
             <a
               target="_blank"
               href="https://spectretranstradeglobal.com/consultative-meeting-with-top-officials-of-chamber-of-commerce-industry-and-services"
             >
-              Learn More
+              {t("learn")}
             </a>
           </Button>
         </div>

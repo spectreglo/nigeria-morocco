@@ -408,23 +408,23 @@ export default function Register() {
   ];
 
   const [companyNiche] = useState([
-    "Importer/User",
-    "Wholesaler/Distributor",
-    "Intermediary",
-    "Central Purchasing",
-    "Manufacturer",
+    `${t("Importer")}`,
+    `${t("Wholesaler")}`,
+    `${t("Intermediary")}`,
+    `${t("CentralPurchasing")}`,
+    `${t("Manufacturer")}`,
   ]);
 
   const [meetingWith] = useState([
-    "Agriculture & Agro Allied",
+    `${t("Agriculture")}`,
     "Automobile",
-    "Solid Minerals/Steel",
-    "Electricity & Renewable Energy",
-    "Information Technology",
-    "Education",
-    "Finance & Fintech",
-    "Aviation",
-    "Culture & Tourism",
+    `${t("minerals")}`,
+    `${t("renewable")}`,
+    `${t("IT")}`,
+    `${t("Education")}`,
+    `${t("Finance")}`,
+    `${t("Aviation")}`,
+    `${t("Tourism")}`,
   ]);
 
   const props: UploadProps = {
@@ -854,9 +854,7 @@ export default function Register() {
                 {uploading && <Spin size="large" spinning />}
                 {t("Drag")}
               </p>
-              <p className="ant-upload-hint">
-                Please Upload or Capture your passport photograph
-              </p>
+              <p className="ant-upload-hint">{t("UploadHint")}</p>
             </Dragger>
           </div>
 
