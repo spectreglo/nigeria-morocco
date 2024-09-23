@@ -22,8 +22,7 @@ export default function LandinPage() {
   const [phone, setPhone] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const { t, i18n } = useTranslation();
-  i18n.changeLanguage("en");
+  const { t } = useTranslation();
 
   const showDrawer = () => {
     setOpen(true);
