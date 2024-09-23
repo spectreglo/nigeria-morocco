@@ -1,15 +1,15 @@
-import CarouselItem from './componets/CarouselItem';
-import { Carousel } from 'react-responsive-carousel';
-import ProgramItems from './componets/ProgramItems';
-import { Button, Modal, message, Divider } from 'antd';
-import Footer from './componets/Footer';
-import { useState, useEffect } from 'react';
-import PhoneInput from './componets/PhoneInput';
-import { useNavigate } from 'react-router-dom';
-import MenuIcon from './componets/MenuIcon';
+import CarouselItem from "./componets/CarouselItem";
+import { Carousel } from "react-responsive-carousel";
+import ProgramItems from "./componets/ProgramItems";
+import { Button, Modal, message, Divider } from "antd";
+import Footer from "./componets/Footer";
+import { useState, useEffect } from "react";
+import PhoneInput from "./componets/PhoneInput";
+import { useNavigate } from "react-router-dom";
+import MenuIcon from "./componets/MenuIcon";
 
-import { Drawer } from 'antd';
-import { useTranslation } from 'react-i18next';
+import { Drawer } from "antd";
+import { useTranslation } from "react-i18next";
 
 interface ItemType {
   left: React.ReactNode;
@@ -18,14 +18,14 @@ interface ItemType {
 export default function LandinPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
-  const [value, setValue] = useState('+234');
-  const [phone, setPhone] = useState('');
+  const [value, setValue] = useState("+234");
+  const [phone, setPhone] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    i18n.changeLanguage('en');
+    i18n.changeLanguage("en");
   }, []);
 
   const showDrawer = () => {
@@ -57,14 +57,15 @@ export default function LandinPage() {
             🇳🇬 NIGERIA-MOROCCO 🇲🇦
           </h1>
           <h1 className="text-5xl md:text-6xl text-left font-bold text-lightGreen">
-            {t('businessweek')}
+            {t("businessweek")}
           </h1>
-          <h2 className="mt-6 text-left">{t('edition')}</h2>
-          <span className="my-6 text-left">{t('oct')}</span>
+          <h2 className="mt-6 text-left">{t("edition")}</h2>
+          <span className="my-6 text-left">{t("oct")}</span>
           <Button
             onClick={showModal}
-            className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
-            {t('Participate')}
+            className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black"
+          >
+            {t("Participate")}
           </Button>
         </div>
       ),
@@ -78,13 +79,13 @@ export default function LandinPage() {
       left: (
         <div className="flex w-100% flex-col md:w-4/6">
           <h1 className="text-5xl md:text-6xl text-left font-bold text-white">
-            {t('slide2Head')}
+            {t("slide2Head")}
           </h1>
           {/* <h1 className="text-5xl md:text-6xl text-left font-bold  text-white">
             Morocco
           </h1> */}
 
-          <span className="my-6 text-left text-white">{t('slide2Body')}</span>
+          <span className="my-6 text-left text-white">{t("slide2Body")}</span>
         </div>
       ),
     },
@@ -92,13 +93,13 @@ export default function LandinPage() {
       left: (
         <div className="flex w-100% flex-col md:w-4/6">
           <h1 className="text-5xl md:text-6xl text-left font-bold text-white">
-            {t('slide3Head')}
+            {t("slide3Head")}
           </h1>
           {/* <h1 className="text-5xl md:text-6xl text-left font-bold  text-white">
             Morocco
           </h1> */}
 
-          <span className="my-6 text-left text-white">{t('slide3Body')}</span>
+          <span className="my-6 text-left text-white">{t("slide3Body")}</span>
         </div>
       ),
     },
@@ -115,10 +116,10 @@ export default function LandinPage() {
           </h1>
           <div className="hidden md:flex items-center space-x-8">
             <a className="text-[12px]" href="/">
-              {t('Home')}
+              {t("Home")}
             </a>
             <a className="text-[12px]" href="#partners">
-              {t('Sponsors')}
+              {t("Sponsors")}
             </a>
 
             <Button
@@ -128,13 +129,15 @@ export default function LandinPage() {
                 e.preventDefault();
                 setBookingModalOpen(true);
               }}
-              className="h-[40px]">
-              {t('bookButtton')}
+              className="h-[40px]"
+            >
+              {t("bookButtton")}
             </Button>
             <Button
               onClick={showModal}
-              className="bg-lightGreen w-[115px] h-[40px] text-white">
-              {t('Participate')}
+              className="bg-lightGreen w-[115px] h-[40px] text-white"
+            >
+              {t("Participate")}
             </Button>
           </div>
 
@@ -150,7 +153,8 @@ export default function LandinPage() {
           autoPlay
           showArrows={false}
           infiniteLoop
-          className="flex flex-col w-full min-h-[50vh] md:min-h-[80vh] justify-start text-start">
+          className="flex flex-col w-full min-h-[50vh] md:min-h-[80vh] justify-start text-start"
+        >
           {conditionalItem.map((item, ind) => (
             <CarouselItem key={ind} item={item} ind={ind} />
           ))}
@@ -161,7 +165,7 @@ export default function LandinPage() {
 
       {/* OUR PARTNERS */}
       <div id="partners" className="flex flex-col items-center p-10">
-        <h1 className="text-2xl text-fontColor font-[600]">{t('Partners')}</h1>
+        <h1 className="text-2xl text-fontColor font-[600]">{t("Partners")}</h1>
 
         <div className="grid  place-items-center px-0 grid-cols-2 md:grid-cols-6 gap-5 w-full md:px-32 mt-10">
           {/* <img src="nec.png" alt="nec" /> */}
@@ -181,26 +185,26 @@ export default function LandinPage() {
 
       <div className="flex flex-col items-center bg-silver p-10">
         <h1 className="text-2xl text-fontColor font-[600]">
-          {t('sectorHeading')}
+          {t("sectorHeading")}
         </h1>
-        <p className="my-5 text-center text-fontColor">{t('sectorBody')}</p>
+        <p className="my-5 text-center text-fontColor">{t("sectorBody")}</p>
         <div className="grid place-items-center px-0 grid-cols-1 md:grid-cols-3 gap-5 w-full md:px-5 lg:px-32 mt-10">
           <ProgramItems
             icon="agric.png"
-            title={t('agricProducts')}
+            title={t("agricProducts")}
             content=""
           />
           <ProgramItems
-            title={t('automobile')}
+            title={t("automobile")}
             content=""
             icon="automobile.png"
           />
-          <ProgramItems icon="energy.jpg" title={t('renewable')} content="" />
-          <ProgramItems icon="minerals.jpg" title={t('minerals')} content="" />
-          <ProgramItems icon="digital.jpeg" title={t('economy')} content="" />
+          <ProgramItems icon="energy.jpg" title={t("renewable")} content="" />
+          <ProgramItems icon="minerals.jpg" title={t("minerals")} content="" />
+          <ProgramItems icon="digital.jpeg" title={t("economy")} content="" />
           <ProgramItems
             icon="e-government.png"
-            title={t('banking')}
+            title={t("banking")}
             content=""
           />
         </div>
@@ -209,22 +213,24 @@ export default function LandinPage() {
       {/* Space Booking */}
       <div
         id="space"
-        className="flex bg-silver min-h-[308px] justify-center flex-col md:flex-row md:justify-between  items-center w-full py-5 px-5  md:px-20 gap-5 md:gap-10 lg:px-40">
+        className="flex bg-silver min-h-[308px] justify-center flex-col md:flex-row md:justify-between  items-center w-full py-5 px-5  md:px-20 gap-5 md:gap-10 lg:px-40"
+      >
         <div className="gap-4">
           <h1 className="text-4xl font-bold">
-            {t('exhibitionHead')}{' '}
+            {t("exhibitionHead")}{" "}
             <span className="text-lightGreen text-4xl font-bold">
-              {t('exhibitionSpace')}?
+              {t("exhibitionSpace")}?
             </span>
           </h1>
-          <p className="text-left text-fontColor mt-2">{t('exhibitionBody')}</p>
+          <p className="text-left text-fontColor mt-2">{t("exhibitionBody")}</p>
         </div>
 
         <div className="grid grid-cols-2 gap-20">
           <Button
             onClick={() => setBookingModalOpen(true)}
-            className="bg-lightGreen w-[100%] mt-4 md:w-[200px] h-12 text-white hover:bg-black">
-            {t('bookButtton')}
+            className="bg-lightGreen w-[100%] mt-4 md:w-[200px] h-12 text-white hover:bg-black"
+          >
+            {t("bookButtton")}
           </Button>
         </div>
       </div>
@@ -236,20 +242,20 @@ export default function LandinPage() {
 
         <div className="flex flex-col gap-5 w-full md:w-1/2">
           <h1 className="text-2xl  font-bold text-fontColor">
-            {t('newsHeader1')}
+            {t("newsHeader1")}
           </h1>
           <p className="text-justify text-[13px] text-fontColor">
-            <p>{t('newsBody1')}</p>{' '}
+            <p>{t("newsBody1")}</p>{" "}
             <p className="my-3">
-              <b>{t('venue')}:</b> Parc d’ Expositions Mohammed VI El- Jadida
+              <b>{t("venue")}:</b> Parc d’ Expositions Mohammed VI El- Jadida
               Casablanca Morocco.
-            </p>{' '}
-            {t('news1Body2')}
+            </p>{" "}
+            {t("news1Body2")}
             <br />
-            {t('news1Body3')}
+            {t("news1Body3")}
           </p>
           <Button className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
-            {t('learn')}
+            {t("learn")}
           </Button>
         </div>
       </div>
@@ -257,7 +263,7 @@ export default function LandinPage() {
       <div className="w-full px-5 md:px-20">
         <Divider
           style={{
-            borderColor: '#e9e9e9',
+            borderColor: "#e9e9e9",
           }}
         />
       </div>
@@ -271,17 +277,18 @@ export default function LandinPage() {
         />
 
         <div className="flex flex-col gap-5 w-full md:w-1/2">
-          <h1 className="text-2xl  font-bold text-fontColor">
-            {t('newsHeader2')}
+          <h1 className="text-2xl font-bold text-fontColor">
+            {t("newsHeader2")}
           </h1>
           <p className="text-justify text-[13px] text-fontColor">
-            {t('newsBody2')}
+            {t("newsBody2")}
           </p>
           <Button className="bg-lightGreen w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
             <a
               target="_blank"
-              href="https://spectretranstradeglobal.com/consultative-meeting-with-top-officials-of-chamber-of-commerce-industry-and-services">
-              {t('learn')}
+              href="https://spectretranstradeglobal.com/consultative-meeting-with-top-officials-of-chamber-of-commerce-industry-and-services"
+            >
+              {t("learn")}
             </a>
           </Button>
         </div>
@@ -295,7 +302,8 @@ export default function LandinPage() {
         title=""
         open={isModalOpen}
         onOk={handleOk}
-        onCancel={handleCancel}>
+        onCancel={handleCancel}
+      >
         <div className="flex flex-col min-h-[400px] bg-white justify-center items-center">
           <img src="phone.png" className="mt-[auto]" />
           <h1 className="font-bold mt-5">Enter Your Phone Number</h1>
@@ -313,15 +321,16 @@ export default function LandinPage() {
             <Button
               onClick={() => {
                 if (phone && value) {
-                  navigate('Register', {
+                  navigate("Register", {
                     state: { phoneNumber: value + phone },
                   });
                 } else {
-                  message.warning('Phone number is required');
+                  message.warning("Phone number is required");
                 }
               }}
               className="bg-lightGreen h-[40px]"
-              type="primary">
+              type="primary"
+            >
               Confirm
             </Button>
           </div>
@@ -334,7 +343,8 @@ export default function LandinPage() {
         title=""
         open={bookingModalOpen}
         onOk={() => setBookingModalOpen(false)}
-        onCancel={() => setBookingModalOpen(false)}>
+        onCancel={() => setBookingModalOpen(false)}
+      >
         <div className="flex flex-col min-h-[400px] bg-white justify-center items-center">
           <img src="phone.png" className="mt-[auto]" />
           <h1 className="font-bold mt-5">Enter Your Phone Number</h1>
@@ -350,15 +360,16 @@ export default function LandinPage() {
             <Button
               onClick={() => {
                 if (phone && value) {
-                  navigate('Booking', {
+                  navigate("Booking", {
                     state: { phoneNumber: value + phone },
                   });
                 } else {
-                  message.warning('Phone number is required');
+                  message.warning("Phone number is required");
                 }
               }}
               className="bg-lightGreen h-[40px]"
-              type="primary">
+              type="primary"
+            >
               Confirm
             </Button>
           </div>
@@ -369,13 +380,15 @@ export default function LandinPage() {
           <a
             onClick={onClose}
             className="text-[14px]  w-full text-center"
-            href="/">
+            href="/"
+          >
             Home
           </a>
           <a
             onClick={onClose}
             className="text-[14px] w-full text-center"
-            href="#partners">
+            href="#partners"
+          >
             Our Sponsors
           </a>
 
@@ -386,12 +399,14 @@ export default function LandinPage() {
               e.preventDefault();
               setBookingModalOpen(true);
             }}
-            className="w-full h-[40px]">
+            className="w-full h-[40px]"
+          >
             Book A Space
           </Button>
           <Button
             onClick={showModal}
-            className="bg-lightGreen w-full h-[40px] text-white">
+            className="bg-lightGreen w-full h-[40px] text-white"
+          >
             Participate
           </Button>
         </div>
