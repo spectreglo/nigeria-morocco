@@ -3,7 +3,7 @@ import { Carousel } from "react-responsive-carousel";
 import ProgramItems from "./componets/ProgramItems";
 import { Button, Modal, message, Divider } from "antd";
 import Footer from "./componets/Footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PhoneInput from "./componets/PhoneInput";
 import { useNavigate } from "react-router-dom";
 import MenuIcon from "./componets/MenuIcon";
@@ -22,7 +22,11 @@ export default function LandinPage() {
   const [phone, setPhone] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage("en");
+  }, []);
 
   const showDrawer = () => {
     setOpen(true);
@@ -110,7 +114,7 @@ export default function LandinPage() {
           <h1 className="text-xl md:text-2xl font-bold">
             🇳🇬 NIGERIA-MOROCCO 🇲🇦
           </h1>
-          <div className="hidden md:flex items-center space-x-10">
+          <div className="hidden md:flex items-center space-x-8">
             <a className="text-[12px]" href="/">
               {t("Home")}
             </a>
@@ -118,19 +122,20 @@ export default function LandinPage() {
               {t("Sponsors")}
             </a>
 
-            <a
-              // onClick={(e) => {
-              //   e.preventDefault();
-              //   setBookingModalOpen(true);
-              // }}
-              className="text-[12px]"
-              href="#space"
+            <Button
+              type="primary"
+              ghost
+              onClick={(e) => {
+                e.preventDefault();
+                setBookingModalOpen(true);
+              }}
+              className="h-[40px]"
             >
               {t("bookButtton")}
-            </a>
+            </Button>
             <Button
               onClick={showModal}
-              className="bg-lightGreen w-[115px] h-[40px]   text-white"
+              className="bg-lightGreen w-[115px] h-[40px] text-white"
             >
               {t("Participate")}
             </Button>
@@ -387,16 +392,20 @@ export default function LandinPage() {
             Our Sponsors
           </a>
 
-          <a
-            onClick={onClose}
-            className="text-[14px]  w-full text-center"
-            href="#space"
+          <Button
+            type="primary"
+            ghost
+            onClick={(e) => {
+              e.preventDefault();
+              setBookingModalOpen(true);
+            }}
+            className="w-full h-[40px]"
           >
-            Space Booking
-          </a>
+            Book A Space
+          </Button>
           <Button
             onClick={showModal}
-            className="bg-lightGreen w-full h-[40px]   text-white"
+            className="bg-lightGreen w-full h-[40px] text-white"
           >
             Participate
           </Button>
