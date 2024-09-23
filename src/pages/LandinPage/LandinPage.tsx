@@ -178,29 +178,37 @@ export default function LandinPage() {
 
       {/* OUR PROGRAMS */}
 
-      <div className="flex flex-col items-center p-10">
+      <div className="flex flex-col items-center bg-silver p-10">
         <h1 className="text-2xl text-fontColor font-[600]">
           {t("sectorHeading")}
         </h1>
         <p className="my-5 text-center text-fontColor">{t("sectorBody")}</p>
-        <div className="grid  place-items-center px-0 grid-cols-1 md:grid-cols-3 gap-5 w-full md:px-5 lg:px-32 mt-10">
+        <div className="grid place-items-center px-0 grid-cols-1 md:grid-cols-3 gap-5 w-full md:px-5 lg:px-32 mt-10">
           <ProgramItems
-            icon="tract.svg"
+            icon="agric.png"
             title={t("agricProducts")}
             content=""
           />
-          <ProgramItems title={t("automobile")} content="" icon="car.svg" />
-          <ProgramItems icon="renergy.svg" title={t("renewable")} content="" />
-          <ProgramItems icon="rock.svg" title={t("minerals")} content="" />
-          <ProgramItems icon="economy.svg" title={t("economy")} content="" />
-          <ProgramItems icon="bank.svg" title={t("banking")} content="" />
+          <ProgramItems
+            title={t("automobile")}
+            content=""
+            icon="automobile.png"
+          />
+          <ProgramItems icon="energy.jpg" title={t("renewable")} content="" />
+          <ProgramItems icon="minerals.jpg" title={t("minerals")} content="" />
+          <ProgramItems icon="digital.jpeg" title={t("economy")} content="" />
+          <ProgramItems
+            icon="e-government.png"
+            title={t("banking")}
+            content=""
+          />
         </div>
       </div>
 
       {/* Space Booking */}
       <div
         id="space"
-        className="flex bg-silver  min-h-[308px] justify-center flex-col md:flex-row md:justify-between  items-center w-full py-5 px-5  md:px-20 gap-5 md:gap-10 lg:px-40"
+        className="flex bg-silver min-h-[308px] justify-center flex-col md:flex-row md:justify-between  items-center w-full py-5 px-5  md:px-20 gap-5 md:gap-10 lg:px-40"
       >
         <div className="gap-4">
           <h1 className="text-4xl font-bold">
