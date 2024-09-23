@@ -46,17 +46,7 @@ export default function Booking() {
     setSelectedOption(event.target.value);
     setSelectedMeters(Number(event.target.value));
   };
-  const [sector] = useState([
-    "Agriculture & Agro Allied",
-    "Automobile",
-    "Solid Minerals/Steel",
-    "Electricity & Renewable Energy",
-    "Information Technology",
-    "Education",
-    "Finance & Fintech",
-    "Aviation",
-    "Culture & Tourism",
-  ]);
+
   const [email] = useState("");
 
   const { book, booking } = useBooking();
@@ -71,6 +61,18 @@ export default function Booking() {
       i18n.changeLanguage("fr");
     }
   }, []);
+
+  const [sector] = useState([
+    `${t("Agriculture")}`,
+    "Automobile",
+    `${t("minerals")}`,
+    `${t("renewable")}`,
+    `${t("IT")}`,
+    `${t("Education")}`,
+    `${t("Finance")}`,
+    `${t("Aviation")}`,
+    `${t("Tourism")}`,
+  ]);
 
   const onSuccess = () => {
     setAmount(0);
@@ -304,7 +306,7 @@ export default function Booking() {
           ))}
           <div className="h-[75px] bg-[#F2F2F2] w-full flex items-center">
             <h1 className="text-lightGreen font-bold text-2xl">
-              Space Booking
+              {t("Booking")}
             </h1>
           </div>
           {!phoneNumber.startsWith("+234") && (
@@ -425,7 +427,7 @@ export default function Booking() {
           <div className="flex flex-col">
             {phoneNumber.startsWith("+212") ? (
               <h1 className="ml-auto font-bold text-black">
-                TOTAL AMOUNT (MAD)
+                MONTANT TOTAL (MAD)
               </h1>
             ) : (
               <h1 className="ml-auto font-bold text-black">TOTAL AMOUNT ($)</h1>
