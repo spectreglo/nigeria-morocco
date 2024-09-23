@@ -13,7 +13,10 @@ const validationSchema = Yup.object().shape({
   lastName: Yup.string().trim().required(),
   email: Yup.string().trim().email().required(),
   password: Yup.string().trim().required(),
-  role: Yup.string().trim().oneOf(['admin', 'super_admin']).default('admin'),
+  role: Yup.string()
+    .trim()
+    .oneOf(['admin', 'super_admin', 'morocco_admin'])
+    .default('admin'),
 });
 export default function Users() {
   const user = useSelector((user: RootState) => user.user);
@@ -236,6 +239,7 @@ export default function Users() {
             options={[
               { value: 'admin', label: 'Admin' },
               { value: 'super_admin', label: 'Super Admin' },
+              { value: 'morocco_admin', label: 'Morocco Admin' },
             ]}
           />
 

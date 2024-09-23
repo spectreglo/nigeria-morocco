@@ -24,7 +24,7 @@ const useGetAllRegistration = (filter: string) => {
       stopLoading();
 
       if (response.data.success) {
-        setData(response.data.data);
+      setData(response.data.data);
       }
     } catch (error) {
       stopLoading();

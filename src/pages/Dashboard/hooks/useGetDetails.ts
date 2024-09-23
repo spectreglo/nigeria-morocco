@@ -19,7 +19,6 @@ interface CompanyData {
   number_of_employees: string;
   governmental: boolean;
   ministry: string;
-
   payment: {
     method: string;
     status: string;

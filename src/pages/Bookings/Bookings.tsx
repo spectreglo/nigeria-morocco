@@ -1,11 +1,17 @@
 import { Skeleton } from 'antd';
 
 import useGetAllBookings from './hooks/useGetAllBookings';
+import { RootState } from '../../redux';
+import { useSelector } from 'react-redux';
 
 export default function Bookings() {
   //   const navigate = useNavigate();
+  const user = useSelector((user: RootState) => user.user);
   const { loading, data } = useGetAllBookings();
-
+  const conditionalData =
+    user.user.role == 'morocco_admin'
+      ? data.filter((rec) => !rec?.mobile?.startsWith('+234'))
+      : data;
   return (
     <div>
       <div className="mt-4 max-w-[80vw] overflow-x-scroll text-[13px]">
@@ -73,7 +79,7 @@ export default function Bookings() {
               </tr>
             )}
             {!loading &&
-              data.map((record, ind) => {
+              conditionalData.map((record, ind) => {
                 const rate = record.personalised
                   ? 2700
                   : record?.mobile?.startsWith('+234')

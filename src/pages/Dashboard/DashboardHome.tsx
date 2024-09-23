@@ -30,6 +30,10 @@ export default function DashboardHome() {
   const [email, setEmail] = useState('');
   const [filter, setFilter] = useState('');
   const { data, loading } = useGetAllRegistration(filter);
+  const conditionalData =
+    user.user.role == 'morocco_admin'
+      ? data.filter((rec) => !rec.mobile.startsWith('+234'))
+      : data;
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -226,7 +230,7 @@ export default function DashboardHome() {
               </tr>
             )}
             {!loading &&
-              data.map((record, ind) => (
+              conditionalData.map((record, ind) => (
                 <tr key={ind.toString()}>
                   <td className="px-6 py-4 whitespace-nowrap">{ind + 1}</td>
                   <td className="px-6 py-4 whitespace-nowrap max-w-[20%]">
