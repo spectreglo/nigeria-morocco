@@ -178,6 +178,7 @@ export default function LandinPage() {
           <img src="niger.png" alt="niger" />
           <img src="farmcreed.jpg" alt="farm creed" />
           <img src="MSD.jpg" alt="steel" />
+          <img src="NADDC.png" alt="coc" />
         </div>
       </div>
 
