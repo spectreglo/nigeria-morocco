@@ -242,8 +242,8 @@ export default function Register() {
       value: "FEDERAL MINISTRY OF HEALTH AND SOCIAL SERVICES",
     },
     {
-      label: "FEDERAL MINISTRY OF INDUSTRIES, TRADE AND INVESTMENT",
-      value: "FEDERAL MINISTRY OF INDUSTRIES, TRADE AND INVESTMENT",
+      label: "FEDERAL MINISTRY OF INDUSTRY, TRADE AND INVESTMENT",
+      value: "FEDERAL MINISTRY OF INDUSTRY, TRADE AND INVESTMENT",
     },
     {
       label: "FEDERAL MINISTRY OF INFORMATION & COMMUNICATIONS",
@@ -338,12 +338,6 @@ export default function Register() {
       value: "MINISTRY OF FOREIGN AFFAIRS",
     },
     {
-      label:
-        "MINISTRY OF FOREIGN AFFAIRS, AFRICAN COOPERATION AND MOROCCAN EXPATRIATES",
-      value:
-        "MINISTRY OF FOREIGN AFFAIRS, AFRICAN COOPERATION AND MOROCCAN EXPATRIATES",
-    },
-    {
       label: "MINISTRY OF INTERIOR",
       value: "MINISTRY OF INTERIOR",
     },
@@ -407,15 +401,62 @@ export default function Register() {
     },
   ];
 
-  const [companyNiche] = useState([
+  const MoroccanMinisteries = [
+    {
+      label: "Ministère de l'Industrie et du Commerce",
+      value: "Ministère de l'Industrie et du Commerce",
+    },
+    {
+      label: "Ministère de l'intérieur",
+      value: "Ministère de l'intérieur",
+    },
+    {
+      label:
+        "Ministre de la Transition Énergétique et du Développement Durable",
+      value:
+        "Ministre de la Transition Énergétique et du Développement Durable",
+    },
+    {
+      label: "Office National des Hydrocarbures et des Mines (ONHYM)",
+      value: "Office National des Hydrocarbures et des Mines (ONHYM)",
+    },
+    {
+      label:
+        "Ministère de l'Agriculture, de la Pêche maritime, du Développement rural et des Eaux et forêts",
+      value:
+        "Ministère de l'Agriculture, de la Pêche maritime, du Développement rural et des Eaux et forêts",
+    },
+    {
+      label: "La Maison de l'Artisan",
+      value: "La Maison de l'Artisan",
+    },
+    {
+      label:
+        "Ministry of Foreign Affairs and International Cooperation and Moroccan Expatriates",
+      value:
+        "Ministry of Foreign Affairs and International Cooperation and Moroccan Expatriates",
+    },
+    {
+      label:
+        "Islamic world Educational, Scientific and Cultural Organization (ICESCO)",
+      value:
+        "Islamic world Educational, Scientific and Cultural Organization (ICESCO)",
+    },
+    {
+      label: "Nigeria Embassy Rabat",
+      value: "Nigeria Embassy Rabat",
+    },
+  ];
+
+  const companyNiche = [
     `${t("Importer")}`,
     `${t("Wholesaler")}`,
     `${t("Intermediary")}`,
     `${t("CentralPurchasing")}`,
     `${t("Manufacturer")}`,
-  ]);
+  ];
 
-  const [meetingWith] = useState([
+  const meetingWith = [
     `${t("Agriculture")}`,
     "Automobile",
     `${t("minerals")}`,
@@ -425,7 +466,7 @@ export default function Register() {
     `${t("Finance")}`,
     `${t("Aviation")}`,
     `${t("Tourism")}`,
-  ]);
+  ];
 
   const props: UploadProps = {
     name: "file",
@@ -551,8 +592,8 @@ export default function Register() {
                 setIsGov((prev) => !prev);
               }}
               options={[
-                { value: true, label: t("Governmental") },
-                { value: false, label: t("Private Company") },
+                { value: true, label: t("Govermental") },
+                { value: false, label: t("Private") },
               ]}
             />
           </div>
@@ -585,34 +626,55 @@ export default function Register() {
 
           {formik.values.governmental ? (
             <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
-              <div className="w-full md:w-[50%] mt-4">
+              <div className="w-full md:w-[70%] mt-4">
                 <span className="text-[12px]">{t("Ministry")}</span>
                 <br />
-                <Select
-                  status={
-                    formik.touched.governmental && formik.errors.governmental
-                      ? "error"
-                      : ""
-                  }
-                  className="w-[100%] md:w-[100%]"
-                  defaultValue={""}
-                  onChange={(e) => {
-                    formik.values.ministry = e;
-                    if (isGov) {
-                      console.log(e);
+                {phoneNumber.startsWith("+234") ? (
+                  <Select
+                    status={
+                      formik.touched.governmental && formik.errors.governmental
+                        ? "error"
+                        : ""
                     }
-                    setIsGov((prev) => !prev);
-                  }}
-                  options={NigerianMinisteries}
-                />
+                    className="w-[100%] md:w-[100%]"
+                    defaultValue={""}
+                    onChange={(e) => {
+                      formik.values.ministry = e;
+                      if (isGov) {
+                        console.log(e);
+                      }
+                      setIsGov((prev) => !prev);
+                    }}
+                    options={NigerianMinisteries}
+                  />
+                ) : (
+                  <Select
+                    status={
+                      formik.touched.governmental && formik.errors.governmental
+                        ? "error"
+                        : ""
+                    }
+                    className="w-[100%] md:w-[100%]"
+                    defaultValue={""}
+                    onChange={(e) => {
+                      formik.values.ministry = e;
+                      if (isGov) {
+                        console.log(e);
+                      }
+                      setIsGov((prev) => !prev);
+                    }}
+                    options={MoroccanMinisteries}
+                  />
+                )}
               </div>
-              <div className="w-full md:w-[50%]">
+              <div className="w-full md:w-[30%]">
                 <Input
                   id="designation"
                   type="text"
                   value={formik.values.designation}
                   onChange={formik.handleChange}
                   className="w-full"
+                  required
                   label={t("Designation")}
                   outlined={false}
                 />
@@ -669,17 +731,33 @@ export default function Register() {
                 outlined={false}
                 placeholder="Type your address"
               />
-              <Input
-                id="annual_turnover"
-                type="number"
-                value={formik.values.annual_turnover}
-                onChange={formik.handleChange}
-                className="w-full"
-                label={`${t("annual")} ${
-                  phoneNumber.startsWith("+234") ? "(USD)" : "(USD)"
-                }`}
-                outlined={false}
-              />
+              <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
+                <div className="w-full md:w-[50%]">
+                  <Input
+                    id="designation"
+                    type="text"
+                    value={formik.values.designation}
+                    onChange={formik.handleChange}
+                    className="w-full"
+                    required
+                    label={t("Designation")}
+                    outlined={false}
+                  />
+                </div>
+                <div className="w-full md:w-[50%]">
+                  <Input
+                    id="annual_turnover"
+                    type="number"
+                    value={formik.values.annual_turnover}
+                    onChange={formik.handleChange}
+                    className="w-full"
+                    label={`${t("annual")} ${
+                      phoneNumber.startsWith("+234") ? "(USD)" : "(USD)"
+                    }`}
+                    outlined={false}
+                  />
+                </div>
+              </div>
               <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
                 <Input
                   error={
@@ -727,7 +805,7 @@ export default function Register() {
                 onChange={formik.handleChange}
                 className="w-full md:w-[70%]"
                 required
-                label={"CIN Number"}
+                label={"CIN Nombre"}
                 outlined={false}
                 type="number"
               />

@@ -62,7 +62,7 @@ export default function Booking() {
     }
   }, []);
 
-  const [sector] = useState([
+  const sector = [
     `${t("Agriculture")}`,
     "Automobile",
     `${t("minerals")}`,
@@ -72,7 +72,7 @@ export default function Booking() {
     `${t("Finance")}`,
     `${t("Aviation")}`,
     `${t("Tourism")}`,
-  ]);
+  ];
 
   const onSuccess = () => {
     setAmount(0);
