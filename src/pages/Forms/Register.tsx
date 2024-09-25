@@ -10,6 +10,8 @@ import {
   Select,
   Spin,
   Upload,
+  Checkbox,
+  Radio,
 } from "antd";
 import PaymentSumarryModal from "./components/PaymentSumarryModal";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -856,8 +858,7 @@ export default function Register() {
               </h1>
               {companyNiche.map((options, ind) => (
                 <div className="mt-3 flex items-center" key={ind.toString()}>
-                  <input
-                    className="mr-2"
+                  <Checkbox
                     onChange={(e) => {
                       if (e.target.checked) {
                         setNiche((prev) => [...prev, options]);
@@ -868,9 +869,9 @@ export default function Register() {
                         setNiche(filtered);
                       }
                     }}
-                    type="checkbox"
-                  />
-                  <span className="text-[12px]">{options}</span>
+                  >
+                    {options}
+                  </Checkbox>
                 </div>
               ))}
             </>
@@ -908,16 +909,14 @@ export default function Register() {
 
           {meetingWith.map((option: string, ind) => (
             <div className="my-3 flex items-center" key={ind.toString()}>
-              <input
-                className="mr-2"
+              <Radio
                 onChange={() => {
                   setMeeting([option]); // Set the selected option as the only item in the state
                 }}
-                type="radio"
-                name="meetingOptions"
                 checked={selectedMeeting.includes(option)}
-              />
-              <span className="text-[12px]">{option}</span>
+              >
+                {option}
+              </Radio>
             </div>
           ))}
 
@@ -1075,19 +1074,12 @@ export default function Register() {
             </p>
           </div>
           <div className="my-3 flex items-center">
-            {/* <Checkbox
-              onChange={(e) => setIsChecked(e.currentTarget.checked)}
+            <Checkbox
+              onChange={(e) => setIsChecked(e.target.checked)}
               checked={isChecked}
             >
               {t("accept")}
-            </Checkbox> */}
-            <input
-              onChange={(e) => setIsChecked(e.currentTarget.checked)}
-              checked={isChecked}
-              className="mr-2"
-              type="checkbox"
-            />
-            <span className="text-[12px]">{t("accept")}</span>
+            </Checkbox>
           </div>
 
           <div className="flex gap-4 items-center justify-end mt-5">
