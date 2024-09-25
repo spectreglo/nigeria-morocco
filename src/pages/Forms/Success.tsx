@@ -1,6 +1,6 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { Button } from 'antd';
+import { Button } from "antd";
 
 export default function Success() {
   const navigate = useNavigate();
@@ -61,8 +61,9 @@ export default function Success() {
           </div>
         </div>
         <Button
-          onClick={() => navigate('/')}
-          className="bg-lightGreen text-white w-1/2 my-5">
+          onClick={() => navigate("/")}
+          className="bg-lightGreen text-white w-1/2 my-5"
+        >
           Back to home
         </Button>
       </div>
