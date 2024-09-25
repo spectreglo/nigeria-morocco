@@ -1,9 +1,12 @@
+import { useTranslation } from 'react-i18next';
+
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-[344px] bg-lightBlack text-white py-10 flex flex-col-reverse md:flex-row md:justify-between  px-5 md:px-20 lg:px-40 gap-10">
       <div className="flex flex-col gap-5 w-[40%]">
         <h1 className="font-bold text-3xl">Nigeria-Morocco</h1>
-        <p className="text-[13px]">Copyright © 2024 Business Week</p>
+        <p className="text-[13px]">{t('copyright')}</p>
         <p className="text-[13px]">All rights reserved</p>
 
         <div className="flex items-center mt-[auto]">
