@@ -1,7 +1,8 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../../components/Input";
 
-import { Button, Select, message } from "antd";
+import { Button, Select, message, Radio, Space } from "antd";
+import type { RadioChangeEvent } from "antd";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -42,9 +43,15 @@ export default function Booking() {
   const [rate, setRate] = useState(phoneNumber.startsWith("+234") ? 550 : 1650);
   const [selectedMeters, setSelectedMeters] = useState(0);
 
-  const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSelectedOption(event.target.value);
-    setSelectedMeters(Number(event.target.value));
+  // const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setSelectedOption(event.target.value);
+  //   setSelectedMeters(Number(event.target.value));
+  // };
+
+  const onChangeOption = (e: RadioChangeEvent) => {
+    console.log("radio checked", e.target.value);
+    setSelectedOption(e.target.value);
+    setSelectedMeters(Number(e.target.value));
   };
 
   const [email] = useState("");
@@ -292,16 +299,14 @@ export default function Booking() {
 
           {sector.map((option: string, ind) => (
             <div className="my-3 flex items-center" key={ind.toString()}>
-              <input
-                className="mr-2"
+              <Radio
                 onChange={() => {
                   setSelectedSectors([option]); // Set the selected option as the only item in the state
                 }}
-                type="radio"
-                name="meetingOptions"
                 checked={selectedSectors.includes(option)}
-              />
-              <span className="text-[12px]">{option}</span>
+              >
+                {option}
+              </Radio>
             </div>
           ))}
           <div className="h-[75px] bg-[#F2F2F2] w-full flex items-center">
@@ -361,7 +366,17 @@ export default function Booking() {
             <h1>
               {t("size")} <span className="text-[red] ml-1">*</span>
             </h1>
-            <label className="inline-flex items-center">
+            <Radio.Group onChange={onChangeOption} value={selectedOption}>
+              <Space direction="vertical">
+                <Radio value={6}>6 Sqm</Radio>
+                <Radio value={9}>9 Sqm</Radio>
+                <Radio value={12}>12 Sqm</Radio>
+                <Radio value={18}>18 Sqm</Radio>
+                <Radio value={40}>40 Sqm</Radio>
+                <Radio value={50}>50 Sqm</Radio>
+              </Space>
+            </Radio.Group>
+            {/* <label className="inline-flex items-center">
               <input
                 type="radio"
                 className="form-radio text-lightGreen"
@@ -380,49 +395,7 @@ export default function Booking() {
                 onChange={handleOptionChange}
               />
               <span className="ml-2">9 Sqm</span>
-            </label>
-            <label className="inline-flex items-center">
-              <input
-                type="radio"
-                className="form-radio text-lightGreen"
-                value={12}
-                checked={selectedOption == "12"}
-                onChange={handleOptionChange}
-              />
-              <span className="ml-2">12 Sqm</span>
-            </label>
-
-            <label className="inline-flex items-center">
-              <input
-                type="radio"
-                className="form-radio text-lightGreen"
-                value={18}
-                checked={selectedOption == "18"}
-                onChange={handleOptionChange}
-              />
-              <span className="ml-2">18 Sqm</span>
-            </label>
-            <label className="inline-flex items-center">
-              <input
-                type="radio"
-                className="form-radio text-lightGreen"
-                value={40}
-                checked={selectedOption == "40"}
-                onChange={handleOptionChange}
-              />
-              <span className="ml-2">40 Sqm</span>
-            </label>
-
-            <label className="inline-flex items-center">
-              <input
-                type="radio"
-                className="form-radio text-lightGreen"
-                value={50}
-                checked={selectedOption == "50"}
-                onChange={handleOptionChange}
-              />
-              <span className="ml-2">50 Sqm</span>
-            </label>
+            </label> */}
           </div>
           <div className="flex flex-col">
             {phoneNumber.startsWith("+212") ? (
