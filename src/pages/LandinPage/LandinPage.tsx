@@ -11,7 +11,7 @@ import {
   MenuProps,
 } from 'antd';
 import Footer from './componets/Footer';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import PhoneInput from './componets/PhoneInput';
 import { useNavigate } from 'react-router-dom';
 import MenuIcon from './componets/MenuIcon';
@@ -32,11 +32,10 @@ export default function LandinPage() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { t, i18n } = useTranslation();
-  const [curretLanguage, setCurretLanguage] = useState('en');
 
-  useEffect(() => {
-    i18n.changeLanguage(curretLanguage);
-  }, []);
+  // useEffect(() => {
+  //   i18n.changeLanguage(curretLanguage);
+  // }, []);
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -44,7 +43,6 @@ export default function LandinPage() {
         <span
           onClick={() => {
             i18n.changeLanguage('en');
-            setCurretLanguage('en');
           }}>
           Nigeria🇳🇬
         </span>
@@ -56,7 +54,6 @@ export default function LandinPage() {
         <span
           onClick={() => {
             i18n.changeLanguage('fr');
-            setCurretLanguage('fr');
           }}>
           Morocco 🇲🇦
         </span>
@@ -178,7 +175,7 @@ export default function LandinPage() {
                 onClick={(e) => e.preventDefault()}>
                 <Space>
                   <p className="text-[10px]">
-                    {curretLanguage == 'en'
+                    {i18n.language == 'en'
                       ? 'English Language'
                       : 'French Language'}
                   </p>
@@ -188,8 +185,18 @@ export default function LandinPage() {
             </Dropdown>
           </div>
 
-          <div onClick={showDrawer} className="flex flex-col md:hidden">
-            <MenuIcon />
+          <div className="flex items-center gap-4 md:hidden">
+            <Dropdown menu={{ items }}>
+              <a
+                className=" cursor-pointer"
+                onClick={(e) => e.preventDefault()}>
+                <GlobeIcon />
+              </a>
+            </Dropdown>
+
+            <div onClick={showDrawer}>
+              <MenuIcon />
+            </div>
           </div>
         </div>
         <Carousel
