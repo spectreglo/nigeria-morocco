@@ -537,12 +537,12 @@ export default function Register() {
           </Link>
         </div>
 
-        <h1 className="text-lightGreen font-bold text-4xl">{t("Register")}</h1>
+        <h1 className="text-primary font-bold text-4xl">{t("Register")}</h1>
         <span>{t("Part")}</span>
         <p className="text-2xl"> {t("Fill")}</p>
 
         <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[50%] mt-5 overflow-x-hidden">
-          <span className="text-[18px] text-lightGreen">{t("Personal")}</span>
+          <span className="text-[18px] text-primary">{t("Personal")}</span>
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
             <Input
               error={
@@ -936,7 +936,7 @@ export default function Register() {
           </div>
 
           <div className="flex gap-4 items-center justify-end mt-10 mb-5">
-            <Button className="border-lightGreen bg-transparent text-lightGreen h-[38px]">
+            <Button className="border-primary bg-transparent text-primary h-[38px]">
               Reset
             </Button>
             <Button
@@ -948,7 +948,7 @@ export default function Register() {
 
                 formik.handleSubmit();
               }}
-              className="bg-lightGreen h-[38px]"
+              className="bg-primary h-[38px]"
               type="primary"
             >
               {phoneNumber.startsWith("+234")
@@ -1085,14 +1085,14 @@ export default function Register() {
           <div className="flex gap-4 items-center justify-end mt-5">
             <Button
               onClick={() => navigate("/")}
-              className="border-lightGreen bg-transparent text-lightGreen h-[38px]"
+              className="border-primary bg-transparent text-primary h-[38px]"
             >
               Cancel
             </Button>
             <Button
               disabled={!isChecked}
               onClick={handleCancel}
-              className="bg-lightGreen h-[38px]"
+              className="bg-primary h-[38px]"
               type="primary"
             >
               Confirm

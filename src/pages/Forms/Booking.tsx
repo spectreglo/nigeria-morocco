@@ -174,12 +174,12 @@ export default function Booking() {
             <BackIcon />
           </Link>
         </div>
-        <h1 className="text-lightGreen font-bold text-4xl">{t("Book")}</h1>
+        <h1 className="text-primary font-bold text-4xl">{t("Book")}</h1>
         <span>{t("Part")}</span>
         <p className="text-2xl"> {t("Fill")}</p>
 
         <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[50%] mt-5 overflow-x-hidden">
-          <span className="text-[18px] text-lightGreen">{t("Personal")}</span>
+          <span className="text-[18px] text-primary">{t("Personal")}</span>
           <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
             <Input
               error={
@@ -310,9 +310,7 @@ export default function Booking() {
             </div>
           ))}
           <div className="h-[75px] bg-[#F2F2F2] w-full flex items-center">
-            <h1 className="text-lightGreen font-bold text-2xl">
-              {t("Booking")}
-            </h1>
+            <h1 className="text-primary font-bold text-2xl">{t("Booking")}</h1>
           </div>
           {!phoneNumber.startsWith("+234") && (
             <div className="w-full md:w-[100%] mt-[5px]">
@@ -379,7 +377,7 @@ export default function Booking() {
             {/* <label className="inline-flex items-center">
               <input
                 type="radio"
-                className="form-radio text-lightGreen"
+                className="form-radio text-primary"
                 value={6}
                 checked={selectedOption == "6"}
                 onChange={handleOptionChange}
@@ -389,7 +387,7 @@ export default function Booking() {
             <label className="inline-flex items-center">
               <input
                 type="radio"
-                className="form-radio text-lightGreen"
+                className="form-radio text-primary"
                 value={9}
                 checked={selectedOption == "9"}
                 onChange={handleOptionChange}
@@ -411,7 +409,7 @@ export default function Booking() {
             </p>
           </div>
           <div className="flex gap-4 items-center justify-end mt-10 mb-5">
-            <Button className="border-lightGreen bg-transparent text-lightGreen h-[38px]">
+            <Button className="border-primary bg-transparent text-primary h-[38px]">
               Reset
             </Button>
             <Button
@@ -419,7 +417,7 @@ export default function Booking() {
               onClick={() => {
                 formik.handleSubmit();
               }}
-              className="bg-lightGreen h-[38px]"
+              className="bg-primary h-[38px]"
               type="primary"
             >
               {t("Payment")}
