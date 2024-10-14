@@ -53,11 +53,11 @@ export default function Footer() {
           <h1 className="font-bold mb-2 md:mb-8">Infos</h1>
           <span className="text-[13px]">
             <i className="fa-solid fa-location-dot mr-2" />
-            Parc d’ Expositions Mohammed VI El- Jadida Casablanca Morocco
+            Sofitel Hotel Casablanca Morocco
           </span>
           <span className="text-[13px]">
             <i className="fa-solid fa-calendar mr-2" />
-            23rd-25th October, 2024
+            29th -31st October 2024
           </span>
           <span className="text-[13px]">
             <i className="fa-solid fa-clock mr-2" />
