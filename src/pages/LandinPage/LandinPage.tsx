@@ -336,8 +336,7 @@ export default function LandinPage() {
           <p className="text-justify text-[13px] text-fontColor">
             <p>{t("newsBody1")}</p>{" "}
             <p className="my-3">
-              <b>{t("venue")}:</b> Parc d’ Expositions Mohammed VI El- Jadida
-              Casablanca Morocco.
+              <b>{t("venue")}:</b> Sofitel Hotel Casablanca Morocco.
             </p>{" "}
             {t("news1Body2")}
             <br />
