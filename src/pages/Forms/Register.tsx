@@ -312,6 +312,10 @@ export default function Register() {
       value: "GOMBE STATE GOVERNMENT",
     },
     {
+      label: "JIGAWA STATE GOVERNMENT",
+      value: "JIGAWA STATE GOVERNMENT",
+    },
+    {
       label: "KADUNA STATE GOVERNMENT",
       value: "KADUNA STATE GOVERNMENT",
     },
