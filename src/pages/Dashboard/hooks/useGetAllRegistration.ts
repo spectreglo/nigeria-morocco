@@ -20,11 +20,12 @@ const useGetAllRegistration = (filter: string) => {
     startLoading();
 
     try {
-      const response: Response = await httpClient.get(`/register`);
+      const url = filter ? `/register?${filter}` : '/register';
+      const response: Response = await httpClient.get(url);
       stopLoading();
 
       if (response.data.success) {
-      setData(response.data.data);
+        setData(response.data.data);
       }
     } catch (error) {
       stopLoading();

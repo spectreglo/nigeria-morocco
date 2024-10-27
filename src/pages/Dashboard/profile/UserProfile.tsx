@@ -21,9 +21,12 @@ export default function UserProfile() {
     }
   };
   return (
-    <div className="flex flex-1 bg-transparent flex-col">
-      <div className="h-[140px] w-full bg-[#F5F7FA] flex items-center px-4 justify-between">
-        <h1 onClick={() => console.log(data)} className="text-[30px]">
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm py-6 px-8 flex items-center justify-between">
+        <h1
+          onClick={() => console.log(data)}
+          className="text-2xl font-semibold text-gray-800 cursor-pointer">
           User Details
         </h1>
 
@@ -31,89 +34,127 @@ export default function UserProfile() {
           <DeleteIcon />
         </span>
       </div>
-      {(loading || deleting) && <Skeleton className="w-1/2" loading active />}
 
+      {/* Loading State */}
+      {(loading || deleting) && (
+        <Skeleton className="mx-8 my-6 w-1/2" loading active />
+      )}
+
+      {/* Main Content */}
       {!loading && !deleting && (
-        <div className="flex  flex-1">
-          <div className="w-[30%] border-r border-silver flex flex-col items-center">
+        <div className="flex flex-col lg:flex-row bg-white rounded-lg shadow-md m-8 p-6">
+          {/* Profile Section */}
+          <div className="flex flex-col items-center lg:w-1/3 border-b lg:border-b-0 lg:border-r border-gray-200 p-6">
             <img
-              className="h-[150px] w-[150px] rounded-full my-8"
+              className="h-36 w-36 rounded-full shadow-lg object-cover"
               src={data?.image_url ? data.image_url : '../default.png'}
+              alt="Profile"
             />
-            <h1 className="text-[26px] text-black font-bold capitalize">
+            <h1 className="text-xl font-bold mt-4 text-gray-900 text-center">
               {data?.company_name}{' '}
-              {data?.mobile.startsWith('+234') ? ' 🇳🇬' : '  🇲🇦'}
+              {data?.mobile.startsWith('+234') ? '🇳🇬' : '🇲🇦'}
             </h1>
-            <h1 className="text-fontColor uppercase">{data?.mobile}</h1>
+            <p className="text-sm text-gray-600 mt-1">{data?.mobile}</p>
+            <img
+              className="h-28 w-28 mt-6 shadow-md"
+              src={data?.qr_data}
+              alt="QR Code"
+            />
           </div>
 
-          <div className="flex flex-1 flex-col bg-transparent mx-5 gap-4">
-            <div className="flex items-center justify-between w-full h-[70px] border-b border-silver">
-              <h1 className="text-[20px]">Registration Info</h1>
-            </div>
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div>
-                <h1 className="font-bold text-[13px] text-black">
-                  {data?.governmental ? data?.ministry : data?.company_name}
-                </h1>
-                <span>Organization/Company</span>
-              </div>
-
-              <div>
-                <h1 className="font-bold text-[20px] text-black">
-                  {data?.creation_date}
-                </h1>
-                <span>Date Of Creation</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div>
-                <h1 className="font-bold text-[20px] text-black">
-                  {data?.number_of_employees}
-                </h1>
-                <span>Number Of Employees</span>
-              </div>
-
-              <div>
-                <h1 className="font-bold text-[20px] text-black">
-                  {data?.address}
-                </h1>
-                <span>Address</span>
+          {/* Details Section */}
+          <div className="flex-1 flex flex-col p-6 space-y-6">
+            {/* Registration Info */}
+            <div>
+              <h2 className="text-lg font-semibold text-gray-800 border-b pb-2 border-gray-300">
+                Registration Information
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 mt-4 gap-4">
+                <div>
+                  <p className="text-gray-500">Organization/Company</p>
+                  <h3 className="font-medium text-gray-800">
+                    {data?.governmental ? data?.ministry : data?.company_name}
+                  </h3>
+                </div>
+                <div>
+                  <p className="text-gray-500">Date Of Creation</p>
+                  <h3 className="font-medium text-gray-800">
+                    {data?.creation_date}
+                  </h3>
+                </div>
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div>
-                <h1 className="font-bold text-[20px] text-black">
-                  {data?.email}
-                </h1>
-                <span>Email</span>
-              </div>
-
-              <div>
-                <h1 className="font-bold text-[20px] text-black">
-                  {data?.website}
-                </h1>
-                <span>Website</span>
+            {/* Personal Info */}
+            <div>
+              <h2 className="text-lg font-semibold text-gray-800 border-b pb-2 border-gray-300">
+                Personal Information
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 mt-4 gap-4">
+                <div>
+                  <p className="text-gray-500">Full Name</p>
+                  <h3 className="font-medium text-gray-800">
+                    {data?.first_name} {data?.last_name}
+                  </h3>
+                </div>
+                <div>
+                  <p className="text-gray-500">Designation</p>
+                  <h3 className="font-medium text-gray-800">
+                    {data?.designation}
+                  </h3>
+                </div>
               </div>
             </div>
+
+            {/* Company Details */}
+            <div>
+              <h2 className="text-lg font-semibold text-gray-800 border-b pb-2 border-gray-300">
+                Company Details
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 mt-4 gap-4">
+                <div>
+                  <p className="text-gray-500">Number Of Employees</p>
+                  <h3 className="font-medium text-gray-800">
+                    {data?.number_of_employees}
+                  </h3>
+                </div>
+                <div>
+                  <p className="text-gray-500">Address</p>
+                  <h3 className="font-medium text-gray-800">{data?.address}</h3>
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Info */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <p className="text-gray-500">Email</p>
+                <h3 className="font-medium text-gray-800">{data?.email}</h3>
+              </div>
+              <div>
+                <p className="text-gray-500">Website</p>
+                <h3 className="font-medium text-gray-800">{data?.website}</h3>
+              </div>
+            </div>
+
+            {/* Additional Info */}
             <AntTextArea
               outlined={true}
-              value={data?.meeting_sectors
-                .map((meeting) => `${meeting},`)
-                .join()}
-              label="Sector for B2B"
+              value={data?.meeting_sectors.join(', ')}
+              label="Sectors for B2B"
+              className="mt-6"
             />
             <AntTextArea
               outlined={true}
               value={data?.import_morocco}
               label="Import from Morocco"
+              className="mt-4"
             />
             <AntTextArea
               outlined={true}
               value={data?.export_morocco}
-              label="Export To Morocco"
+              label="Export to Morocco"
+              className="mt-4"
             />
           </div>
         </div>
