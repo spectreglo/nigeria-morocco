@@ -10,9 +10,14 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
 import { truncateText } from '../../utils';
-
+const ITEMS_PER_PAGE = 10;
 export default function DashboardHome() {
   const user = useSelector((user: RootState) => user.user);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
 
   const { tokens, lloadingTokens, setRefresh } = useGetAllTokens(
     user.user.role
@@ -28,12 +33,18 @@ export default function DashboardHome() {
   const [tokenModal, setTokenModal] = useState(false);
 
   const [email, setEmail] = useState('');
+  const [companyFilter, setCompanyFilter] = useState('');
   const [filter, setFilter] = useState('');
   const { data, loading } = useGetAllRegistration(filter);
   const conditionalData =
     user.user.role == 'morocco_admin'
       ? data.filter((rec) => !rec.mobile.startsWith('+234'))
       : data;
+  const totalPages = Math.ceil(conditionalData.length / ITEMS_PER_PAGE);
+  const currentCompanies = conditionalData.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -69,6 +80,10 @@ export default function DashboardHome() {
   }, [data]);
   const items: MenuProps['items'] = [
     {
+      key: '0',
+      label: <Button onClick={() => setFilter('')}>All</Button>,
+    },
+    {
       key: '1',
       label: (
         <Button onClick={() => setFilter('mobile=+234')}>Nigeria 🇳🇬</Button>
@@ -81,6 +96,13 @@ export default function DashboardHome() {
       ),
     },
   ];
+  useEffect(() => {
+    if (companyFilter) {
+      setFilter(`company_name=${companyFilter}`);
+    } else {
+      setFilter('');
+    }
+  }, [companyFilter]);
   return (
     <div className="flex flex-col flex-1 bg-white overflow-y-scroll overflow-x-hidden">
       <h1 className="text-[24px] text-fontColor">
@@ -154,16 +176,30 @@ export default function DashboardHome() {
       <div className="flex w-full md:w-1/2 items-center justify-between">
         <h1 className="font-bold">All Participants</h1>
         <div className="flex items-center">
-          <Input
-            style={{ marginTop: 0, marginRight: 10 }}
-            className="bg-gray"
-            placeholder="Search Results"
-            label=""
-            outlined={true}
-          />
-          <Dropdown trigger={['click']} menu={{ items }} placement="bottom">
-            <Button>Filter</Button>
-          </Dropdown>
+          {user.user.role !== 'moroccan_admin' && (
+            <>
+              <Input
+                value={companyFilter}
+                onChange={(e) => {
+                  setCompanyFilter(e.target.value);
+                }}
+                style={{ marginTop: 0, marginRight: 10 }}
+                className="bg-gray"
+                placeholder="Search by company name"
+                label=""
+                outlined={true}
+              />
+              <Dropdown trigger={['click']} menu={{ items }} placement="bottom">
+                <Button>
+                  {filter && filter.includes('mobile')
+                    ? filter == 'mobile=+234'
+                      ? 'Nigeria 🇳🇬'
+                      : 'Morocco 🇲🇦'
+                    : 'All'}
+                </Button>
+              </Dropdown>
+            </>
+          )}
         </div>
       </div>
 
@@ -179,13 +215,14 @@ export default function DashboardHome() {
               <th
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Company Name
+                Full Name
               </th>
               <th
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Status
+                Company Name
               </th>
+
               <th
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -230,17 +267,20 @@ export default function DashboardHome() {
               </tr>
             )}
             {!loading &&
-              conditionalData.map((record, ind) => (
+              currentCompanies.map((record, ind) => (
                 <tr key={ind.toString()}>
-                  <td className="px-6 py-4 whitespace-nowrap">{ind + 1}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {ind + 1 + (currentPage - 1) * ITEMS_PER_PAGE}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {record.first_name} {record.last_name}
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap max-w-[20%]">
                     {record.governmental
                       ? truncateText(record.ministry)
                       : truncateText(record.company_name)}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {record.payment?.status}
-                  </td>
+
                   <td className="px-6 py-4 whitespace-nowrap">
                     {record.mobile}
                   </td>
@@ -267,6 +307,37 @@ export default function DashboardHome() {
               ))}
           </tbody>
         </table>
+
+        <div className="flex justify-center mt-6 space-x-2">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 ${
+              currentPage === 1 ? 'cursor-not-allowed opacity-50' : ''
+            }`}>
+            Previous
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={`px-4 py-2 rounded transition-colors duration-200 ${
+                currentPage === index + 1
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 hover:bg-gray-300'
+              }`}>
+              {index + 1}
+            </button>
+          ))}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 ${
+              currentPage === totalPages ? 'cursor-not-allowed opacity-50' : ''
+            }`}>
+            Next
+          </button>
+        </div>
       </div>
 
       <Modal

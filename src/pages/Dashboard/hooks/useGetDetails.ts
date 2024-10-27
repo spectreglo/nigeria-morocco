@@ -19,6 +19,10 @@ interface CompanyData {
   number_of_employees: string;
   governmental: boolean;
   ministry: string;
+  first_name: string;
+  last_name: string;
+  designation: string;
+  qr_data: string;
   payment: {
     method: string;
     status: string;
