@@ -1,6 +1,6 @@
-import { Input, Select } from 'antd';
-import { ReactElement, useEffect, useState } from 'react';
-import coutries from '../../../utils/coutries.json';
+import { Input, Select } from "antd";
+import { ReactElement, useEffect, useState } from "react";
+import coutries from "../../../utils/coutries.json";
 interface IProps {
   value: string;
   label: ReactElement;
