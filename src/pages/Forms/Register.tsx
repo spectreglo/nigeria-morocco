@@ -374,6 +374,10 @@ export default function Register() {
       value: "NASENI",
     },
     {
+      label: "NATIONAL ASSEMBLY OF NIGERIA",
+      value: "NATIONAL ASSEMBLY OF NIGERIA",
+    },
+    {
       label: "NEXIM",
       value: "NEXIM",
     },
