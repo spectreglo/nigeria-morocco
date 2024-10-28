@@ -18,6 +18,7 @@ import UserProfile from './pages/Dashboard/profile/UserProfile';
 import Users from './pages/Users/Users';
 import Success from './pages/Forms/Success';
 import Bookings from './pages/Bookings/Bookings';
+// MADE IT PUBLIC
 
 function App() {
   return (
