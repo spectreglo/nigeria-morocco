@@ -248,9 +248,9 @@ export default function UserProfile() {
             id="event-pass-vip"
           >
             <img
-              src="../bg-pass.jpg"
+              src="../bweek.jpg"
               alt=""
-              className="h-20 w-full object-cover content-center rounded-t-lg"
+              className="h-30 w-full object-cover content-center rounded-t-lg"
             />
             <div className="flex justify-center">
               <img
