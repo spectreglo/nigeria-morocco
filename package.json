@@ -14,6 +14,7 @@
     "antd": "^5.14.2",
     "axios": "^1.6.7",
     "formik": "^2.4.5",
+    "html2pdf.js": "^0.10.2",
     "i18next": "^23.10.1",
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-http-backend": "^2.5.0",

@@ -261,10 +261,12 @@ export default function LandinPage() {
           <img src="fmiti.png" alt="fmiti" />
           <img src="HIESL.png" alt="highland" />
           <img src="jed.jpg" alt="JED" />
-          <img src="niger.png" alt="niger" />
+          <img src="jig.jpeg" alt="Jigawa" />
+          {/* <img src="niger.png" alt="niger" /> */}
           <img src="farmcreed.jpg" alt="farm creed" />
           <img src="MSD.jpg" alt="steel" />
           <img src="NADDC.png" alt="coc" />
+          <img src="ridec.png" alt="Ridec" />
         </div>
       </div>
 
