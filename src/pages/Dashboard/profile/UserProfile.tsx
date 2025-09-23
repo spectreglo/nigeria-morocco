@@ -5,7 +5,7 @@ import { Skeleton, Button } from "antd";
 import AntTextArea from "../../../components/TextArea";
 import DeleteIcon from "../compopnents/DeleteIcon";
 import useDeleteRecord from "../hooks/useDeleteRecord";
-import html2pdf from "html2pdf.js";
+import html2pdf from "html2pdf.js"; // you can also use react-to-print
 
 export default function UserProfile() {
   const location = useLocation();
