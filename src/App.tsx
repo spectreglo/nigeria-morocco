@@ -20,6 +20,18 @@ import Users from "./pages/Users/Users";
 import Bookings from "./pages/Bookings/Bookings";
 // MADE IT PUBLIC
 
+import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import { ConfigProvider } from 'antd';
+
+import { Suspense } from 'react';
+
+import { Provider } from 'react-redux';
+import store from './redux';
+
+import NewLanding from './pages/LandinPage/NewLanding';
+
 function App() {
   return (
     <Suspense fallback="loading">
@@ -37,8 +49,8 @@ function App() {
             }}
           >
             <Routes>
-              <Route path="/" element={<LandinPage />} />
-              <Route path="/Register" element={<Register />} />
+              <Route path="/" element={<NewLanding />} />
+              {/* <Route path="/Register" element={<Register />} />
               <Route path="/Booking" element={<Booking />} />
               {/* <Route path="/Invoice" element={<Invoice />} />
               <Route path="/BookingInvoice" element={<BookingInvoice />} />
