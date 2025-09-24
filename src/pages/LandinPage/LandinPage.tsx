@@ -1,6 +1,6 @@
-import CarouselItem from "./componets/CarouselItem";
+import CarouselItem from "./components/CarouselItem";
 import { Carousel } from "react-responsive-carousel";
-import ProgramItems from "./componets/ProgramItems";
+import ProgramItems from "./components/ProgramItems";
 import {
   Button,
   Modal,
@@ -10,11 +10,11 @@ import {
   Space,
   MenuProps,
 } from "antd";
-import Footer from "./componets/Footer";
+import Footer from "./components/Footer";
 import { useState } from "react";
-import PhoneInput from "./componets/PhoneInput";
+import PhoneInput from "./components/PhoneInput";
 import { useNavigate } from "react-router-dom";
-import MenuIcon from "./componets/MenuIcon";
+import MenuIcon from "./components/MenuIcon";
 
 import { Drawer } from "antd";
 import { useTranslation } from "react-i18next";
@@ -360,11 +360,7 @@ export default function LandinPage() {
       {/* NEWS */}
 
       <div className="flex flex-col md:flex-row justify-between my-10 items-center w-full px-5  md:px-20  gap-10 lg:px-40">
-        <img
-          src="https://spectretranstradeglobal.com/wp-content/uploads/2024/09/Consultative-meeting-1-1080x675.jpeg"
-          alt="Meeting"
-          className="w-full md:w-1/2"
-        />
+        <img src="bweek.jpg" alt="Meeting" className="w-full md:w-1/2" />
 
         <div className="flex flex-col gap-5 w-full md:w-1/2">
           <h1 className="text-2xl font-bold text-fontColor">
@@ -374,10 +370,7 @@ export default function LandinPage() {
             {t("newsBody2")}
           </p>
           <Button className="bg-primary w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
-            <a
-              target="_blank"
-              href="https://spectretranstradeglobal.com/consultative-meeting-with-top-officials-of-chamber-of-commerce-industry-and-services"
-            >
+            <a target="_blank" href="https://spectretranstradeglobal.com">
               {t("learn")}
             </a>
           </Button>
