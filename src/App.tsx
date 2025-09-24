@@ -3,12 +3,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LandinPage from "./pages/LandinPage/LandinPage";
 import { ConfigProvider } from "antd";
 import Register from "./pages/Forms/Register";
-import Invoice from "./pages/Invoice/Invoice";
+// import Invoice from "./pages/Invoice/Invoice";
 
 import DashboardHome from "./pages/Dashboard/DashboardHome";
 import { Suspense } from "react";
 import Booking from "./pages/Forms/Booking";
-import BookingInvoice from "./pages/Invoice/BookingInvoice";
+// import BookingInvoice from "./pages/Invoice/BookingInvoice";
 import Login from "./pages/Auth/Login";
 import PrivateRoutes from "./pages/PrivateRoutes";
 import { Provider } from "react-redux";
@@ -16,7 +16,7 @@ import store from "./redux";
 import Profile from "./pages/Dashboard/profile/Profile";
 import UserProfile from "./pages/Dashboard/profile/UserProfile";
 import Users from "./pages/Users/Users";
-import Success from "./pages/Forms/Success";
+// import Success from "./pages/Forms/Success";
 import Bookings from "./pages/Bookings/Bookings";
 // MADE IT PUBLIC
 
