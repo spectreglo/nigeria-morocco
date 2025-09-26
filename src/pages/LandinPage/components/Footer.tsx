@@ -53,11 +53,11 @@ export default function Footer() {
           <h1 className="font-bold mb-2 md:mb-8">Infos</h1>
           <span className="text-[13px]">
             <i className="fa-solid fa-location-dot mr-2" />
-            Sofitel Hotel Casablanca Morocco
+            Lagos, Kano and Abuja (Nigeria)
           </span>
           <span className="text-[13px]">
             <i className="fa-solid fa-calendar mr-2" />
-            29th -31st October 2024
+            8th - 11th December 2025
           </span>
           <span className="text-[13px]">
             <i className="fa-solid fa-clock mr-2" />
