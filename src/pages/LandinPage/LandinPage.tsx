@@ -139,6 +139,48 @@ export default function LandinPage() {
         </div>
       ),
     },
+    {
+      left: (
+        <div className="flex w-100% flex-col md:w-4/6">
+          <h1 className="text-5xl md:text-6xl text-left font-bold text-white">
+            Nigeria-Morocco Business Week 2024
+          </h1>
+          {/* <h1 className="text-5xl md:text-6xl text-left font-bold  text-white">
+            Morocco
+          </h1> */}
+
+          {/* <span className="my-6 text-left text-white">{t("slide3Body")}</span> */}
+        </div>
+      ),
+    },
+    {
+      left: (
+        <div className="flex w-100% flex-col md:w-4/6">
+          <h1 className="text-5xl md:text-6xl text-left font-bold text-white">
+            Nigeria-Morocco Business Week 2024
+          </h1>
+          {/* <h1 className="text-5xl md:text-6xl text-left font-bold  text-white">
+            Morocco
+          </h1> */}
+
+          {/* <span className="my-6 text-left text-white">{t("slide3Body")}</span> */}
+        </div>
+      ),
+    },
+    {
+      left: (
+        <div className="flex w-100% flex-col md:w-4/6">
+          <h1 className="text-5xl md:text-6xl text-left font-bold text-white">
+            Nigeria-Morocco Business Week 2024
+          </h1>
+          {/* <h1 className="text-5xl md:text-6xl text-left font-bold  text-white">
+            Morocco
+          </h1> */}
+
+          {/* <span className="my-6 text-left text-white">{t("slide3Body")}</span> */}
+        </div>
+      ),
+    },
   ];
   const isSmallSize = window.innerWidth < 100;
   const conditionalItem = isSmallSize ? ITEMS.slice(0, 1) : ITEMS;
@@ -338,7 +380,7 @@ export default function LandinPage() {
           <p className="text-justify text-[13px] text-fontColor">
             <p>{t("newsBody1")}</p>{" "}
             <p className="my-3">
-              <b>{t("venue")}:</b> Sofitel Hotel Casablanca Morocco.
+              <b>{t("venue")}:</b> Lagos, Kano and Abuja (Nigeria).
             </p>{" "}
             {t("news1Body2")}
             <br />
@@ -360,7 +402,7 @@ export default function LandinPage() {
       {/* NEWS */}
 
       <div className="flex flex-col md:flex-row justify-between my-10 items-center w-full px-5  md:px-20  gap-10 lg:px-40">
-        <img src="bweek.jpg" alt="Meeting" className="w-full md:w-1/2" />
+        <img src="lagos.jpg" alt="lagos" className="w-full md:w-1/2" />
 
         <div className="flex flex-col gap-5 w-full md:w-1/2">
           <h1 className="text-2xl font-bold text-fontColor">
@@ -368,6 +410,54 @@ export default function LandinPage() {
           </h1>
           <p className="text-justify text-[13px] text-fontColor">
             {t("newsBody2")}
+          </p>
+          <Button className="bg-primary w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
+            <a target="_blank" href="https://spectretranstradeglobal.com">
+              {t("learn")}
+            </a>
+          </Button>
+        </div>
+      </div>
+      <div className="w-full px-5 md:px-20">
+        <Divider
+          style={{
+            borderColor: "#e9e9e9",
+          }}
+        />
+      </div>
+      <div className="flex flex-col md:flex-row justify-between my-10 items-center w-full px-5  md:px-20  gap-10 lg:px-40">
+        <img src="kano.webp" alt="kano" className="w-full md:w-1/2" />
+
+        <div className="flex flex-col gap-5 w-full md:w-1/2">
+          <h1 className="text-2xl font-bold text-fontColor">
+            {t("newsHeader3")}
+          </h1>
+          <p className="text-justify text-[13px] text-fontColor">
+            {t("newsBody3")}
+          </p>
+          <Button className="bg-primary w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
+            <a target="_blank" href="https://spectretranstradeglobal.com">
+              {t("learn")}
+            </a>
+          </Button>
+        </div>
+      </div>
+      <div className="w-full px-5 md:px-20">
+        <Divider
+          style={{
+            borderColor: "#e9e9e9",
+          }}
+        />
+      </div>
+      <div className="flex flex-col md:flex-row justify-between my-10 items-center w-full px-5  md:px-20  gap-10 lg:px-40">
+        <img src="abuja.jpg" alt="abuja" className="w-full md:w-1/2" />
+
+        <div className="flex flex-col gap-5 w-full md:w-1/2">
+          <h1 className="text-2xl font-bold text-fontColor">
+            {t("newsHeader4")}
+          </h1>
+          <p className="text-justify text-[13px] text-fontColor">
+            {t("newsBody4")}
           </p>
           <Button className="bg-primary w-1/2 mt-4 md:w-1/3 h-12 text-white hover:bg-black">
             <a target="_blank" href="https://spectretranstradeglobal.com">
