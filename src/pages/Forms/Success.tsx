@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from "react-router-dom";
-
 import { Button } from "antd";
 
 export default function Success() {
@@ -8,63 +7,92 @@ export default function Success() {
   const total = location.state.total;
 
   return (
-    <div className="w-full h-[90vh] flex flex-col items-center justify-center">
-      <div className="w-full flex flex-col justify-center items-center">
-        <img src="gif.gif" className="h-[50px] w-[50px]" />
-        <h1 className="my-[20px]">Succesfull!</h1>
+    <div className="w-full h-[100vh] flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
+      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-lg flex flex-col justify-center items-center animate-fade-in">
+        <img
+          src="/gif.gif"
+          className="h-[70px] w-[70px] mb-2 animate-bounce"
+          alt="Success"
+        />
+        <h1 className="my-4 text-3xl font-bold text-green-600">Successful!</h1>
 
-        <p className=" text-fontColor text-center">
-          You Can Now Proceed To Pay your fee Using the following Details
+        <div className="w-full mb-6">
+          <h2 className="text-lg font-semibold mb-2 text-gray-700">
+            Participation Fee Breakdown
+          </h2>
+          <div className="space-y-2 text-sm text-gray-600">
+            <div className="bg-green-50 rounded p-2">
+              <span className="font-bold text-green-700">Lagos:</span> 704 MAD
+              HT
+              <br />
+              <span className="text-xs">
+                Includes event access, airport transfer, coffee break & lunch.
+              </span>
+            </div>
+            <div className="bg-green-50 rounded p-2">
+              <span className="font-bold text-green-700">Kano:</span> 704 MAD HT
+              <br />
+              <span className="text-xs">
+                Includes event access, airport transfer, coffee break & lunch.
+              </span>
+            </div>
+            <div className="bg-green-50 rounded p-2">
+              <span className="font-bold text-green-700">Abuja:</span> 704 MAD
+              HT
+              <br />
+              <span className="text-xs">
+                Includes airport transfer, awards ceremony access & dining.
+              </span>
+            </div>
+            <div className="bg-yellow-50 rounded p-2">
+              <span className="font-bold text-yellow-700">Tax 20%:</span> 140.80
+              MAD for each city
+            </div>
+          </div>
+        </div>
+
+        <p className="text-fontColor text-center mb-4 text-base font-medium">
+          You can now proceed to pay your fee using the following details:
         </p>
         {total > 0 && (
-          <h1 className="font-bold">Total ${Number(total).toLocaleString()}</h1>
+          <h1 className="font-bold text-2xl text-blue-700 mb-4">
+            Total: ${Number(total).toLocaleString()}
+          </h1>
         )}
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-10 my-5">
-          {/* <div className="flex flex-col">
-            <h1 className="text-[30px]">Nigerian Account 🇳🇬</h1>
+        <div className="grid grid-cols-1 gap-8 w-full mb-6">
+          {/* Nigerian Account (uncomment if needed)
+          <div className="flex flex-col bg-gray-50 rounded-lg p-4 border border-gray-200">
+            <h2 className="text-xl font-semibold mb-2">Nigerian Account 🇳🇬</h2>
+            <div className="flex items-center gap-2"><span className="font-bold">ACCOUNT NAME:</span> <span>CONSCCIMA</span></div>
+            <div className="flex items-center gap-2"><span className="font-bold">ACCOUNT NUMBER:</span> <span>0002225410</span></div>
+            <div className="flex items-center gap-2"><span className="font-bold">BANK NAME/BRANCH:</span> <span>UNITY BANK PLC</span></div>
+          </div>
+          */}
+          <div className="flex flex-col bg-blue-50 rounded-lg p-4 border border-blue-200">
+            <h2 className="text-xl font-semibold mb-2">Moroccan Account 🇲🇦</h2>
             <div className="flex items-center gap-2">
-              <h1 className="font-bold">ACCOUNT NAME:</h1>
-              <h1>CONSCCIMA</h1>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <h1 className="font-bold">ACCOUNT NUMBER:</h1>
-              <h1>0002225410</h1>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <h1 className="font-bold">BANK NAME/BRANCH:</h1>
-              <h1>UNITY BANK PLC</h1>
-            </div>
-          </div> */}
-
-          <div className="flex flex-col">
-            <h1 className="text-[30px]">Morroccan Account 🇲🇦</h1>
-            <div className="flex items-center gap-2">
-              <h1 className="font-bold">ACCOUNT NAME:</h1>
-              <h1>SPECTRE TRANS-TRADE GLOBAL</h1>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <h1 className="font-bold">RIB:</h1>
-              <h1>007 810 0001593000003349 42</h1>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <h1 className="font-bold">BANK NAME:</h1>
-              <h1>ATTIJARIWAFA BANK</h1>
+              <span className="font-bold">ACCOUNT NAME:</span>{" "}
+              <span className="text-blue-700">SPECTRE TRANS-TRADE GLOBAL</span>
             </div>
             <div className="flex items-center gap-2">
-              <h1 className="font-bold">SWIFT CODE:</h1>
-              <h1>BCMAMAMC</h1>
+              <span className="font-bold">RIB:</span>{" "}
+              <span>007 810 0001593000003349 42</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold">BANK NAME:</span>{" "}
+              <span>ATTIJARIWAFA BANK</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold">SWIFT CODE:</span>{" "}
+              <span>BCMAMAMC</span>
             </div>
           </div>
         </div>
         <Button
           onClick={() => navigate("/")}
-          className="bg-lightGreen text-white w-1/2 my-5"
+          className="bg-gradient-to-r from-green-500 to-blue-500 text-white w-full py-2 text-lg font-semibold rounded-lg shadow hover:from-green-600 hover:to-blue-600 transition-colors duration-200"
         >
-          Back to home
+          Back to Home
         </Button>
       </div>
     </div>
