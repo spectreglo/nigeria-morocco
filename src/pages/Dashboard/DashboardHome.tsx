@@ -6,7 +6,7 @@ import useGetAllRegistration from "./hooks/useGetAllRegistration";
 import { useEffect, useState } from "react";
 import useGetAllTokens from "./hooks/useGetAllTokens";
 import moment from "moment";
-import { DownloadTableExcel } from "react-export-table-to-excel";
+// import { DownloadTableExcel } from "react-export-table-to-excel";
 import useGenerateToken from "./hooks/useGenerateToken";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
