@@ -529,220 +529,162 @@ export default function Register() {
   }, []);
   return (
     <div
-      // style={{ backgroundImage: 'url(rectangle.png)' }}
-      className="bg-cover bg-center h-[100vh] w-full relative overflow-x-hidden"
+      // style={{ backgroundImage: "url(rectangle.png)" }}
+      className="bg-cover bg-center min-h-screen w-full relative overflow-x-hidden flex items-center justify-center py-8 md:py-0 md:bg-[url('rectangle.png')] bg-none"
     >
       <div
         // style={{
         //   backgroundImage: 'url(round.png)',
         //   backgroundRepeat: 'no-repeat',
         // }}
-        className="top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden"
+        className="top-0 bottom-0 right-0 left-0 bg-bgImage bg-contain bg-center flex flex-col items-center p-5 md:p-11 w-full min-h-screen overflow-x-hidden"
       >
-        <div className="mr-auto">
+        <div className="mr-auto w-full max-w-2xl">
           <Link to="/">
             <BackIcon />
           </Link>
         </div>
-
-        <h1 className="text-primary font-bold text-4xl">{t("Register")}</h1>
-        <span>{t("Part")}</span>
-        <p className="text-2xl"> {t("Fill")}</p>
-
-        <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[50%] mt-5 overflow-x-hidden">
-          <span className="text-[18px] text-primary">{t("Personal")}</span>
-          <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
-            <Input
-              error={
-                formik.touched.first_name && formik.errors.first_name
-                  ? formik.errors.first_name
-                  : ""
-              }
-              value={formik.values.first_name}
-              onChange={formik.handleChange}
-              id="first_name"
-              className="w-full md:w-[50%]"
-              required
-              label={t("full")}
-              placeholder="Enter Your First Name"
-              outlined={false}
-            />
-
-            <Input
-              error={
-                formik.touched.last_name && formik.errors.last_name
-                  ? formik.errors.last_name
-                  : ""
-              }
-              value={formik.values.last_name}
-              onChange={formik.handleChange}
-              id="last_name"
-              className="w-full md:w-[50%]"
-              required
-              label={t("last")}
-              placeholder="Enter Your Last Name"
-              outlined={false}
-            />
-          </div>
-          <div className="w-full mt-4">
-            <span className="text-[12px]">{t("Organization")}</span>
-            <Select
-              status={
-                formik.touched.governmental && formik.errors.governmental
-                  ? "error"
-                  : ""
-              }
-              className="w-[100%]"
-              defaultValue={false}
-              onChange={(e) => {
-                formik.values.governmental = e;
-                if (isGov) {
-                  console.log(e);
+        {/* Progress Indicator removed */}
+        <div className="w-full max-w-2xl bg-white/90 shadow-2xl rounded-2xl p-8 flex flex-col items-center animate-fade-in">
+          <h1 className="text-primary font-bold text-3xl md:text-4xl mb-1">
+            {t("Register")}
+          </h1>
+          <span className="mb-2 text-gray-700">{t("Part")}</span>
+          <p className="text-xl text-gray-600 mb-4">{t("Fill")}</p>
+          <div className="w-full border-b border-gray-200 mb-6" />
+          <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full mt-0 overflow-x-hidden">
+            <span className="text-lg text-primary font-semibold mb-2 block">
+              {t("Personal")}
+            </span>
+            <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
+              <Input
+                error={
+                  formik.touched.first_name && formik.errors.first_name
+                    ? formik.errors.first_name
+                    : ""
                 }
-                setIsGov((prev) => !prev);
-              }}
-              options={[
-                { value: true, label: t("Govermental") },
-                { value: false, label: t("Private") },
-              ]}
-            />
-          </div>
-          {phoneNumber.startsWith("+234") && (
-            <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
-              <Input
-                value={formik.values.passport_number}
+                value={formik.values.first_name}
                 onChange={formik.handleChange}
-                id="passport_number"
-                className="w-full md:w-[70%]"
+                id="first_name"
+                className="w-full md:w-[50%]"
                 required
-                label="Passport number"
-                placeholder="Enter your passport number"
-                outlined={false}
+                label={t("full")}
+                placeholder="Enter Your First Name"
+                outlined={true}
               />
 
               <Input
-                value={formik.values.passport_expiry}
-                id="passport_expiry"
+                error={
+                  formik.touched.last_name && formik.errors.last_name
+                    ? formik.errors.last_name
+                    : ""
+                }
+                value={formik.values.last_name}
                 onChange={formik.handleChange}
-                className="w-full md:w-[30%]"
+                id="last_name"
+                className="w-full md:w-[50%]"
                 required
-                label="Passport expiration date"
-                placeholder="Enter the expiration date"
-                outlined={false}
-                type="date"
+                label={t("last")}
+                placeholder="Enter Your Last Name"
+                outlined={true}
               />
             </div>
-          )}
-
-          {formik.values.governmental ? (
-            <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
-              <div className="w-full md:w-[70%] mt-4">
-                <span className="text-[12px]">{t("Ministry")}</span>
-                <br />
-                {phoneNumber.startsWith("+234") ? (
-                  <Select
-                    status={
-                      formik.touched.governmental && formik.errors.governmental
-                        ? "error"
-                        : ""
-                    }
-                    className="w-[100%] md:w-[100%]"
-                    defaultValue={""}
-                    onChange={(e) => {
-                      formik.values.ministry = e;
-                      if (isGov) {
-                        console.log(e);
-                      }
-                      setIsGov((prev) => !prev);
-                    }}
-                    options={NigerianMinisteries}
-                  />
-                ) : (
-                  <Select
-                    status={
-                      formik.touched.governmental && formik.errors.governmental
-                        ? "error"
-                        : ""
-                    }
-                    className="w-[100%] md:w-[100%]"
-                    defaultValue={""}
-                    onChange={(e) => {
-                      formik.values.ministry = e;
-                      if (isGov) {
-                        console.log(e);
-                      }
-                      setIsGov((prev) => !prev);
-                    }}
-                    options={MoroccanMinisteries}
-                  />
-                )}
-              </div>
-              <div className="w-full md:w-[30%]">
-                <Input
-                  id="designation"
-                  type="text"
-                  value={formik.values.designation}
-                  onChange={formik.handleChange}
-                  className="w-full"
-                  required
-                  label={t("Designation")}
-                  outlined={false}
-                />
-              </div>
+            <div className="w-full mt-4">
+              <span className="text-[12px]">{t("Organization")}</span>
+              <Select
+                status={
+                  formik.touched.governmental && formik.errors.governmental
+                    ? "error"
+                    : ""
+                }
+                className="w-[100%] h-[38px]"
+                defaultValue={false}
+                onChange={(e) => {
+                  formik.values.governmental = e;
+                  if (isGov) {
+                    console.log(e);
+                  }
+                  setIsGov((prev) => !prev);
+                }}
+                options={[
+                  { value: true, label: t("Govermental") },
+                  { value: false, label: t("Private") },
+                ]}
+              />
             </div>
-          ) : (
-            <>
+            {phoneNumber.startsWith("+234") && (
               <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
                 <Input
-                  error={
-                    formik.touched.company_name && formik.errors.company_name
-                      ? formik.errors.company_name
-                      : ""
-                  }
-                  value={formik.values.company_name}
+                  value={formik.values.passport_number}
                   onChange={formik.handleChange}
-                  id="company_name"
+                  id="passport_number"
                   className="w-full md:w-[70%]"
                   required
-                  label={t("Name")}
-                  placeholder="Enter the name of the company"
-                  outlined={false}
+                  label="Passport number"
+                  placeholder="Enter your passport number"
+                  outlined={true}
                 />
 
                 <Input
-                  error={
-                    formik.touched.creation_date && formik.errors.creation_date
-                      ? formik.errors.creation_date
-                      : ""
-                  }
-                  value={formik.values.creation_date}
-                  id="creation_date"
+                  value={formik.values.passport_expiry}
+                  id="passport_expiry"
                   onChange={formik.handleChange}
                   className="w-full md:w-[30%]"
                   required
-                  label={t("Creation")}
-                  placeholder="Enter the name of the company"
-                  outlined={false}
+                  label="Passport expiration date"
+                  placeholder="Enter the expiration date"
+                  outlined={true}
                   type="date"
                 />
               </div>
+            )}
 
-              <AntTextArea
-                error={
-                  formik.touched.address && formik.errors.address
-                    ? formik.errors.address
-                    : ""
-                }
-                value={formik.values.address}
-                onChange={formik.handleChange}
-                required
-                id="address"
-                label={t("Address")}
-                outlined={false}
-                placeholder="Type your address"
-              />
+            {formik.values.governmental ? (
               <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
-                <div className="w-full md:w-[50%]">
+                <div className="w-full md:w-[70%] mt-4">
+                  <span className="text-[12px]">{t("Ministry")}</span>
+                  <br />
+                  {phoneNumber.startsWith("+234") ? (
+                    <Select
+                      status={
+                        formik.touched.governmental &&
+                        formik.errors.governmental
+                          ? "error"
+                          : ""
+                      }
+                      className="w-[100%] h-[38px] md:w-[100%]"
+                      defaultValue={""}
+                      onChange={(e) => {
+                        formik.values.ministry = e;
+                        if (isGov) {
+                          console.log(e);
+                        }
+                        setIsGov((prev) => !prev);
+                      }}
+                      options={NigerianMinisteries}
+                    />
+                  ) : (
+                    <Select
+                      status={
+                        formik.touched.governmental &&
+                        formik.errors.governmental
+                          ? "error"
+                          : ""
+                      }
+                      className="w-[100%] h-[38px] md:w-[100%]"
+                      defaultValue={""}
+                      onChange={(e) => {
+                        formik.values.ministry = e;
+                        if (isGov) {
+                          console.log(e);
+                        }
+                        setIsGov((prev) => !prev);
+                      }}
+                      options={MoroccanMinisteries}
+                    />
+                  )}
+                </div>
+                <div className="w-full md:w-[30%]">
                   <Input
                     id="designation"
                     type="text"
@@ -751,222 +693,289 @@ export default function Register() {
                     className="w-full"
                     required
                     label={t("Designation")}
-                    outlined={false}
-                  />
-                </div>
-                <div className="w-full md:w-[50%]">
-                  <Input
-                    id="annual_turnover"
-                    type="number"
-                    value={formik.values.annual_turnover}
-                    onChange={formik.handleChange}
-                    className="w-full"
-                    label={`${t("annual")} ${
-                      phoneNumber.startsWith("+234") ? "(USD)" : "(USD)"
-                    }`}
-                    outlined={false}
+                    outlined={true}
                   />
                 </div>
               </div>
+            ) : (
+              <>
+                <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
+                  <Input
+                    error={
+                      formik.touched.company_name && formik.errors.company_name
+                        ? formik.errors.company_name
+                        : ""
+                    }
+                    value={formik.values.company_name}
+                    onChange={formik.handleChange}
+                    id="company_name"
+                    className="w-full md:w-[70%]"
+                    required
+                    label={t("Name")}
+                    placeholder="Enter the name of the company"
+                    outlined={true}
+                  />
+
+                  <Input
+                    error={
+                      formik.touched.creation_date &&
+                      formik.errors.creation_date
+                        ? formik.errors.creation_date
+                        : ""
+                    }
+                    value={formik.values.creation_date}
+                    id="creation_date"
+                    onChange={formik.handleChange}
+                    className="w-full md:w-[30%]"
+                    required
+                    label={t("Creation")}
+                    placeholder="Enter the name of the company"
+                    outlined={true}
+                    type="date"
+                  />
+                </div>
+
+                <AntTextArea
+                  error={
+                    formik.touched.address && formik.errors.address
+                      ? formik.errors.address
+                      : ""
+                  }
+                  value={formik.values.address}
+                  onChange={formik.handleChange}
+                  required
+                  id="address"
+                  label={t("Address")}
+                  outlined={true}
+                  placeholder="Type your address"
+                />
+                <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
+                  <div className="w-full md:w-[50%]">
+                    <Input
+                      id="designation"
+                      type="text"
+                      value={formik.values.designation}
+                      onChange={formik.handleChange}
+                      className="w-full"
+                      required
+                      label={t("Designation")}
+                      outlined={true}
+                    />
+                  </div>
+                  <div className="w-full md:w-[50%]">
+                    <Input
+                      id="annual_turnover"
+                      type="number"
+                      value={formik.values.annual_turnover}
+                      onChange={formik.handleChange}
+                      className="w-full"
+                      label={`${t("annual")} ${
+                        phoneNumber.startsWith("+234") ? "(USD)" : "(USD)"
+                      }`}
+                      outlined={true}
+                      prefix="$"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
+                  <Input
+                    error={
+                      formik.touched.website && formik.errors.website
+                        ? formik.errors.website
+                        : ""
+                    }
+                    value={formik.values.website}
+                    onChange={formik.handleChange}
+                    className="w-full md:w-[50%]"
+                    label={t("Website")}
+                    id="website"
+                    placeholder="www.example.com"
+                    outlined={true}
+                  />
+
+                  <Input
+                    id="number_of_employees"
+                    error={
+                      formik.touched.number_of_employees &&
+                      formik.errors.number_of_employees
+                        ? formik.errors.number_of_employees
+                        : ""
+                    }
+                    value={formik.values.number_of_employees}
+                    onChange={formik.handleChange}
+                    className="w-full md:w-[50%]"
+                    label={t("Employees")}
+                    outlined={true}
+                    type="number"
+                  />
+                </div>
+              </>
+            )}
+            {!phoneNumber.startsWith("+234") && (
               <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
                 <Input
+                  id="cin"
                   error={
-                    formik.touched.website && formik.errors.website
-                      ? formik.errors.website
+                    formik.touched.cin && formik.errors.cin
+                      ? formik.errors.cin
                       : ""
                   }
-                  value={formik.values.website}
+                  value={formik.values.cin}
                   onChange={formik.handleChange}
-                  className="w-full md:w-[50%]"
-                  label={t("Website")}
-                  id="website"
-                  placeholder="www.example.com"
-                  outlined={false}
+                  className="w-full md:w-[70%]"
+                  required
+                  label={"CIN Nombre"}
+                  outlined={true}
+                  type="number"
                 />
 
                 <Input
-                  id="number_of_employees"
-                  error={
-                    formik.touched.number_of_employees &&
-                    formik.errors.number_of_employees
-                      ? formik.errors.number_of_employees
-                      : ""
-                  }
-                  value={formik.values.number_of_employees}
+                  value={formik.values.cin_expiry}
+                  id="cin_expiry"
                   onChange={formik.handleChange}
-                  className="w-full md:w-[50%]"
-                  label={t("Employees")}
-                  outlined={false}
-                  type="number"
+                  className="w-full md:w-[30%]"
+                  required
+                  label={t("expiry")}
+                  placeholder="Enter the expiration date"
+                  outlined={true}
+                  type="date"
                 />
               </div>
-            </>
-          )}
-          {!phoneNumber.startsWith("+234") && (
+            )}
             <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
               <Input
-                id="cin"
-                error={
-                  formik.touched.cin && formik.errors.cin
-                    ? formik.errors.cin
-                    : ""
-                }
-                value={formik.values.cin}
-                onChange={formik.handleChange}
-                className="w-full md:w-[70%]"
                 required
-                label={"CIN Nombre"}
-                outlined={false}
-                type="number"
+                value={phoneNumber}
+                disabled
+                className="w-full md:w-[50%]"
+                label={t("Mobile")}
+                outlined={true}
               />
 
               <Input
-                value={formik.values.cin_expiry}
-                id="cin_expiry"
-                onChange={formik.handleChange}
-                className="w-full md:w-[30%]"
                 required
-                label={t("expiry")}
-                placeholder="Enter the expiration date"
-                outlined={false}
-                type="date"
+                error={
+                  formik.touched.email && formik.errors.email
+                    ? formik.errors.email
+                    : ""
+                }
+                value={formik.values.email}
+                id="email"
+                onChange={formik.handleChange}
+                className="w-full md:w-[50%]"
+                label={t("Email")}
+                outlined={true}
               />
             </div>
-          )}
-          <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
-            <Input
-              required
-              value={phoneNumber}
-              disabled
-              className="w-full md:w-[50%]"
-              label={t("Mobile")}
-              outlined={false}
-            />
+            {!formik.values.governmental && (
+              <>
+                <h1 className="my-[10px] text-[13px] font-[500]">
+                  {t("Is")}
+                  <span className="text-[red]">*</span>
+                </h1>
+                {companyNiche.map((options, ind) => (
+                  <div className="mt-3 flex items-center" key={ind.toString()}>
+                    <Checkbox
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setNiche((prev) => [...prev, options]);
+                        } else {
+                          const filtered = selectedNiche.filter(
+                            (selected) => selected !== options
+                          );
+                          setNiche(filtered);
+                        }
+                      }}
+                    >
+                      {options}
+                    </Checkbox>
+                  </div>
+                ))}
+              </>
+            )}
 
-            <Input
-              required
+            <AntTextArea
               error={
-                formik.touched.email && formik.errors.email
-                  ? formik.errors.email
+                formik.touched.import_morocco && formik.errors.import_morocco
+                  ? formik.errors.import_morocco
                   : ""
               }
-              value={formik.values.email}
-              id="email"
+              value={formik.values.import_morocco}
+              id="import_morocco"
               onChange={formik.handleChange}
-              className="w-full md:w-[50%]"
-              label={t("Email")}
-              outlined={false}
+              label={t("What")}
+              outlined={true}
+              placeholder="Type here"
             />
-          </div>
-          {!formik.values.governmental && (
-            <>
-              <h1 className="my-[10px] text-[13px] font-[500]">
-                {t("Is")}
-                <span className="text-[red]">*</span>
-              </h1>
-              {companyNiche.map((options, ind) => (
-                <div className="mt-3 flex items-center" key={ind.toString()}>
-                  <Checkbox
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setNiche((prev) => [...prev, options]);
-                      } else {
-                        const filtered = selectedNiche.filter(
-                          (selected) => selected !== options
-                        );
-                        setNiche(filtered);
-                      }
-                    }}
-                  >
-                    {options}
-                  </Checkbox>
-                </div>
-              ))}
-            </>
-          )}
 
-          <AntTextArea
-            error={
-              formik.touched.import_morocco && formik.errors.import_morocco
-                ? formik.errors.import_morocco
-                : ""
-            }
-            value={formik.values.import_morocco}
-            id="import_morocco"
-            onChange={formik.handleChange}
-            label={t("What")}
-            outlined={false}
-            placeholder="Type here"
-          />
+            <AntTextArea
+              error={
+                formik.touched.export_morocco && formik.errors.export_morocco
+                  ? formik.errors.export_morocco
+                  : ""
+              }
+              value={formik.values.export_morocco}
+              id="export_morocco"
+              onChange={formik.handleChange}
+              className="mb-10"
+              label={t("Export")}
+              outlined={true}
+              placeholder="Type here"
+            />
+            <span className="font-[500]">{t("Meeting")}</span>
 
-          <AntTextArea
-            error={
-              formik.touched.export_morocco && formik.errors.export_morocco
-                ? formik.errors.export_morocco
-                : ""
-            }
-            value={formik.values.export_morocco}
-            id="export_morocco"
-            onChange={formik.handleChange}
-            className="mb-10"
-            label={t("Export")}
-            outlined={false}
-            placeholder="Type here"
-          />
-          <span className="font-[500]">{t("Meeting")}</span>
+            {meetingWith.map((option: string, ind) => (
+              <div className="my-3 flex items-center" key={ind.toString()}>
+                <Radio
+                  onChange={() => {
+                    setMeeting([option]); // Set the selected option as the only item in the state
+                  }}
+                  checked={selectedMeeting.includes(option)}
+                >
+                  {option}
+                </Radio>
+              </div>
+            ))}
 
-          {meetingWith.map((option: string, ind) => (
-            <div className="my-3 flex items-center" key={ind.toString()}>
-              <Radio
-                onChange={() => {
-                  setMeeting([option]); // Set the selected option as the only item in the state
-                }}
-                checked={selectedMeeting.includes(option)}
-              >
-                {option}
-              </Radio>
+            <span className="mt-5">{t("Passport")}</span>
+            <div className="h-[200px] md:h-[150px] mt-4">
+              <Dragger showUploadList={true} className="h-[150px]" {...props}>
+                <p className="ant-upload-drag-icon">
+                  <InboxOutlined />
+                </p>
+
+                <p className="ant-upload-text">
+                  {uploading && <Spin size="large" spinning />}
+                  {t("Drag")}
+                </p>
+                <p className="ant-upload-hint">{t("UploadHint")}</p>
+              </Dragger>
             </div>
-          ))}
 
-          <span className="mt-5">{t("Passport")}</span>
-          <div className="h-[200px] md:h-[150px] mt-4">
-            <Dragger showUploadList={true} className="h-[150px]" {...props}>
-              <p className="ant-upload-drag-icon">
-                <InboxOutlined />
-              </p>
-
-              <p className="ant-upload-text">
-                {uploading && <Spin size="large" spinning />}
-                {t("Drag")}
-              </p>
-              <p className="ant-upload-hint">{t("UploadHint")}</p>
-            </Dragger>
-          </div>
-
-          <div className="flex gap-4 items-center justify-end mt-10 mb-5">
-            <Button className="border-primary bg-transparent text-primary h-[38px]">
-              Reset
-            </Button>
-            <Button
-              disabled={uploading}
-              loading={registering}
-              onClick={() => {
-                formik.values.company_niche = selectedNiche;
-                formik.values.meeting_sectors = selectedMeeting;
-
-                formik.handleSubmit();
-              }}
-              className="bg-primary h-[38px]"
-              type="primary"
-            >
-              {phoneNumber.startsWith("+234")
-                ? "Submit & proceed to payment"
-                : t("Submit")}
-            </Button>
+            <div className="flex gap-4 items-center justify-end mt-10 mb-5">
+              <Button className="border-primary bg-transparent text-primary h-[38px] hover:bg-primary/10 transition-all duration-200">
+                Reset
+              </Button>
+              <Button
+                disabled={uploading}
+                loading={registering}
+                onClick={() => {
+                  formik.values.company_niche = selectedNiche;
+                  formik.values.meeting_sectors = selectedMeeting;
+                  formik.handleSubmit();
+                }}
+                className="bg-primary h-[38px] text-white font-semibold rounded-lg shadow hover:scale-105 transition-all duration-200"
+                type="primary"
+              >
+                {phoneNumber.startsWith("+234")
+                  ? "Submit & proceed to payment"
+                  : t("Submit")}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-
+      {/* Terms Modal */}
       <Modal
         closable={false}
         keyboard={false}
@@ -976,9 +985,11 @@ export default function Register() {
         open={isModalOpen}
         onOk={handleOk}
       >
-        <div className="flex flex-col min-h-[400px] bg-white  items-cente p-3">
-          <h1 className="text-[16px] text-black">Terms and Conditions</h1>
-          <div className="border-[#9D9DB7] border h-[217px] w-full my-5 overflow-y-scroll p-[10px]">
+        <div className="flex flex-col min-h-[400px] bg-white rounded-xl p-3 animate-fade-in">
+          <h1 className="text-lg font-bold text-primary mb-2">
+            Terms and Conditions
+          </h1>
+          <div className="border-[#9D9DB7] border h-[217px] w-full my-5 overflow-y-scroll p-[10px] rounded bg-silver/30 text-gray-700 text-sm">
             <p className="text-justify">
               <p>
                 Welcome to Nigeria-Morocco Business Week! By proceeding with the
@@ -1089,18 +1100,17 @@ export default function Register() {
               {t("accept")}
             </Checkbox>
           </div>
-
           <div className="flex gap-4 items-center justify-end mt-5">
             <Button
               onClick={() => navigate("/")}
-              className="border-primary bg-transparent text-primary h-[38px]"
+              className="border-primary bg-transparent text-primary h-[38px] hover:bg-primary/10 transition-all duration-200"
             >
               Cancel
             </Button>
             <Button
               disabled={!isChecked}
               onClick={handleCancel}
-              className="bg-primary h-[38px]"
+              className="bg-primary h-[38px] text-white font-semibold rounded-lg shadow hover:scale-105 transition-all duration-200"
               type="primary"
             >
               Confirm

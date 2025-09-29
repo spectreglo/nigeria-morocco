@@ -159,269 +159,215 @@ export default function Booking() {
   }, [amount, ref]);
   return (
     <div
-      // style={{ backgroundImage: 'url(rectangle.png)' }}
-      className="bg-cover bg-center h-[100vh] w-full relative overflow-x-hidden"
+      // style={{ backgroundImage: "url(rectangle.png)" }}
+      className="bg-cover bg-center min-h-screen w-full relative overflow-x-hidden flex items-center justify-center py-8 md:py-0"
     >
       <div
-        // style={{
-        //   backgroundImage: 'url(round.png)',
-        //   backgroundRepeat: 'no-repeat',
-        // }}
-        className="top-0 bottom-0 right-0 left-0 bg-bgImage  bg-contain bg-center flex flex-col items-center p-5 md:p-11 overflow-x-hidden"
+        style={{
+          backgroundImage: "url(round.png)",
+          backgroundRepeat: "no-repeat",
+        }}
+        className="top-0 bottom-0 right-0 left-0 bg-bgImage bg-contain bg-center flex flex-col items-center p-5 md:p-11 w-full min-h-screen overflow-x-hidden"
       >
-        <div className="mr-auto">
+        <div className="mr-auto w-full max-w-2xl">
           <Link to="/">
             <BackIcon />
           </Link>
         </div>
-        <h1 className="text-primary font-bold text-4xl">{t("Book")}</h1>
-        <span>{t("Part")}</span>
-        <p className="text-2xl"> {t("Fill")}</p>
-
-        <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full md:w-[50%] mt-5 overflow-x-hidden">
-          <span className="text-[18px] text-primary">{t("Personal")}</span>
-          <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
-            <Input
-              error={
-                formik.touched.name && formik.errors.name
-                  ? formik.errors.name
-                  : ""
-              }
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              id="name"
-              className="w-full md:w-[50%]"
-              required
-              label={t("Name")}
-              placeholder="Enter the name of the company"
-              outlined={false}
-            />
-
-            <Input
-              error={
-                formik.touched.full_name && formik.errors.full_name
-                  ? formik.errors.full_name
-                  : ""
-              }
-              value={formik.values.full_name}
-              id="full_name"
-              onChange={formik.handleChange}
-              className="w-full md:w-[50%]"
-              required
-              label={t("full")}
-              placeholder="Enter Your Full Name"
-              outlined={false}
-            />
-          </div>
-
-          <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
-            <Input
-              required
-              value={phoneNumber}
-              disabled
-              className="w-full md:w-[30%]"
-              label={t("Mobile")}
-              outlined={false}
-            />
-
-            <Input
-              required
-              error={
-                formik.touched.email && formik.errors.email
-                  ? formik.errors.email
-                  : ""
-              }
-              value={formik.values.email}
-              id="email"
-              onChange={formik.handleChange}
-              className="w-full md:w-[70%]"
-              label={t("Email")}
-              outlined={false}
-            />
-          </div>
-          <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
-            <Input
-              error={
-                formik.touched.job_title && formik.errors.job_title
-                  ? formik.errors.job_title
-                  : ""
-              }
-              value={formik.values.job_title}
-              onChange={formik.handleChange}
-              id="job_title"
-              className="w-full md:w-[50%]"
-              label={t("job")}
-              placeholder="Job Title"
-              outlined={false}
-            />
-
-            <Input
-              error={
-                formik.touched.annual_turnover && formik.errors.annual_turnover
-                  ? formik.errors.annual_turnover
-                  : ""
-              }
-              value={formik.values.annual_turnover}
-              id="annual_turnover"
-              onChange={formik.handleChange}
-              className="w-full md:w-[50%]"
-              label={t("annual")}
-              placeholder="Enter Your Annual Turnover"
-              outlined={false}
-            />
-          </div>
-
-          <span className="font-[500] text-[12px] my-4 mt-[20px] ">
-            {t("your")} <span className="text-[red]">*</span>
-          </span>
-          {/* {sector.map((options, ind) => (
-            <div className="my-3 flex items-center" key={ind.toString()}>
-              <input
-                className="mr-2"
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    if (isPersonalised) {
-                      console.log('');
-                    }
-                    setSelectedSectors((prev) => [...prev, options]);
-                  } else {
-                    const filtered = selectedSectors.filter(
-                      (selected) => selected !== options
-                    );
-                    setSelectedSectors(filtered);
-                  }
-                }}
-                type="checkbox"
-              />
-              <span className="text-[12px]">{options}</span>
-            </div>
-          ))} */}
-
-          {sector.map((option: string, ind) => (
-            <div className="my-3 flex items-center" key={ind.toString()}>
-              <Radio
-                onChange={() => {
-                  setSelectedSectors([option]); // Set the selected option as the only item in the state
-                }}
-                checked={selectedSectors.includes(option)}
-              >
-                {option}
-              </Radio>
-            </div>
-          ))}
-          <div className="h-[75px] bg-[#F2F2F2] w-full flex items-center">
-            <h1 className="text-primary font-bold text-2xl">{t("Booking")}</h1>
-          </div>
-          {!phoneNumber.startsWith("+234") && (
-            <div className="w-full md:w-[100%] mt-[5px]">
-              <span className="text-[12px]">{t("space")}</span>
-              <Select
-                status={
-                  formik.touched.personalised && formik.errors.personalised
-                    ? "error"
+        <div className="w-full max-w-2xl bg-white/90 shadow-2xl rounded-2xl p-8 flex flex-col items-center animate-fade-in">
+          <h1 className="text-primary font-bold text-3xl md:text-4xl mb-1">
+            {t("Book")}
+          </h1>
+          <span className="mb-2 text-gray-700">{t("Part")}</span>
+          <p className="text-xl text-gray-600 mb-4">{t("Fill")}</p>
+          <div className="w-full border-b border-gray-200 mb-6" />
+          <div className="flex-1 flex-col bg-transparent min-h-[200px] w-full mt-0 overflow-x-hidden">
+            <span className="text-lg text-primary font-semibold mb-2 block">
+              {t("Personal")}
+            </span>
+            <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
+              <Input
+                error={
+                  formik.touched.name && formik.errors.name
+                    ? formik.errors.name
                     : ""
                 }
-                className="w-[100%]"
-                defaultValue={false}
-                onChange={(e) => {
-                  formik.values.personalised = e;
-
-                  setIsPersonalised(e);
-                  if (!phoneNumber.startsWith("+234")) {
-                    if (isPersonalised) {
-                      console.log("");
-                    }
-                    if (e == true) {
-                      setRate(2700);
-                    } else {
-                      setRate(1650);
-                    }
-                  }
-                }}
-                options={[
-                  { value: true, label: t("Pesonalised") },
-                  { value: false, label: t("Non-Personalised") },
-                ]}
+                value={formik.values.name}
+                onChange={formik.handleChange}
+                id="name"
+                className="w-full md:w-[50%]"
+                required
+                label={t("Name")}
+                placeholder="Enter the name of the company"
+                outlined={true}
+              />
+              <Input
+                error={
+                  formik.touched.full_name && formik.errors.full_name
+                    ? formik.errors.full_name
+                    : ""
+                }
+                value={formik.values.full_name}
+                id="full_name"
+                onChange={formik.handleChange}
+                className="w-full md:w-[50%]"
+                required
+                label={t("full")}
+                placeholder="Enter Your Full Name"
+                outlined={true}
               />
             </div>
-          )}
-          {/* {formik.values.personalised ? (
-            <AntTextArea
-              id="personal_meters"
-              error={
-                formik.touched.personal_meters && formik.errors.personal_meters
-                  ? formik.errors.personal_meters
-                  : ''
-              }
-              value={formik.values.personal_meters}
-              onChange={formik.handleChange}
-              className="w-full"
-              label={t('personal')}
-              outlined={false}
-            />
-          ) : null} */}
-          <div className="flex flex-col mt-[20px]">
-            <h1>
-              {t("size")} <span className="text-[red] ml-1">*</span>
-            </h1>
-            <Radio.Group onChange={onChangeOption} value={selectedOption}>
-              <Space direction="vertical">
-                <Radio value={6}>6 Sqm</Radio>
-                <Radio value={9}>9 Sqm</Radio>
-                <Radio value={12}>12 Sqm</Radio>
-                <Radio value={18}>18 Sqm</Radio>
-                <Radio value={40}>40 Sqm</Radio>
-                <Radio value={50}>50 Sqm</Radio>
-              </Space>
-            </Radio.Group>
-            {/* <label className="inline-flex items-center">
-              <input
-                type="radio"
-                className="form-radio text-primary"
-                value={6}
-                checked={selectedOption == "6"}
-                onChange={handleOptionChange}
+            <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
+              <Input
+                required
+                value={phoneNumber}
+                disabled
+                className="w-full md:w-[30%]"
+                label={t("Mobile")}
+                outlined={true}
               />
-              <span className="ml-2">6 Sqm</span>
-            </label>
-            <label className="inline-flex items-center">
-              <input
-                type="radio"
-                className="form-radio text-primary"
-                value={9}
-                checked={selectedOption == "9"}
-                onChange={handleOptionChange}
+              <Input
+                required
+                error={
+                  formik.touched.email && formik.errors.email
+                    ? formik.errors.email
+                    : ""
+                }
+                value={formik.values.email}
+                id="email"
+                onChange={formik.handleChange}
+                className="w-full md:w-[70%]"
+                label={t("Email")}
+                outlined={true}
               />
-              <span className="ml-2">9 Sqm</span>
-            </label> */}
-          </div>
-          <div className="flex flex-col">
-            {phoneNumber.startsWith("+212") ? (
-              <h1 className="ml-auto font-bold text-black">
-                MONTANT TOTAL (MAD)
-              </h1>
-            ) : (
-              <h1 className="ml-auto font-bold text-black">TOTAL AMOUNT ($)</h1>
+            </div>
+            <div className="flex flex-col md:flex-row gap-0 md:gap-3 items-center">
+              <Input
+                error={
+                  formik.touched.job_title && formik.errors.job_title
+                    ? formik.errors.job_title
+                    : ""
+                }
+                value={formik.values.job_title}
+                onChange={formik.handleChange}
+                id="job_title"
+                className="w-full md:w-[50%]"
+                label={t("job")}
+                placeholder="Job Title"
+                outlined={true}
+              />
+              <Input
+                error={
+                  formik.touched.annual_turnover &&
+                  formik.errors.annual_turnover
+                    ? formik.errors.annual_turnover
+                    : ""
+                }
+                value={formik.values.annual_turnover}
+                id="annual_turnover"
+                onChange={formik.handleChange}
+                className="w-full md:w-[50%]"
+                label={t("annual")}
+                placeholder="Enter Your Annual Turnover"
+                outlined={true}
+                prefix={phoneNumber.startsWith("+212") ? "MAD" : "$"}
+              />
+            </div>
+            <span className="font-[500] text-[12px] my-4 mt-[20px] ">
+              {t("your")} <span className="text-[red]">*</span>
+            </span>
+            {sector.map((option: string, ind) => (
+              <div className="my-3 flex items-center" key={ind.toString()}>
+                <Radio
+                  onChange={() => {
+                    setSelectedSectors([option]);
+                  }}
+                  checked={selectedSectors.includes(option)}
+                >
+                  {option}
+                </Radio>
+              </div>
+            ))}
+            <div className="h-[75px] w-full flex items-center border-t border-gray-200 mt-10">
+              <h1 className="text-primary font-bold text-lg">{t("Booking")}</h1>
+            </div>
+            {!phoneNumber.startsWith("+234") && (
+              <div className="w-full md:w-[100%] mt-[5px]">
+                <span className="text-[12px]">{t("space")}</span>
+                <Select
+                  status={
+                    formik.touched.personalised && formik.errors.personalised
+                      ? "error"
+                      : ""
+                  }
+                  className="w-[100%] h-[38px]"
+                  defaultValue={false}
+                  onChange={(e) => {
+                    formik.values.personalised = e;
+                    setIsPersonalised(e);
+                    if (!phoneNumber.startsWith("+234")) {
+                      if (isPersonalised) {
+                        console.log("");
+                      }
+                      if (e == true) {
+                        setRate(2700);
+                      } else {
+                        setRate(1650);
+                      }
+                    }
+                  }}
+                  options={[
+                    { value: true, label: t("Pesonalised") },
+                    { value: false, label: t("Non-Personalised") },
+                  ]}
+                />
+              </div>
             )}
-            <p className="ml-auto font-bold">
-              {phoneNumber.startsWith("+212") ? "" : "$"}{" "}
-              {(rate * selectedMeters).toLocaleString()}
-            </p>
-          </div>
-          <div className="flex gap-4 items-center justify-end mt-10 mb-5">
-            <Button className="border-primary bg-transparent text-primary h-[38px]">
-              Reset
-            </Button>
-            <Button
-              loading={booking}
-              onClick={() => {
-                formik.handleSubmit();
-              }}
-              className="bg-primary h-[38px]"
-              type="primary"
-            >
-              {t("Payment")}
-            </Button>
+            <div className="flex flex-col mt-[20px]">
+              <h1>
+                {t("size")} <span className="text-[red] ml-1">*</span>
+              </h1>
+              <Radio.Group onChange={onChangeOption} value={selectedOption}>
+                <Space direction="vertical">
+                  <Radio value={6}>6 Sqm</Radio>
+                  <Radio value={9}>9 Sqm</Radio>
+                  <Radio value={12}>12 Sqm</Radio>
+                  <Radio value={18}>18 Sqm</Radio>
+                  <Radio value={40}>40 Sqm</Radio>
+                  <Radio value={50}>50 Sqm</Radio>
+                </Space>
+              </Radio.Group>
+            </div>
+            <div className="flex flex-col mt-4">
+              {phoneNumber.startsWith("+212") ? (
+                <h1 className="ml-auto font-bold text-black">
+                  MONTANT TOTAL (MAD)
+                </h1>
+              ) : (
+                <h1 className="ml-auto font-bold text-black">
+                  TOTAL AMOUNT ($)
+                </h1>
+              )}
+              <p className="ml-auto font-bold">
+                {phoneNumber.startsWith("+212") ? "MAD" : "$"}{" "}
+                {(rate * selectedMeters).toLocaleString()}
+              </p>
+            </div>
+            <div className="flex gap-4 items-center justify-end mt-10 mb-5">
+              <Button className="border-primary bg-transparent text-primary h-[38px] hover:bg-primary/10 transition-all duration-200">
+                Reset
+              </Button>
+              <Button
+                loading={booking}
+                onClick={() => {
+                  formik.handleSubmit();
+                }}
+                className="bg-primary h-[38px] text-white font-semibold rounded-lg shadow hover:scale-105 transition-all duration-200"
+                type="primary"
+              >
+                {t("Payment")}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
