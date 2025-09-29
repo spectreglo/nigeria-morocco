@@ -241,6 +241,7 @@ export default function DashboardHome() {
           </div>
         </section>
         <section className="mt-4 max-w-full overflow-x-auto rounded-xl shadow bg-white/90">
+          {/* Uncomment when Export on Excel is needed */}
           {/* <DownloadTableExcel
             filename="nigeria/morocco_users_data"
             sheet="users"
@@ -249,82 +250,87 @@ export default function DashboardHome() {
             <button className="my-2 ml-2 px-3 py-1 bg-primary text-white rounded shadow hover:scale-105 transition-transform duration-200">
               Export excel
             </button>
-          </DownloadTableExcel>
-          <table
-            ref={tableRef}
-            className="w-full min-w-[900px] divide-y divide-gray-200 rounded text-[13px]"
-          >
-            <thead className="bg-silver sticky top-0 z-10">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  S/N
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Full Name
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Company Name
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Address
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Designation
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Passport Number/CIN
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Phone
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Email
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Country
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200 overflow-x-scroll">
-              {!loading &&
-                conditionalData.map((record, ind) => (
-                  <tr
-                    key={ind.toString()}
-                    className={ind % 2 === 0 ? "bg-silver/30" : ""}
-                  >
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {ind + 1 + (currentPage - 1) * ITEMS_PER_PAGE}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {record.first_name} {record.last_name}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap max-w-[20%]">
-                      {record.governmental
-                        ? record.ministry
-                        : record.company_name}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {record.address}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {record.designation}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {record.passport_number} {record.cin}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {record.mobile}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {record.email}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {record.mobile.startsWith("+234") ? " 🇳🇬" : "  🇲🇦"}
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table> */}
+          </DownloadTableExcel> */}
+          {/* Hide the table below by wrapping in a conditional */}
+          {/* table for export on Excel */}
+          {false && (
+            <table
+              ref={tableRef}
+              className="w-full min-w-[900px] divide-y divide-gray-200 rounded text-[13px]"
+            >
+              <thead className="bg-silver sticky top-0 z-10">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    S/N
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Full Name
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Company Name
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Address
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Designation
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Passport Number/CIN
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Phone
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Email
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Country
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200 overflow-x-scroll">
+                {!loading &&
+                  conditionalData.map((record, ind) => (
+                    <tr
+                      key={ind.toString()}
+                      className={ind % 2 === 0 ? "bg-silver/30" : ""}
+                    >
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {ind + 1 + (currentPage - 1) * ITEMS_PER_PAGE}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {record.first_name} {record.last_name}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap max-w-[20%]">
+                        {record.governmental
+                          ? record.ministry
+                          : record.company_name}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {record.address}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {record.designation}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {record.passport_number} {record.cin}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {record.mobile}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {record.email}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {record.mobile.startsWith("+234") ? " 🇳🇬" : "  🇲🇦"}
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          )}
+          {/* End of conditional table */}
           <table className="w-full divide-y divide-gray-200 rounded text-[13px]">
             <thead className="bg-silver">
               <tr>
