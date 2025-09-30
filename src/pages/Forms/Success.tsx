@@ -4,7 +4,10 @@ import { Button } from "antd";
 export default function Success() {
   const navigate = useNavigate();
   const location = useLocation();
-  const total = location.state.total;
+  const { total = 0, cities = [] } = (location.state || {}) as {
+    total?: number;
+    cities?: string[];
+  };
 
   return (
     <div className="w-full h-[100vh] flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
@@ -56,8 +59,20 @@ export default function Success() {
         </p>
         {total > 0 && (
           <h1 className="font-bold text-2xl text-blue-700 mb-4">
-            Total: ${Number(total).toLocaleString()}
+            Total: {Number(total).toLocaleString()} MAD
           </h1>
+        )}
+        {cities.length > 0 && (
+          <div className="text-left mb-6">
+            <h2 className="text-lg font-semibold text-gray-800 mb-2">
+              Selected Cities:
+            </h2>
+            <ul className="list-disc list-inside text-gray-600">
+              {cities.map((city, index) => (
+                <li key={index}>{city}</li>
+              ))}
+            </ul>
+          </div>
         )}
         <div className="grid grid-cols-1 gap-8 w-full mb-6">
           {/* Nigerian Account (uncomment if needed)
