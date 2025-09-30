@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Input from "../../components/Input";
 import { InboxOutlined } from "@ant-design/icons";
 
@@ -48,6 +48,7 @@ export interface InitialValuesProps {
   passport_expiry: string;
   cin_expiry: string;
   last_name: string;
+  cities?: string[];
 }
 interface UploadProps {
   name: string;
@@ -102,6 +103,9 @@ export default function Register() {
     image_url: Yup.string().url("Invalid image URL"),
     first_name: Yup.string().required("First name is required"),
     last_name: Yup.string().required("Last name is required"),
+    cities: Yup.array()
+      .of(Yup.string())
+      .required("At least one city is required"),
   });
 
   const initialValues: InitialValuesProps = {
@@ -127,10 +131,16 @@ export default function Register() {
     cin_expiry: "",
     last_name: "",
     first_name: "",
+    cities: [],
   };
   const formik = useFormik({
     initialValues,
     onSubmit: async (values) => {
+      const cityCount = values.cities?.length || 0;
+      const base = cityCount * 704;
+      const tax = base * 0.2;
+      const total = base + tax;
+
       if (values.governmental) {
         if (!values.ministry) {
           notification.error({ message: "Please add an organisation" });
@@ -168,7 +178,8 @@ export default function Register() {
         if (phoneNumber.startsWith("+234")) {
           navigate("/Success", {
             state: {
-              total: 0,
+              total,
+              cities: values.cities,
             },
           });
           // setEmail(values.email);
@@ -177,7 +188,8 @@ export default function Register() {
         } else {
           navigate("/Success", {
             state: {
-              total: 0,
+              total,
+              cities: values.cities,
             },
           });
         }
@@ -186,9 +198,13 @@ export default function Register() {
     validationSchema,
   });
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
+  const { base, tax, total } = useMemo(() => {
+    const cityCount = formik.values.cities?.length || 0;
+    const base = cityCount * 704;
+    const tax = base * 0.2;
+    const total = base + tax;
+    return { base, tax, total };
+  }, [formik.values.cities]);
 
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -937,7 +953,7 @@ export default function Register() {
               </div>
             ))}
 
-            <span className="mt-5">{t("Passport")}</span>
+            <span className="font-[500]">{t("Passport")}</span>
             <div className="h-[200px] md:h-[150px] mt-4">
               <Dragger showUploadList={true} className="h-[150px]" {...props}>
                 <p className="ant-upload-drag-icon">
@@ -952,8 +968,96 @@ export default function Register() {
               </Dragger>
             </div>
 
+            {/* City selection checkboxes */}
+            <div className="mt-6">
+              <span className="font-[500] block mb-2">
+                Select City (704 MAD per city)
+              </span>
+              <div className="flex gap-6">
+                {["Lagos", "Kano", "Abuja"].map((city) => (
+                  <Checkbox
+                    key={city}
+                    required
+                    checked={formik.values.cities?.includes(city)}
+                    onChange={(e) => {
+                      const checked = e.target.checked;
+                      let updated = formik.values.cities || [];
+                      if (checked) {
+                        updated = [...updated, city];
+                      } else {
+                        updated = updated.filter((c: string) => c !== city);
+                      }
+                      formik.setFieldValue("cities", updated);
+                    }}
+                  >
+                    {city}
+                  </Checkbox>
+                ))}
+              </div>
+              <span className="text-xs text-gray-500 mt-1 block">
+                You can select one, two, or all cities. Price is 704 MAD per
+                city.
+              </span>
+              <span className="text-xs text-gray-500 mt-1 block">
+                (Includes airport transfer, awards ceremony access & dining)
+              </span>
+
+              <div className="w-full flex justify-center mt-6">
+                <div className="bg-silver/40 border border-gray-200 rounded-xl px-8 py-4 shadow flex flex-col items-center max-w-xs w-full">
+                  {(() => {
+                    // const cityCount = formik.values.cities?.length || 0;
+                    // const base = cityCount * 704;
+                    // const tax = base * 0.2;
+                    // const total = base + tax;
+                    return (
+                      <>
+                        <div className="flex justify-between w-full mb-1">
+                          <span className="text-gray-700 font-medium">
+                            Subtotal
+                          </span>
+                          <span className="font-semibold">
+                            {base.toLocaleString()} MAD
+                          </span>
+                        </div>
+                        <div className="flex justify-between w-full mb-1">
+                          <span className="text-gray-700 font-medium">
+                            Tax (20%)
+                          </span>
+                          <span className="font-semibold">
+                            {tax.toLocaleString(undefined, {
+                              maximumFractionDigits: 2,
+                            })}{" "}
+                            MAD
+                          </span>
+                        </div>
+                        <div className="border-b border-gray-300 w-full my-2" />
+                        <div className="flex justify-between w-full">
+                          <span className="text-primary font-bold text-lg">
+                            Grand Total
+                          </span>
+                          <span className="text-green-700 font-bold text-lg">
+                            {total.toLocaleString(undefined, {
+                              maximumFractionDigits: 2,
+                            })}{" "}
+                            MAD
+                          </span>
+                        </div>
+                      </>
+                    );
+                  })()}
+                </div>
+              </div>
+            </div>
+
             <div className="flex gap-4 items-center justify-end mt-10 mb-5">
-              <Button className="border-primary bg-transparent text-primary h-[38px] hover:bg-primary/10 transition-all duration-200">
+              <Button
+                className="border-primary bg-transparent text-primary h-[38px] hover:bg-primary/10 transition-all duration-200"
+                onClick={() => {
+                  formik.resetForm();
+                  setNiche([]);
+                  setMeeting([]);
+                }}
+              >
                 Reset
               </Button>
               <Button
@@ -979,11 +1083,11 @@ export default function Register() {
       <Modal
         closable={false}
         keyboard={false}
-        footer={false}
+        footer={null}
         centered
         title=""
         open={isModalOpen}
-        onOk={handleOk}
+        onCancel={handleCancel}
       >
         <div className="flex flex-col min-h-[400px] bg-white rounded-xl p-3 animate-fade-in">
           <h1 className="text-lg font-bold text-primary mb-2">
@@ -991,18 +1095,18 @@ export default function Register() {
           </h1>
           <div className="border-[#9D9DB7] border h-[217px] w-full my-5 overflow-y-scroll p-[10px] rounded bg-silver/30 text-gray-700 text-sm">
             <p className="text-justify">
-              <p>
+              <span>
                 Welcome to Nigeria-Morocco Business Week! By proceeding with the
                 registration process, you agree to the following terms and
-                conditions:{" "}
-              </p>
+                conditions:
+              </span>
               Registration Information: <br />
               1.1 You must provide accurate and complete information during the
               registration process. <br />
               1.2 You are responsible for maintaining the confidentiality of
               your account credentials and for all activities that occur under
               your account. <br />
-              <p>Data Collection and Use: </p>
+              <span>Data Collection and Use: </span>
               2.1 We collect personal information such as your name, email
               address, and other relevant details for registration and
               communication purposes. <br />
@@ -1015,14 +1119,14 @@ export default function Register() {
               IP address, and usage patterns to improve our services and user
               experience.
               <br />
-              <p>Cookies and Tracking:</p>
+              <span>Cookies and Tracking:</span>
               3.1 We use cookies and similar technologies to enhance your
               browsing experience and track usage patterns.
               <br />
               3.2 By using our website, you consent to the use of cookies and
               tracking technologies as described in our Privacy Policy.
               <br />
-              <p>Content Submission:</p>
+              <span>Content Submission:</span>
               4.1 You are solely responsible for any content you submit or
               upload to the website.
               <br />
@@ -1031,7 +1135,7 @@ export default function Register() {
               use, reproduce, modify, adapt, publish, translate, distribute, and
               display such content.
               <br />
-              <p>Intellectual Property:</p>
+              <span>Intellectual Property:</span>
               5.1 All content and materials on the website, including but not
               limited to text, graphics, logos, and software, are owned or
               licensed by us and are protected by intellectual property laws.
@@ -1039,7 +1143,7 @@ export default function Register() {
               5.2 You may not use, reproduce, modify, or distribute any content
               from the website without our prior written consent.
               <br />
-              <p>Disclaimer of Warranties:</p>
+              <span>Disclaimer of Warranties:</span>
               6.1 We strive to provide accurate and up-to-date information, but
               we do not warrant the completeness, reliability, or accuracy of
               the content on the website.
@@ -1049,7 +1153,7 @@ export default function Register() {
               warranties of merchantability, fitness for a particular purpose,
               and non-infringement.
               <br />
-              <p>Limitation of Liability:</p>
+              <span>Limitation of Liability:</span>
               7.1 We shall not be liable for any direct, indirect, incidental,
               consequential, or punitive damages arising out of your use or
               inability to use the website.
@@ -1058,7 +1162,7 @@ export default function Register() {
               related to the website shall not exceed the amount paid by you, if
               any, for accessing the website.
               <br />
-              <p>Indemnification:</p>
+              <span>Indemnification:</span>
               8.1 You agree to indemnify and hold us harmless from any claims,
               losses, liabilities, damages, costs, and expenses arising out of
               your use of the website or violation of these terms and
@@ -1071,25 +1175,25 @@ export default function Register() {
               conditions shall be subject to the exclusive jurisdiction of the
               courts in Nigeria and Morocco.
               <br />
-              <p>Changes to Terms:</p>
+              <span>Changes to Terms:</span>
               10.1 We reserve the right to modify or update these terms and
               conditions at any time without prior notice.
               <br />
               10.2 Your continued use of the website after such changes
               constitutes your acceptance of the modified terms.
               <br />
-              <p>
+              <span>
                 Please review these terms and conditions carefully before
                 proceeding with the registration process. If you do not agree
                 with any part of these terms, please do not proceed further. If
                 you have any questions or concerns, please contact us at
                 info@spectre.com.
-              </p>
-              <p>
+              </span>
+              <span>
                 By clicking "I Agree" or similar buttons, you acknowledge that
                 you have read, understood, and agreed to these terms and
                 conditions.
-              </p>
+              </span>
             </p>
           </div>
           <div className="my-3 flex items-center">

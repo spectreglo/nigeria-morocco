@@ -40,7 +40,7 @@ export default function Booking() {
   const [isPersonalised, setIsPersonalised] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [phoneNumber] = useState<string>(location.state.phoneNumber);
-  const [rate, setRate] = useState(phoneNumber.startsWith("+234") ? 550 : 1650);
+  const [rate, setRate] = useState(phoneNumber.startsWith("+234") ? 550 : 1600);
   const [selectedMeters, setSelectedMeters] = useState(0);
 
   // const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -310,9 +310,9 @@ export default function Booking() {
                         console.log("");
                       }
                       if (e == true) {
-                        setRate(2700);
+                        setRate(2400);
                       } else {
-                        setRate(1650);
+                        setRate(1600);
                       }
                     }
                   }}
@@ -328,14 +328,40 @@ export default function Booking() {
                 {t("size")} <span className="text-[red] ml-1">*</span>
               </h1>
               <Radio.Group onChange={onChangeOption} value={selectedOption}>
-                <Space direction="vertical">
-                  <Radio value={6}>6 Sqm</Radio>
-                  <Radio value={9}>9 Sqm</Radio>
-                  <Radio value={12}>12 Sqm</Radio>
-                  <Radio value={18}>18 Sqm</Radio>
-                  <Radio value={40}>40 Sqm</Radio>
-                  <Radio value={50}>50 Sqm</Radio>
-                </Space>
+                {isPersonalised ? (
+                  <Space direction="vertical">
+                    {/* <Radio value={6}>6 Sqm</Radio> */}
+                    <Radio value={9}>
+                      9 Sqm ( Tv , chairs Table,Sofa, sockets) + registration
+                      for 2 persons for all cities{" "}
+                    </Radio>
+                    <Radio value={12}>
+                      12 Sqm (Tv Chairs, Table, Sofas ,Sockets ) + registration
+                      for 3 persons for all cities
+                    </Radio>
+                    <Radio value={18}>
+                      18 Sqm ( Tv, Chairs Table, Sofas, sockets ) + registration
+                      for 4 persons for all cities
+                    </Radio>
+                    {/* <Radio value={40}>40 Sqm</Radio>
+                  <Radio value={50}>50 Sqm</Radio> */}
+                  </Space>
+                ) : (
+                  <Space direction="vertical">
+                    {/* <Radio value={6}>6 Sqm</Radio> */}
+                    <Radio value={9}>9 Sqm ( Tv , chairs Table, sockets)</Radio>
+                    <Radio value={12}>
+                      12 Sqm (Tv Chairs, Table, Sockets ) + registration for 1
+                      persons for all cities
+                    </Radio>
+                    <Radio value={18}>
+                      18 Sqm ( Tv, Chairs Table, sockets ) + registration for 2
+                      persons for all cities
+                    </Radio>
+                    {/* <Radio value={40}>40 Sqm</Radio>
+                  <Radio value={50}>50 Sqm</Radio> */}
+                  </Space>
+                )}
               </Radio.Group>
             </div>
             <div className="flex flex-col mt-4">
