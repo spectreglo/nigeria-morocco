@@ -114,7 +114,7 @@ export default function LandinPage() {
           <div className="flex gap-4 mt-4">
             <Button
               onClick={showModal}
-              className="bg-gradient-to-r from-primary to-blue-500 w-36 h-12 text-white font-semibold rounded-lg shadow-lg hover:scale-105 hover:from-black hover:to-primary transition-all duration-200"
+              className="bg-gradient-to-r from-primary to-blue-500 w-[180px] h-12 text-white font-semibold rounded-lg shadow-lg hover:scale-105 hover:from-black hover:to-primary transition-all duration-200"
             >
               {i18n?.language === "fr"
                 ? "Obtenez Votre Badge"
@@ -124,7 +124,7 @@ export default function LandinPage() {
               onClick={() =>
                 scrollRef.current?.scrollIntoView({ behavior: "smooth" })
               }
-              className="bg-white border border-primary text-primary w-36 h-12 font-semibold rounded-lg shadow hover:bg-primary hover:text-white transition-all duration-200"
+              className="bg-white border border-primary text-primary w-[180px] h-12 font-semibold rounded-lg shadow hover:bg-primary hover:text-white transition-all duration-200"
             >
               {t("learn")}
             </Button>
@@ -236,8 +236,8 @@ export default function LandinPage() {
     <div className="relative min-h-screen bg-gradient-to-br from-primary/80 via-blue-100 to-white overflow-x-hidden">
       {/* Hero Section */}
       <div className="min-h-screen flex flex-col relative">
-        {/* Countdown Timer */}
-        <div className="absolute top-24 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
+        {/* Countdown Timer (hidden on mobile) */}
+        <div className="hidden md:flex absolute top-24 left-1/2 -translate-x-1/2 z-20 flex-col items-center">
           <div className="bg-white/80 px-6 py-2 rounded-full shadow text-primary font-bold text-lg border border-primary animate-fade-in">
             {eventCountdown && <span>Event Starts In: {eventCountdown}</span>}
           </div>
@@ -332,9 +332,11 @@ export default function LandinPage() {
           infiniteLoop
           className="flex flex-col w-full min-h-[50vh] md:min-h-[80vh] justify-start text-start z-10"
         >
-          {conditionalItem.map((item, ind) => (
-            <CarouselItem key={ind} item={item} ind={ind} />
-          ))}
+          {(window.innerWidth < 768 ? ITEMS.slice(0, 1) : ITEMS).map(
+            (item, ind) => (
+              <CarouselItem key={ind} item={item} ind={ind} />
+            )
+          )}
         </Carousel>
         {/* Hero Section CTAs */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center z-20">
@@ -592,7 +594,7 @@ export default function LandinPage() {
       {/* Testimonials Section */}
       <div className="w-full flex flex-col items-center py-20 bg-silver/60">
         <h2 className="text-2xl font-bold text-primary mb-6">
-          What People Are Saying
+          {t("Testimonial")}
         </h2>
         <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center">
@@ -601,10 +603,7 @@ export default function LandinPage() {
               alt="Testimonial 1"
               className="w-16 h-16 rounded-full mb-3"
             />
-            <p className="text-gray-700 italic">
-              “A truly world-class event. The networking opportunities were
-              amazing!”
-            </p>
+            <p className="text-gray-700 italic">{t("testimonial1")}</p>
             <span className="mt-2 font-semibold text-primary">
               Amina S., Lagos
             </span>
@@ -615,10 +614,7 @@ export default function LandinPage() {
               alt="Testimonial 2"
               className="w-16 h-16 rounded-full mb-3"
             />
-            <p className="text-gray-700 italic">
-              “We found new partners and clients. Highly recommended for any
-              business.”
-            </p>
+            <p className="text-gray-700 italic">{t("testimonial2")}</p>
             <span className="mt-2 font-semibold text-primary">
               Youssef M., Casablanca
             </span>
@@ -629,10 +625,7 @@ export default function LandinPage() {
               alt="Testimonial 3"
               className="w-16 h-16 rounded-full mb-3"
             />
-            <p className="text-gray-700 italic">
-              “Excellent organization and great speakers. Looking forward to
-              next year!”
-            </p>
+            <p className="text-gray-700 italic">{t("testimonial3")}</p>
             <span className="mt-2 font-semibold text-primary">
               Chinedu O., Abuja
             </span>
@@ -641,52 +634,38 @@ export default function LandinPage() {
       </div>
       {/* FAQ Section */}
       <div className="w-full flex flex-col items-center py-20 bg-white/80">
-        <h2 className="text-2xl font-bold text-primary mb-6">
-          Frequently Asked Questions
-        </h2>
+        <h2 className="text-2xl font-bold text-primary mb-6">{t("FAQ")}</h2>
         <div className="w-full max-w-2xl">
           <details className="mb-4 border rounded-lg p-4 bg-silver/40">
             <summary className="font-semibold cursor-pointer">
-              How do I register for the event?
+              {t("faq1")}
             </summary>
-            <p className="mt-2 text-gray-700">
-              Click the “Participate” button at the top or in the hero section
-              and fill in your details.
-            </p>
+            <p className="mt-2 text-gray-700">{t("faq1ans")}</p>
           </details>
           <details className="mb-4 border rounded-lg p-4 bg-silver/40">
             <summary className="font-semibold cursor-pointer">
-              Can I book a space for my company?
+              {t("faq2")}
             </summary>
-            <p className="mt-2 text-gray-700">
-              Yes, use the “Book A Space” button in the navigation or space
-              booking section.
-            </p>
+            <p className="mt-2 text-gray-700">{t("faq2ans")}</p>
           </details>
           <details className="mb-4 border rounded-lg p-4 bg-silver/40">
             <summary className="font-semibold cursor-pointer">
-              Where is the event venue?
+              {t("faq3")}
             </summary>
-            <p className="mt-2 text-gray-700">
-              Lagos, Kano, and Abuja, Nigeria. See the About section for more
-              details.
-            </p>
+            <p className="mt-2 text-gray-700">{t("faq3ans")}</p>
           </details>
           <details className="mb-4 border rounded-lg p-4 bg-silver/40">
             <summary className="font-semibold cursor-pointer">
-              Who can I contact for support?
+              {t("faq4")}
             </summary>
-            <p className="mt-2 text-gray-700">
-              Use the WhatsApp button or the contact form on our website for
-              assistance.
-            </p>
+            <p className="mt-2 text-gray-700">{t("faq4ans")}</p>
           </details>
         </div>
       </div>
 
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/2348012345678"
+        href="https://wa.me/212649397662"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg p-4 flex items-center justify-center animate-bounce"
