@@ -211,8 +211,8 @@ export default function LandinPage() {
       ),
     },
   ];
-  const isSmallSize = window.innerWidth < 100;
-  const conditionalItem = isSmallSize ? ITEMS.slice(0, 1) : ITEMS;
+  // const isSmallSize = window.innerWidth < 100;
+  // const conditionalItem = isSmallSize ? ITEMS.slice(0, 1) : ITEMS;
 
   useEffect(() => {
     const interval = setInterval(() => {
