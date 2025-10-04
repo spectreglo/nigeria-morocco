@@ -128,9 +128,13 @@ export default function Booking() {
       if (booked.status) {
         formik.resetForm();
         message.success("Booked successfully!");
+        const montantTotal = phoneNumber.startsWith("+212")
+          ? rate * selectedMeters * 1.2
+          : rate * selectedMeters;
         navigate("/Success", {
           state: {
-            total: rate * selectedMeters,
+            total: montantTotal,
+            fromBooking: true,
           },
         });
         // console.log(booked, 'booked');
@@ -223,7 +227,7 @@ export default function Booking() {
                 value={phoneNumber}
                 disabled
                 className="w-full md:w-[30%]"
-                label={t("Mobile")}
+                label="Mobile"
                 outlined={true}
               />
               <Input
@@ -270,24 +274,26 @@ export default function Booking() {
                 label={t("annual")}
                 placeholder="Enter Your Annual Turnover"
                 outlined={true}
-                prefix={phoneNumber.startsWith("+212") ? "MAD" : "$"}
+                prefix={phoneNumber.startsWith("+212") ? "" : "$"}
               />
             </div>
-            <span className="font-[500] text-[12px] my-4 mt-[20px] ">
-              {t("your")} <span className="text-[red]">*</span>
-            </span>
-            {sector.map((option: string, ind) => (
-              <div className="my-3 flex items-center" key={ind.toString()}>
-                <Radio
-                  onChange={() => {
-                    setSelectedSectors([option]);
-                  }}
-                  checked={selectedSectors.includes(option)}
-                >
-                  {option}
-                </Radio>
-              </div>
-            ))}
+            <div className="mt-6 w-full">
+              <span className="font-[500] text-[12px] my-4 mt-[20px] ">
+                {t("your")} <span className="text-[red]">*</span>
+              </span>
+              {sector.map((option: string, ind) => (
+                <div className="my-3 flex items-center" key={ind.toString()}>
+                  <Radio
+                    onChange={() => {
+                      setSelectedSectors([option]);
+                    }}
+                    checked={selectedSectors.includes(option)}
+                  >
+                    {option}
+                  </Radio>
+                </div>
+              ))}
+            </div>
             <div className="h-[75px] w-full flex items-center border-t border-gray-200 mt-10">
               <h1 className="text-primary font-bold text-lg">{t("Booking")}</h1>
             </div>
@@ -332,16 +338,16 @@ export default function Booking() {
                   <Space direction="vertical">
                     {/* <Radio value={6}>6 Sqm</Radio> */}
                     <Radio value={9}>
-                      9 Sqm ( Tv , chairs Table,Sofa, sockets) + registration
-                      for 2 persons for all cities{" "}
+                      9 Sqm ( {t("spaceItems")}) + {t("registrationFor")} 2{" "}
+                      {t("personsForAllCities")}
                     </Radio>
                     <Radio value={12}>
-                      12 Sqm (Tv Chairs, Table, Sofas ,Sockets ) + registration
-                      for 3 persons for all cities
+                      12 Sqm ( {t("spaceItems")}) + {t("registrationFor")} 3{" "}
+                      {t("personsForAllCities")}
                     </Radio>
                     <Radio value={18}>
-                      18 Sqm ( Tv, Chairs Table, Sofas, sockets ) + registration
-                      for 4 persons for all cities
+                      18 Sqm ( {t("spaceItems")}) + {t("registrationFor")} 4{" "}
+                      {t("personsForAllCities")}
                     </Radio>
                     {/* <Radio value={40}>40 Sqm</Radio>
                   <Radio value={50}>50 Sqm</Radio> */}
@@ -349,14 +355,14 @@ export default function Booking() {
                 ) : (
                   <Space direction="vertical">
                     {/* <Radio value={6}>6 Sqm</Radio> */}
-                    <Radio value={9}>9 Sqm ( Tv , chairs Table, sockets)</Radio>
+                    <Radio value={9}>9 Sqm ( {t("spaceItems")})</Radio>
                     <Radio value={12}>
-                      12 Sqm (Tv Chairs, Table, Sockets ) + registration for 1
-                      persons for all cities
+                      12 Sqm ( {t("spaceItems")}) + {t("registrationFor")} 1{" "}
+                      {t("personsForAllCities")}
                     </Radio>
                     <Radio value={18}>
-                      18 Sqm ( Tv, Chairs Table, sockets ) + registration for 2
-                      persons for all cities
+                      18 Sqm ( {t("spaceItems")}) + {t("registrationFor")} 2{" "}
+                      {t("personsForAllCities")}
                     </Radio>
                     {/* <Radio value={40}>40 Sqm</Radio>
                   <Radio value={50}>50 Sqm</Radio> */}
@@ -366,21 +372,62 @@ export default function Booking() {
             </div>
             <div className="flex flex-col mt-4">
               {phoneNumber.startsWith("+212") ? (
-                <h1 className="ml-auto font-bold text-black">
-                  MONTANT TOTAL (MAD)
-                </h1>
+                <div className="bg-silver/40 border border-gray-200 rounded-xl px-4 py-4 shadow flex flex-col items-center max-w-xs w-full mx-auto">
+                  <div className="flex justify-between w-full mb-1">
+                    <span className="text-gray-700 font-medium">
+                      Sous-total
+                    </span>
+                    <span className="font-semibold">
+                      {(rate * selectedMeters).toLocaleString()} MAD HT
+                    </span>
+                  </div>
+                  <div className="flex justify-between w-full mb-1">
+                    <span className="text-gray-700 font-medium">TVA (20%)</span>
+                    <span className="font-semibold">
+                      {(0.2 * rate * selectedMeters).toLocaleString(undefined, {
+                        maximumFractionDigits: 2,
+                      })}{" "}
+                      MAD
+                    </span>
+                  </div>
+                  <div className="border-b border-gray-300 w-full my-2" />
+                  <div className="flex justify-between w-full">
+                    <span className="text-primary font-bold text-lg">
+                      Montant Total
+                    </span>
+                    <span className="text-green-700 font-bold text-lg">
+                      {(rate * selectedMeters * 1.2).toLocaleString(undefined, {
+                        maximumFractionDigits: 2,
+                      })}{" "}
+                      MAD TTC
+                    </span>
+                  </div>
+                </div>
               ) : (
-                <h1 className="ml-auto font-bold text-black">
-                  TOTAL AMOUNT ($)
-                </h1>
+                <div className="bg-silver/40 border border-gray-200 rounded-xl px-8 py-4 shadow flex flex-col items-center max-w-xs w-full mx-auto">
+                  <div className="flex justify-between w-full mb-1">
+                    <span className="text-gray-700 font-medium">
+                      Total Amount ($)
+                    </span>
+                    <span className="font-bold">
+                      $ {(rate * selectedMeters).toLocaleString()}
+                    </span>
+                  </div>
+                </div>
               )}
-              <p className="ml-auto font-bold">
-                {phoneNumber.startsWith("+212") ? "MAD" : "$"}{" "}
-                {(rate * selectedMeters).toLocaleString()}
-              </p>
             </div>
             <div className="flex gap-4 items-center justify-end mt-10 mb-5">
-              <Button className="border-primary bg-transparent text-primary h-[38px] hover:bg-primary/10 transition-all duration-200">
+              <Button
+                className="border-primary bg-transparent text-primary h-[38px] hover:bg-primary/10 transition-all duration-200"
+                onClick={() => {
+                  formik.resetForm();
+                  setSelectedSectors([]);
+                  setSelectedOption("");
+                  setSelectedMeters(0);
+                  setIsPersonalised(false);
+                  setRate(phoneNumber.startsWith("+234") ? 550 : 1600);
+                }}
+              >
                 Reset
               </Button>
               <Button

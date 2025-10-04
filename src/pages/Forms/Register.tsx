@@ -148,8 +148,13 @@ export default function Register() {
         }
       }
 
-      if (!values.image_url) {
-        notification.error({ message: "Please upload your passport" });
+      // if (!values.image_url) {
+      //   notification.error({ message: "Please upload your passport" });
+      //   return;
+      // }
+
+      if (values.cities?.length === 0) {
+        notification.error({ message: "Please select at least one city" });
         return;
       }
 
@@ -494,6 +499,23 @@ export default function Register() {
     `${t("Tourism")}`,
   ];
 
+  const cities = [
+    {
+      label: `Lagos (${t("openingCeremony")}, ${t("Exhibitions")}, ${t(
+        "B2BSessions"
+      )}, ${t("PanelSessions")}, ${t("Tours")})`,
+      value: "Lagos",
+    },
+    {
+      label: `Kano (${t("StakeholderRoundtable")})`,
+      value: "Kano",
+    },
+    {
+      label: `Abuja (${t("HighLevelNetworkingAwardsEvent")})`,
+      value: "Abuja",
+    },
+  ];
+
   const props: UploadProps = {
     name: "file",
     multiple: false,
@@ -774,7 +796,7 @@ export default function Register() {
                       onChange={formik.handleChange}
                       className="w-full"
                       required
-                      label={t("Designation")}
+                      label="Designation"
                       outlined={true}
                     />
                   </div>
@@ -864,7 +886,7 @@ export default function Register() {
                 value={phoneNumber}
                 disabled
                 className="w-full md:w-[50%]"
-                label={t("Mobile")}
+                label="Mobile"
                 outlined={true}
               />
 
@@ -953,7 +975,9 @@ export default function Register() {
               </div>
             ))}
 
-            <span className="font-[500]">{t("Passport")}</span>
+            <span className="font-[500]">
+              {t("Passport")} <span className="text-[red]">*</span>
+            </span>
             <div className="h-[200px] md:h-[150px] mt-4">
               <Dragger showUploadList={true} className="h-[150px]" {...props}>
                 <p className="ant-upload-drag-icon">
@@ -971,39 +995,68 @@ export default function Register() {
             {/* City selection checkboxes */}
             <div className="mt-6">
               <span className="font-[500] block mb-2">
-                Select City (704 MAD per city)
+                {t("selectCity")} <span className="text-[red]">*</span>
               </span>
-              <div className="flex gap-6">
-                {["Lagos", "Kano", "Abuja"].map((city) => (
-                  <Checkbox
-                    key={city}
-                    required
-                    checked={formik.values.cities?.includes(city)}
-                    onChange={(e) => {
-                      const checked = e.target.checked;
-                      let updated = formik.values.cities || [];
-                      if (checked) {
-                        updated = [...updated, city];
-                      } else {
-                        updated = updated.filter((c: string) => c !== city);
-                      }
-                      formik.setFieldValue("cities", updated);
-                    }}
-                  >
-                    {city}
-                  </Checkbox>
-                ))}
+              <div className="flex flex-col gap-3">
+                {cities.map((city) => {
+                  const [main, ...desc] = city.label.split("(");
+                  const isSelected = formik.values.cities?.includes(city.value);
+                  return (
+                    <label
+                      key={city.value}
+                      className={`flex items-start gap-3 p-4 rounded-xl border bg-white shadow-sm transition-all cursor-pointer mb-2 ${
+                        isSelected
+                          ? "border-primary bg-primary/10"
+                          : "border-gray-200 hover:border-primary"
+                      }`}
+                      style={{ minHeight: "64px" }}
+                    >
+                      <Checkbox
+                        required
+                        checked={isSelected}
+                        onChange={(e) => {
+                          const checked = e.target.checked;
+                          let updated = formik.values.cities || [];
+                          if (checked) {
+                            updated = [...updated, city.value];
+                          } else {
+                            updated = updated.filter(
+                              (c: string) => c !== city.value
+                            );
+                          }
+                          formik.setFieldValue("cities", updated);
+                        }}
+                        className="mt-1"
+                      />
+                      <span className="text-base text-gray-700 font-medium leading-tight">
+                        {main.trim()}
+                        {desc.length > 0 && (
+                          <span className="block text-sm text-gray-500 font-normal mt-1">
+                            {desc
+                              .join("(")
+                              .replace(/\)$/, "")
+                              .split(",")
+                              .map((d, i) => (
+                                <span key={i} className="block">
+                                  {d.trim()}
+                                </span>
+                              ))}
+                          </span>
+                        )}
+                      </span>
+                    </label>
+                  );
+                })}
               </div>
               <span className="text-xs text-gray-500 mt-1 block">
-                You can select one, two, or all cities. Price is 704 MAD per
-                city.
+                {t("cityInfo")}
               </span>
               <span className="text-xs text-gray-500 mt-1 block">
-                (Includes airport transfer, awards ceremony access & dining)
+                ({t("cityInfo2")})
               </span>
 
               <div className="w-full flex justify-center mt-6">
-                <div className="bg-silver/40 border border-gray-200 rounded-xl px-8 py-4 shadow flex flex-col items-center max-w-xs w-full">
+                <div className="bg-silver/40 border border-gray-200 rounded-xl px-4 py-4 shadow flex flex-col items-center max-w-xs w-full">
                   {(() => {
                     // const cityCount = formik.values.cities?.length || 0;
                     // const base = cityCount * 704;
@@ -1013,15 +1066,19 @@ export default function Register() {
                       <>
                         <div className="flex justify-between w-full mb-1">
                           <span className="text-gray-700 font-medium">
-                            Subtotal
+                            {phoneNumber.startsWith("+234")
+                              ? "Subtotal"
+                              : "Sous-total"}
                           </span>
                           <span className="font-semibold">
-                            {base.toLocaleString()} MAD
+                            {base.toLocaleString()} MAD HT
                           </span>
                         </div>
                         <div className="flex justify-between w-full mb-1">
                           <span className="text-gray-700 font-medium">
-                            Tax (20%)
+                            {phoneNumber.startsWith("+234")
+                              ? "Tax (20%)"
+                              : "TVA (20%)"}
                           </span>
                           <span className="font-semibold">
                             {tax.toLocaleString(undefined, {
@@ -1033,13 +1090,15 @@ export default function Register() {
                         <div className="border-b border-gray-300 w-full my-2" />
                         <div className="flex justify-between w-full">
                           <span className="text-primary font-bold text-lg">
-                            Grand Total
+                            {phoneNumber.startsWith("+234")
+                              ? "Grand Total"
+                              : "Montant Total"}
                           </span>
                           <span className="text-green-700 font-bold text-lg">
                             {total.toLocaleString(undefined, {
                               maximumFractionDigits: 2,
                             })}{" "}
-                            MAD
+                            MAD TTC
                           </span>
                         </div>
                       </>
@@ -1094,107 +1153,114 @@ export default function Register() {
             Terms and Conditions
           </h1>
           <div className="border-[#9D9DB7] border h-[217px] w-full my-5 overflow-y-scroll p-[10px] rounded bg-silver/30 text-gray-700 text-sm">
-            <p className="text-justify">
-              <span>
-                Welcome to Nigeria-Morocco Business Week! By proceeding with the
-                registration process, you agree to the following terms and
-                conditions:
-              </span>
-              Registration Information: <br />
-              1.1 You must provide accurate and complete information during the
-              registration process. <br />
-              1.2 You are responsible for maintaining the confidentiality of
-              your account credentials and for all activities that occur under
-              your account. <br />
-              <span>Data Collection and Use: </span>
-              2.1 We collect personal information such as your name, email
-              address, and other relevant details for registration and
-              communication purposes. <br />
-              2.2 Your data may be shared with third parties for specific
-              purposes such as marketing, analytics, or service provision. We
-              will not sell or rent your personal information to third parties
-              without your explicit consent.
-              <br />
-              2.3 We may collect non-personal information such as browser type,
-              IP address, and usage patterns to improve our services and user
-              experience.
-              <br />
-              <span>Cookies and Tracking:</span>
-              3.1 We use cookies and similar technologies to enhance your
-              browsing experience and track usage patterns.
-              <br />
-              3.2 By using our website, you consent to the use of cookies and
-              tracking technologies as described in our Privacy Policy.
-              <br />
-              <span>Content Submission:</span>
-              4.1 You are solely responsible for any content you submit or
-              upload to the website.
-              <br />
-              4.2 By submitting content, you grant us a non-exclusive,
-              royalty-free, perpetual, irrevocable, and worldwide license to
-              use, reproduce, modify, adapt, publish, translate, distribute, and
-              display such content.
-              <br />
-              <span>Intellectual Property:</span>
-              5.1 All content and materials on the website, including but not
-              limited to text, graphics, logos, and software, are owned or
-              licensed by us and are protected by intellectual property laws.
-              <br />
-              5.2 You may not use, reproduce, modify, or distribute any content
-              from the website without our prior written consent.
-              <br />
-              <span>Disclaimer of Warranties:</span>
-              6.1 We strive to provide accurate and up-to-date information, but
-              we do not warrant the completeness, reliability, or accuracy of
-              the content on the website.
-              <br />
-              6.2 Your use of the website is at your own risk, and we disclaim
-              all warranties, express or implied, including but not limited to
-              warranties of merchantability, fitness for a particular purpose,
-              and non-infringement.
-              <br />
-              <span>Limitation of Liability:</span>
-              7.1 We shall not be liable for any direct, indirect, incidental,
-              consequential, or punitive damages arising out of your use or
-              inability to use the website.
-              <br />
-              7.2 Our total liability to you for any claims arising from or
-              related to the website shall not exceed the amount paid by you, if
-              any, for accessing the website.
-              <br />
-              <span>Indemnification:</span>
-              8.1 You agree to indemnify and hold us harmless from any claims,
-              losses, liabilities, damages, costs, and expenses arising out of
-              your use of the website or violation of these terms and
-              conditions.
-              <br />
-              Governing Law: 9.1 These terms and conditions shall be governed by
-              and construed in accordance with the laws of Nigeria and Morocco.
-              <br />
-              9.2 Any disputes arising out of or related to these terms and
-              conditions shall be subject to the exclusive jurisdiction of the
-              courts in Nigeria and Morocco.
-              <br />
-              <span>Changes to Terms:</span>
-              10.1 We reserve the right to modify or update these terms and
-              conditions at any time without prior notice.
-              <br />
-              10.2 Your continued use of the website after such changes
-              constitutes your acceptance of the modified terms.
-              <br />
-              <span>
-                Please review these terms and conditions carefully before
-                proceeding with the registration process. If you do not agree
-                with any part of these terms, please do not proceed further. If
-                you have any questions or concerns, please contact us at
-                info@spectre.com.
-              </span>
-              <span>
-                By clicking "I Agree" or similar buttons, you acknowledge that
-                you have read, understood, and agreed to these terms and
+            {phoneNumber.startsWith("+212") ? (
+              <p className="text-justify">
+                <span>{t("termsAndConditionsForMorocco")}</span>
+              </p>
+            ) : (
+              <p className="text-justify">
+                <span>
+                  Welcome to Nigeria-Morocco Business Week! By proceeding with
+                  the registration process, you agree to the following terms and
+                  conditions:
+                </span>
+                Registration Information: <br />
+                1.1 You must provide accurate and complete information during
+                the registration process. <br />
+                1.2 You are responsible for maintaining the confidentiality of
+                your account credentials and for all activities that occur under
+                your account. <br />
+                <span>Data Collection and Use: </span>
+                2.1 We collect personal information such as your name, email
+                address, and other relevant details for registration and
+                communication purposes. <br />
+                2.2 Your data may be shared with third parties for specific
+                purposes such as marketing, analytics, or service provision. We
+                will not sell or rent your personal information to third parties
+                without your explicit consent.
+                <br />
+                2.3 We may collect non-personal information such as browser
+                type, IP address, and usage patterns to improve our services and
+                user experience.
+                <br />
+                <span>Cookies and Tracking:</span>
+                3.1 We use cookies and similar technologies to enhance your
+                browsing experience and track usage patterns.
+                <br />
+                3.2 By using our website, you consent to the use of cookies and
+                tracking technologies as described in our Privacy Policy.
+                <br />
+                <span>Content Submission:</span>
+                4.1 You are solely responsible for any content you submit or
+                upload to the website.
+                <br />
+                4.2 By submitting content, you grant us a non-exclusive,
+                royalty-free, perpetual, irrevocable, and worldwide license to
+                use, reproduce, modify, adapt, publish, translate, distribute,
+                and display such content.
+                <br />
+                <span>Intellectual Property:</span>
+                5.1 All content and materials on the website, including but not
+                limited to text, graphics, logos, and software, are owned or
+                licensed by us and are protected by intellectual property laws.
+                <br />
+                5.2 You may not use, reproduce, modify, or distribute any
+                content from the website without our prior written consent.
+                <br />
+                <span>Disclaimer of Warranties:</span>
+                6.1 We strive to provide accurate and up-to-date information,
+                but we do not warrant the completeness, reliability, or accuracy
+                of the content on the website.
+                <br />
+                6.2 Your use of the website is at your own risk, and we disclaim
+                all warranties, express or implied, including but not limited to
+                warranties of merchantability, fitness for a particular purpose,
+                and non-infringement.
+                <br />
+                <span>Limitation of Liability:</span>
+                7.1 We shall not be liable for any direct, indirect, incidental,
+                consequential, or punitive damages arising out of your use or
+                inability to use the website.
+                <br />
+                7.2 Our total liability to you for any claims arising from or
+                related to the website shall not exceed the amount paid by you,
+                if any, for accessing the website.
+                <br />
+                <span>Indemnification:</span>
+                8.1 You agree to indemnify and hold us harmless from any claims,
+                losses, liabilities, damages, costs, and expenses arising out of
+                your use of the website or violation of these terms and
                 conditions.
-              </span>
-            </p>
+                <br />
+                Governing Law: 9.1 These terms and conditions shall be governed
+                by and construed in accordance with the laws of Nigeria and
+                Morocco.
+                <br />
+                9.2 Any disputes arising out of or related to these terms and
+                conditions shall be subject to the exclusive jurisdiction of the
+                courts in Nigeria and Morocco.
+                <br />
+                <span>Changes to Terms:</span>
+                10.1 We reserve the right to modify or update these terms and
+                conditions at any time without prior notice.
+                <br />
+                10.2 Your continued use of the website after such changes
+                constitutes your acceptance of the modified terms.
+                <br />
+                <span>
+                  Please review these terms and conditions carefully before
+                  proceeding with the registration process. If you do not agree
+                  with any part of these terms, please do not proceed further.
+                  If you have any questions or concerns, please contact us at
+                  info@spectre.com.
+                </span>
+                <span>
+                  By clicking "I Agree" or similar buttons, you acknowledge that
+                  you have read, understood, and agreed to these terms and
+                  conditions.
+                </span>
+              </p>
+            )}
           </div>
           <div className="my-3 flex items-center">
             <Checkbox
