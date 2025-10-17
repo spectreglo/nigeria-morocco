@@ -489,6 +489,7 @@ export default function Register() {
 
   const meetingWith = [
     `${t("Agriculture")}`,
+    phoneNumber.startsWith("+234") ? "Agro Industry" : "Agro-industrie",
     "Automobile",
     `${t("minerals")}`,
     `${t("renewable")}`,
