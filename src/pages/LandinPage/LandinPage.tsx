@@ -409,6 +409,7 @@ export default function LandinPage() {
             "MSD.jpg",
             "NADDC.png",
             "ridec.png",
+            "fenagri.png",
           ].map((src) => (
             <img
               key={src}
