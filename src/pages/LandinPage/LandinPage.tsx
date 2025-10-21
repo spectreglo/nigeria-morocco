@@ -391,32 +391,82 @@ export default function LandinPage() {
       <div
         ref={scrollRef}
         id="partners"
-        className="flex flex-col items-center p-10 pb-20"
+        className="flex flex-col items-center p-10 pb-20 bg-gradient-to-br from-white via-blue-50 to-silver/30 rounded-2xl shadow-lg mx-2 md:mx-20 my-10"
       >
-        <h1 className="text-2xl text-fontColor font-[600] mb-6">
+        <h1 className="text-2xl text-fontColor font-[700] mb-6 tracking-wide uppercase letter-spacing-2">
           {t("Partners")}
         </h1>
-        <div className="grid place-items-center px-0 grid-cols-2 md:grid-cols-6 gap-5 w-full md:px-32 mt-4">
-          {[
-            "cciscs.jpg",
-            "Embassy.png",
-            "ram.png",
-            "fmiti.png",
-            "HIESL.png",
-            "jed.jpg",
-            "jig.jpeg",
-            "farmcreed.jpg",
-            "MSD.jpg",
-            "NADDC.png",
-            "ridec.png",
-            "fenagri.png",
-          ].map((src) => (
+        <p className="uppercase text-primary font-semibold mb-2 text-center text-sm md:text-base tracking-wider">
+          Under the Auspices of the Nigeria Embassy Rabat
+        </p>
+        <div className="flex justify-center items-center mb-6 w-full">
+          <img
+            key={"Embassy.png"}
+            src={"Embassy.png"}
+            alt={"Embassy"}
+            className="rounded-2xl shadow-xl bg-white/90 p-3 border-4 border-primary hover:scale-105 hover:shadow-xl mx-auto block"
+            style={{
+              maxHeight: 180,
+              maxWidth: 420,
+              width: "100%",
+              objectFit: "contain",
+            }}
+          />
+        </div>
+        <p className="uppercase text-blue-700 font-semibold mt-2 mb-2 text-center text-sm md:text-base tracking-wider">
+          In partnership with
+        </p>
+        <div className="grid place-items-center justify-center items-center grid-cols-2 md:grid-cols-2 gap-2 w-full md:w-[70%] md:px-32 mt-2 mb-6">
+          {["casa.png", "fenagri.png"].map((src) => (
             <img
               key={src}
               src={src}
               alt={src.split(".")[0]}
-              className="rounded-lg shadow-md hover:scale-105 hover:shadow-xl transition-all duration-200 bg-white/80 p-2"
-              style={{ maxHeight: 70, objectFit: "contain" }}
+              className="rounded-xl shadow-lg bg-white/90 p-3 border-2 border-blue-200 hover:scale-105 hover:shadow-xl transition-all duration-200 mx-auto block"
+              style={{
+                maxHeight: 120,
+                maxWidth: 380,
+                width: "100%",
+                objectFit: "contain",
+              }}
+            />
+          ))}
+        </div>
+        <p className="uppercase text-gray-700 font-semibold mt-2 mb-2 text-center text-sm md:text-base tracking-wider">
+          Institutional Partners
+        </p>
+        <div className="grid place-items-center justify-center items-center grid-cols-2 md:grid-cols-3 gap-5 w-auto md:px-32 mt-2 mb-6">
+          {["fmiti.png", "MSD.jpg", "NADDC.png"].map((src) => (
+            <img
+              key={src}
+              src={src}
+              alt={src.split(".")[0]}
+              className="rounded-lg shadow-md bg-white/80 p-2 border border-gray-200 hover:scale-105 hover:shadow-xl transition-all duration-200 mx-auto block"
+              style={{
+                maxHeight: 90,
+                maxWidth: 220,
+                width: "100%",
+                objectFit: "contain",
+              }}
+            />
+          ))}
+        </div>
+        <p className="uppercase text-gray-700 font-semibold mt-2 mb-2 text-center text-sm md:text-base tracking-wider">
+          Strategic Partners
+        </p>
+        <div className="grid place-items-center justify-center items-center grid-cols-2 md:grid-cols-4 gap-5 w-auto md:px-32 mt-2">
+          {["ram.png", "HIESL.png", "jed.jpg", "farmcreed.jpg"].map((src) => (
+            <img
+              key={src}
+              src={src}
+              alt={src.split(".")[0]}
+              className="rounded-lg shadow-md bg-white/80 p-2 border border-gray-200 hover:scale-105 hover:shadow-xl transition-all duration-200 mx-auto block"
+              style={{
+                maxHeight: 90,
+                maxWidth: 220,
+                width: "100%",
+                objectFit: "contain",
+              }}
             />
           ))}
         </div>
