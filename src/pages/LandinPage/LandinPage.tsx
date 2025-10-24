@@ -413,11 +413,30 @@ export default function LandinPage() {
             }}
           />
         </div>
+        <p className="uppercase text-red-700 font-semibold mt-2 mb-2 text-center text-sm md:text-base tracking-wider">
+          Official Partner Agro Industry
+        </p>
+        <div className="grid place-items-center justify-center items-center grid-cols-2 md:grid-cols-1 gap-2 w-full md:w-[70%] md:px-32 mt-2 mb-6">
+          {["fenagri.png"].map((src) => (
+            <img
+              key={src}
+              src={src}
+              alt={src.split(".")[0]}
+              className="rounded-xl shadow-lg bg-white/90 p-3 border-2 border-blue-200 hover:scale-105 hover:shadow-xl transition-all duration-200 mx-auto block"
+              style={{
+                maxHeight: 120,
+                maxWidth: 380,
+                width: "100%",
+                objectFit: "contain",
+              }}
+            />
+          ))}
+        </div>
         <p className="uppercase text-blue-700 font-semibold mt-2 mb-2 text-center text-sm md:text-base tracking-wider">
           In partnership with
         </p>
-        <div className="grid place-items-center justify-center items-center grid-cols-2 md:grid-cols-2 gap-2 w-full md:w-[70%] md:px-32 mt-2 mb-6">
-          {["casa.png", "fenagri.png"].map((src) => (
+        <div className="grid place-items-center justify-center items-center grid-cols-2 md:grid-cols-1 gap-2 w-full md:w-[70%] md:px-32 mt-2 mb-6">
+          {["casa.png"].map((src) => (
             <img
               key={src}
               src={src}
